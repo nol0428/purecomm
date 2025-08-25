@@ -41,7 +41,7 @@ Partnership.create(
   user_two: User.all[1]
 )
 
-put "Creating Checkins"
+puts "Creating Checkins"
 
 Checkin.create(
   mood: "Happy",
@@ -86,12 +86,5 @@ Checkin.create(
   partnership: Partnership.all.first,
   nudge: DateTime.now + 2.hours
   )
-
-
-
-
-
-
-
 
 puts "All Done!"
