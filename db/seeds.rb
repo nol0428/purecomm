@@ -41,4 +41,57 @@ Partnership.create(
   user_two: User.all[1]
 )
 
+put "Creating Checkins"
+
+Checkin.create(
+  mood: "Happy",
+  my_day: "Good",
+  discuss: false,
+  comment: "I bought a lot of clothes.",
+  created_at: DateTime.now - 2.days,
+  user: User.all[1],
+  partnership: Partnership.all.first,
+  nudge: DateTime.now + 2.hours
+  )
+
+Checkin.create(
+  mood: "Upset",
+  my_day: "Bad",
+  discuss: true,
+  comment: "My clothes' brand were fake.",
+  created_at: DateTime.now - 1.days,
+  user: User.all[1],
+  partnership: Partnership.all.first,
+  nudge: DateTime.now + 2.hours
+  )
+
+Checkin.create(
+  mood: "Tired",
+  my_day: "Bad",
+  discuss: false,
+  comment: "I am sick of my job.",
+  created_at: DateTime.now - 2.days,
+  user: User.all[0],
+  partnership: Partnership.all.first,
+  nudge: DateTime.now + 2.hours
+  )
+
+Checkin.create(
+  mood: "Upset",
+  my_day: "Bad",
+  discuss: false,
+  comment: "We are spending too much money",
+  created_at: DateTime.now - 1.days,
+  user: User.all[0],
+  partnership: Partnership.all.first,
+  nudge: DateTime.now + 2.hours
+  )
+
+
+
+
+
+
+
+
 puts "All Done!"
