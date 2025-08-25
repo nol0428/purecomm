@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :personality, presence: true
   validates :love_language, presence: true
-  validates :pronoun, presence: true, inclusion: { in: PRONOUNS }
+  validates :pronouns, presence: true, inclusion: { in: PRONOUNS }
   validates :birthday, presence: true
 
   def partnerships
