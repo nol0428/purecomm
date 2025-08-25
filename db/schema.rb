@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_25_074234) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_25_082001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,14 +74,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_25_074234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.bigint "partnership_id"
     t.string "personality"
     t.string "love_language"
     t.string "pronouns"
     t.string "hobbies"
     t.date "birthday"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["partnership_id"], name: "index_users_on_partnership_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -93,5 +91,4 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_25_074234) do
   add_foreign_key "messages", "users"
   add_foreign_key "partnerships", "users", column: "user_one_id"
   add_foreign_key "partnerships", "users", column: "user_two_id"
-  add_foreign_key "users", "partnerships"
 end
