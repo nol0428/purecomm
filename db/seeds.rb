@@ -13,7 +13,7 @@ Partnership.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-User.create({
+User.create(
   username: "Bob",
   email: "bob@email.com",
   password: "password",
@@ -22,9 +22,9 @@ User.create({
   pronouns: "He/Him",
   hobbies: "Fishing",
   birthday: Date.new(1983, 4, 10)
-})
+)
 
-User.create({
+User.create(
   username: "Karen",
   email: "karen@email.com",
   password: "password",
@@ -33,12 +33,12 @@ User.create({
   pronouns: "She/Her",
   hobbies: "Drinking, Shopping",
   birthday: Date.new(1989, 6, 23)
-})
+)
 
 puts "Creating the partnership"
-Partnership.create({
+Partnership.create(
   user_one: User.all[0],
   user_two: User.all[1]
-})
+)
 
 puts "All Done!"
