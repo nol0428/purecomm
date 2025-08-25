@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :personality, presence: true
   validates :love_language, presence: true
   validates :pronoun, presence: true, inclusion: { in: PRONOUNS }
+  validates :birthday, presence: true
 
   def partnerships
     Partnership.where(user_one: self).or(Partnership.where(user_two: self))
