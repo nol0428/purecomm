@@ -1,0 +1,2 @@
+class GrievancesController < ApplicationController
+end
