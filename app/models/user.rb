@@ -23,4 +23,10 @@ class User < ApplicationRecord
   def current_partnership
     partnerships.first
   end
+
+  def current_partner
+  # User.find(current_partnership.select(:user_one_id, :user_two_id)).where.not(id: self)
+  current_partnership.partner_of(self)
+  end
+
 end
