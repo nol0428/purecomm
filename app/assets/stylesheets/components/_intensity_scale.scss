@@ -1,0 +1,45 @@
+.intensity-container .bar {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: #eee;
+  overflow: hidden;
+}
+
+.intensity-container .fill {
+  height: 100%;
+  background: linear-gradient(90deg, #91e6c5, #ff6b6b);
+}
+
+.intensity-container .bar-block {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.intensity-container .bar-block > .fa-leaf,
+.intensity-container .bar-block > .fa-fire {
+  grid-row: 1;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.intensity-container .bar-block .bar {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.intensity-container .bar-block .labels {
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: 6px;
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
