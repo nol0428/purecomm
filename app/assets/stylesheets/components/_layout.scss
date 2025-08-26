@@ -296,3 +296,8 @@ a:hover { text-decoration: underline; }
   height: 28px;
   fill: currentColor; /* inline SVGs inherit .nav-icon text color */
 }
+
+/* Remove main padding only for landing page */
+.site-main.no-padding {
+  padding-block: 0 !important; /* ensure it wins over the @media rule */
+}
