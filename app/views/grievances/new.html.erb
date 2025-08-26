@@ -1,0 +1,17 @@
+<div class="container">
+<%= simple_form_for [@partnership, @grievance] do |f| %>
+  <%= f.input :topic %>
+  <h2>How are you feeling?</h2>
+  <%= f.input :feeling,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: {class: 'category-selector'},
+            collection: Grievance::FEELINGS %>
+     <%= f.input :situation  %>
+     <%= f.input :intensity_scale %>
+     <%= f.input :timing %>
+     <%= f.submit "Submit", class: "btn btn-primary"  %>
+<% end %>
+</div>
