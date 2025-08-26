@@ -7,6 +7,6 @@ class Checkin < ApplicationRecord
 
   validates :mood, presence: true, inclusion: { in: MOODS }
   validates :my_day, presence: true, inclusion: { in: MY_DAY }
-  validates :discuss, presence: true
-  validates :nudge, presence: true
+  # validates :discuss, presence: true
+  # validates :nudge, presence: true
 end
