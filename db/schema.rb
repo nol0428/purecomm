@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_25_082001) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_26_021123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "checkins", force: :cascade do |t|
     t.string "mood"
     t.string "my_day"
-    t.boolean "discuss"
+    t.boolean "discuss", default: false
     t.text "comment"
     t.bigint "partnership_id", null: false
     t.time "nudge"
