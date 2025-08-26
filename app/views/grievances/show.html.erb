@@ -3,5 +3,22 @@
 </div>
 
 <div class="topic-container">
+  <h3>Topic</h3>
+  <%= @grievance.topic %>
+</div>
+
+<div class="made-me-feel">
+  <%= inline_svg_tag "icons/#{@grievance.feeling.downcase}.svg", class: "icon" %>
+</div>
+
+<div class="situation-container">
+  <h3>Description of the situation</h3>
+  <p>
+    <%= @grievance.situation %>
+  </p>
+</div>
+
+<div class="intensity-container">
+  <h3>Intensity Scale</h3>
 
 </div>
