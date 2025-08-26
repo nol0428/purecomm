@@ -1,0 +1,38 @@
+/* ===== Yellow Greeting Banner ===== */
+.banner {
+  background: #FFD166;
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin: 16px;
+  text-align: center;
+  display: grid;
+  gap: 10px;
+}
+
+.banner h2 {
+  margin: 0;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(20px, 4.5vw, 28px);
+}
+
+.banner p {
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(16px, 4vw, 22px);
+}
+
+.banner__cta {
+  background: #6ED3CF !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 20px !important;
+  font-size: 18px !important;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  display: inline-block;
+  margin-top: 8px;
+}
+.banner__cta:hover { filter: brightness(.96); text-decoration: none; }
