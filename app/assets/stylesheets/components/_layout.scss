@@ -2,12 +2,12 @@
 
 /* ===== CSS Variables (light/dark aware) ===== */
 :root {
-  --bg: #0b0b0f;
-  --surface: #12121a;
+  --bg: #FFF9F5;
+  --surface: #FAFAFA;
   --border: #24243a;
-  --text: #ececf3;
-  --muted: #a5a6b3;
-  --brand: #7c9cff;
+  --text: #333333;
+  --muted: #FFD166;
+  --brand: #6ED3CF;
   --radius: 16px;
   --container-max: 72rem; /* ~1152px for desktop comfort */
   --space-1: .25rem;
@@ -135,17 +135,19 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   gap: .5rem;
-  padding: .625rem .875rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border);
-  background: color-mix(in oklab, var(--surface) 90%, var(--text) 10%);
-  color: var(--text);
+  padding: .625rem 1rem;
+  border-radius: var(--radius, 8px);
+  border: 1px solid var(--border, #ccc);
+  background: var(--surface, #f0f0f0);
+  color: var(--text, #111);
   font-weight: 600;
+  cursor: pointer;
   transition: transform .12s ease, background .12s ease, border-color .12s ease;
 }
+
 .btn:hover {
-  background: color-mix(in oklab, var(--surface) 80%, var(--text) 20%);
-  border-color: color-mix(in oklab, var(--border) 70%, var(--text) 30%);
+  background: color-mix(in oklab, var(--surface, #f0f0f0) 80%, var(--text, #111) 20%);
+  border-color: color-mix(in oklab, var(--border, #ccc) 70%, var(--text, #111) 30%);
   transform: translateY(-1px);
 }
 .btn-ghost {
@@ -158,6 +160,34 @@ a:hover { text-decoration: underline; }
   border-color: transparent;
 }
 .btn-primary:hover { filter: brightness(0.95); }
+
+.btn-icon {
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .12s ease;
+  color: #FFD166;
+}
+
+.btn-icon:hover {
+  color: #6ED3CF;
+  border: none;
+  background: transparent;
+}
+
+.btn-icon-small {
+  color: #6ED3CF;
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
 
 /* ===== Utility classes (mini Tailwind-ish) ===== */
 /* Flex & grid */
