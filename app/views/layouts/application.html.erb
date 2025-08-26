@@ -8,16 +8,21 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags if respond_to?(:javascript_importmap_tags) %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap", rel: "stylesheet" %>
   </head>
   <body class="app-shell has-bottom-nav">
     <a class="skip-link" href="#content">Skip to content</a>
-    <%= render "shared/top_navbar" %>
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <%= render "shared/top_navbar" %>
+    <% end %>
     <%= render "shared/flashes" %>
     <main id="content" class="site-main">
       <div class="app-container flow">
         <%= yield %>
       </div>
     </main>
-    <%= render "shared/bottom_navbar" %>
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <%= render "shared/bottom_navbar" %>
+    <% end %>
   </body>
 </html>
