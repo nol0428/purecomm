@@ -6,33 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <!-- App styles -->
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
-    <%# If Rails 7 with importmap/esbuild, include JS like this: %>
     <%= javascript_importmap_tags if respond_to?(:javascript_importmap_tags) %>
   </head>
-  <body class="app-shell">
+  <body class="app-shell has-bottom-nav">
     <a class="skip-link" href="#content">Skip to content</a>
-    <header class="site-header">
-      <div class="container cluster justify-between items-center">
-        <a class="brand" href="/">PureComm</a>
-        <!-- Example right-side controls -->
-        <nav class="cluster gap-2">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-          <%= link_to "Profile", (defined?(edit_user_registration_path) ? edit_user_registration_path : "#"), class: "nav-link" %>
-        </nav>
-      </div>
-    </header>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
     <main id="content" class="site-main">
-      <div class="container flow">
+      <div class="app-container flow">
         <%= yield %>
       </div>
     </main>
-    <footer class="site-footer">
-      <div class="container cluster justify-between items-center">
-        <small>© <%= Date.current.year %> PureComm</small>
-        <div class="muted">Built with Rails</div>
-      </div>
-    </footer>
+    <%# Use YOUR footer/navigation partial here %>
+    <%= render "shared/bottom_navbar" %>
+    <%# Or if you have a non-fixed footer instead: %>
+    <%#= render "shared/footer" %>
   </body>
 </html>

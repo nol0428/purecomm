@@ -15,6 +15,9 @@
   --space-3: 1rem;
   --space-4: 1.5rem;
   --space-5: 2rem;
+
+  /* NEW: height of the fixed bottom nav (keep in sync with your .bottom-navbar height) */
+  --bottom-nav-h: 88px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -54,8 +57,15 @@ a:hover { text-decoration: underline; }
 /* ===== Safe-area padding (iPhone 16 family) ===== */
 .app-shell {
   min-height: 100svh;
+  /* Sass-safe literal CSS so max(env(), 0px) passes through */
   padding-left: #{'max(env(safe-area-inset-left), 0px)'};
   padding-right: #{'max(env(safe-area-inset-right), 0px)'};
+}
+
+/* If the page uses a fixed bottom nav, add extra bottom space so content isn't hidden */
+.has-bottom-nav .site-main,
+.has-bottom-nav .container {
+  padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
 }
 
 /* ===== Layout regions ===== */
@@ -147,9 +157,7 @@ a:hover { text-decoration: underline; }
   color: white;
   border-color: transparent;
 }
-.btn-primary:hover {
-  filter: brightness(0.95);
-}
+.btn-primary:hover { filter: brightness(0.95); }
 
 /* ===== Utility classes (mini Tailwind-ish) ===== */
 /* Flex & grid */
@@ -210,3 +218,10 @@ a:hover { text-decoration: underline; }
 
 /* Muted text */
 .muted { color: var(--muted); }
+
+/* ===== Small helpers for the bottom nav icons ===== */
+.bottom-navbar .icon {
+  width: 28px;
+  height: 28px;
+  fill: currentColor; /* inline SVGs inherit .nav-icon text color */
+}
