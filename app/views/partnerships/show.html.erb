@@ -2,7 +2,7 @@
   <div class="banner">
     <h2>Hello, <%= @user.username %></h2>
     <p>How's your mood today?</p>
-    <%= link_to "#" do %> <!-- new_partnership_checkin_path -->
+    <%= link_to new_partnership_checkin_path(@user.current_partnership) do %>
       Mood Check-in
     <% end %>
   </div>
