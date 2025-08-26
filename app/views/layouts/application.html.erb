@@ -6,31 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags if respond_to?(:javascript_importmap_tags) %>
   </head>
   <body class="app-shell has-bottom-nav">
     <a class="skip-link" href="#content">Skip to content</a>
-    <%= render "shared/navbar" %>
+    <%= render "shared/top_navbar" %>
     <%= render "shared/flashes" %>
     <main id="content" class="site-main">
       <div class="app-container flow">
         <%= yield %>
       </div>
     </main>
-    <%# Use YOUR footer/navigation partial here %>
     <%= render "shared/bottom_navbar" %>
-    <%# Or if you have a non-fixed footer instead: %>
-    <%#= render "shared/footer" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-  <body><%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
-    <%= yield %>
-    <%= render "shared/bottom_navbar" %>
-
   </body>
 </html>
