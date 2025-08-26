@@ -1,0 +1,151 @@
+#new_checkin {
+  legend {
+    display: none;
+  }
+}
+
+.category-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.category-item {
+  flex: 0 0 30%;
+}
+
+.category-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.category-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+  padding: 48px;
+}
+
+.category-selector:checked + label {
+  // background-color: $gray !important;
+  border: 1px solid $gray;
+  color: transparent;
+}
+
+
+#checkin_mood_happy + label {
+  color: transparent;
+  background-image: asset-url("icons/happy.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_mood_happy:checked + label {
+  color: transparent;
+}
+
+#checkin_mood_fine + label {
+  color: transparent;
+  background-image: asset-url("icons/fine.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_mood_fine:checked + label {
+  color: transparent;
+}
+
+#checkin_mood_tired + label {
+  color: transparent;
+  background-image: asset-url("icons/tired.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_mood_tired:checked + label {
+  color: transparent;
+
+}
+
+#checkin_mood_sad + label {
+  color: transparent;
+  background-image: asset-url("icons/sad.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_mood_sad:checked + label {
+  color: transparent;
+
+}
+
+#checkin_mood_upset + label {
+  color: transparent;
+  background-image: asset-url("icons/upset.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_mood_upset:checked + label {
+  color: transparent;
+
+}
+
+#checkin_mood_anxious + label {
+  color: transparent;
+  background-image: asset-url("icons/anxious.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_mood_anxious:checked + label {
+  color: transparent;
+
+}
+
+#checkin_my_day_good + label {
+  color: transparent;
+  background-image: asset-url("icons/good.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_my_day_good:checked + label {
+  color: transparent;
+}
+
+#checkin_my_day_bad + label {
+  color: transparent;
+  background-image: asset-url("icons/bad.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_my_day_bad:checked + label {
+  color: transparent;
+}
+
+#checkin_discuss_true + label {
+  color: transparent;
+  background-image: asset-url("icons/yes.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_discuss_true:checked + label {
+  color: transparent;
+}
+
+#checkin_discuss_false + label {
+  color: transparent;
+  background-image: asset-url("icons/no.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#checkin_discuss_false:checked + label {
+  color: transparent;
+}
