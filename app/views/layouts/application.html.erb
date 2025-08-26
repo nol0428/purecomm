@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Purecomm</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PureComm</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags if respond_to?(:javascript_importmap_tags) %>
   </head>
-
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-
-    <%= yield %>
+  <body class="app-shell has-bottom-nav">
+    <a class="skip-link" href="#content">Skip to content</a>
+    <%= render "shared/top_navbar" %>
+    <%= render "shared/flashes" %>
+    <main id="content" class="site-main">
+      <div class="app-container flow">
+        <%= yield %>
+      </div>
+    </main>
+    <%= render "shared/bottom_navbar" %>
   </body>
 </html>

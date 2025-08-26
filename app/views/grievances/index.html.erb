@@ -1,0 +1,17 @@
+<div class="head-banner">
+<h1>Grievances</h1>
+</div>
+
+<p> Be honest here - Your partner wants to listen. </p>
+
+<%= link_to "New Grievances", "#" %> <!-- new_partnership_grievance_path(@user.current_partnership) -->
+
+<h2>Communication Growth Notes</h2>
+
+<div class="grievance-list">
+<% @grievances.each do |grievance| %>
+  <div class="grievance-card">
+    <%= link_to "#{grievance.topic}", grievance_path(grievance) %>
+  </div>
+<% end %>
+</div>
