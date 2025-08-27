@@ -17,8 +17,12 @@ class CheckinsController < ApplicationController
     end
   end
 
-  def show
-  end
+def show
+  @checkin = Checkin.find(params[:id])
+  session[:viewed_checkins] ||= []
+  session[:viewed_checkins] << @checkin.id
+  session[:viewed_checkins].uniq!
+end
 
   private
 
