@@ -1,25 +1,22 @@
 <div class="container">
-<%= simple_form_for([@partnership, @checkin]) do |f| %>
-
-  <h2>How are you feeling?</h2>
-  <%= f.input :mood,
+  <%= simple_form_for([@partnership, @checkin]) do |f| %>
+    <h2>How are you feeling?</h2>
+    <%= f.input :mood,
             as: :radio_buttons,
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'category-wrapper',
             item_wrapper_class: 'category-item',
             input_html: {class: 'category-selector'},
             collection: Checkin::MOODS %>
-
-  <h2>My day was...</h2>
-  <%= f.input :my_day, legend: false,
+    <h2>My day was...</h2>
+    <%= f.input :my_day, legend: false,
             as: :radio_buttons,
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'category-wrapper',
             item_wrapper_class: 'category-item',
             input_html: {class: 'category-selector'},
             collection: Checkin::MY_DAY %>
-
-  <h2>Do you want to talk about it?</h2>
+    <h2>Do you want to talk about it?</h2>
     <%= f.input :discuss,
             as: :radio_buttons,
             collection_wrapper_tag: 'div',
@@ -27,7 +24,7 @@
             item_wrapper_class: 'category-item',
             input_html: {class: 'category-selector'},
             collection: [true, false] %>
-     <%= f.input :comment  %>
-     <%= f.submit "Submit", class: "btn btn-primary"  %>
-<% end %>
+    <%= f.input :comment  %>
+    <%= f.submit "Submit", class: "btn btn-primary"  %>
+  <% end %>
 </div>
