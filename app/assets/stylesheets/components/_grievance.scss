@@ -43,3 +43,113 @@
 .section-header {
   padding: 0 16px;
 }
+
+.intensity-scale {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.scale-icon .icon { width: 32px; height: 32px; display: block; }
+.scale-icon--min { margin-left: 2px; }
+.scale-icon--max { margin-right: 2px; }
+
+.scale-slider { position: relative; }
+
+/* WebKit（Chrome/Safari） */
+.intensity-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  outline: none;
+}
+
+.intensity-slider::-webkit-slider-runnable-track {
+  height: 10px;
+  background: linear-gradient(to right, #4caf50, #ffeb3b, #f44336);
+  border-radius: 999px;
+  border: 0;
+}
+
+.intensity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 38px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  border: 0;
+  margin-top: -7px;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.18),
+    0 2px 4px rgba(0,0,0,.12);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.intensity-slider:focus::-webkit-slider-thumb,
+.intensity-slider:hover::-webkit-slider-thumb {
+  transform: translateY(-0.5px);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,.20),
+    0 2px 6px rgba(0,0,0,.14);
+}
+
+.intensity-slider::-moz-range-track {
+  height: 10px;
+  background: #e6e1dd;
+  border-radius: 999px;
+  border: 0;
+}
+.intensity-slider::-moz-range-thumb {
+  width: 38px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  border: 0;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.18),
+    0 2px 4px rgba(0,0,0,.12);
+}
+
+.intensity-slider::-ms-track {
+  height: 10px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.intensity-slider::-ms-fill-lower,
+.intensity-slider::-ms-fill-upper {
+  background: #e6e1dd;
+  border-radius: 999px;
+}
+.intensity-slider::-ms-thumb {
+  width: 38px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  border: 0;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.18),
+    0 2px 4px rgba(0,0,0,.12);
+  margin-top: 0;
+}
+
+.scale-ticks {
+  position: absolute;
+  left: 12px; right: 12px;
+  bottom: -12px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.scale-ticks span {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: #d7d2ce;
+  display: block;
+}
+
+.intensity-block {
+  --warm-bg: #fff7f3;
+}
