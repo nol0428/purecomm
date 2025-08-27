@@ -1,0 +1,46 @@
+<%= simple_form_for [partnership, checkin], html: { id: 'new_checkin' } do |f| %>
+  <h2>How are you feeling?</h2>
+  <%= f.input :mood,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'category-item',
+            input_html: { data: {disable_inputs_target: "input"}, class: 'category-selector'},
+            collection: Checkin::MOODS %>
+  <h2>My day was...</h2>
+  <%= f.input :my_day,
+                as: :radio_buttons, label: false,
+                collection: [['Good','Good'], ['Bad','Bad']],
+                label_method: :first, value_method: :last,
+                collection_wrapper_tag: 'div',
+                collection_wrapper_class: 'category-wrapper',
+                item_wrapper_class: 'category-item',
+                input_html: { data: {disable_inputs_target: "input"},  class: 'choice-input visually-hidden' } %>
+  <h2>Do you want to talk about it?</h2>
+  <% if checkin.id %>
+    <%= f.input :discuss,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'talk-item',
+            input_html: { data: {disable_inputs_target: "input"}, class: 'category-selector', selected: checkin.discuss? ? "true" : "false"},
+            collection: [true, false] %>
+  <% else %>
+    <%= f.input :discuss,
+            as: :radio_buttons,
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'category-wrapper',
+            item_wrapper_class: 'talk-item',
+            input_html: { data: {disable_inputs_target: "input"}, class: 'category-selector', checked: false},
+            collection: [true, false] %>
+  <% end %>
+  <%= f.input :comment,
+                label: false,
+                placeholder: "Anything you'd like to share?",
+                input_html: { data: {disable_inputs_target: "input" } } %>
+  <% if checkin.id %>
+    <%= link_to "Back", partnership_path(partnership), class: 'btn btn-secondary w-100'  %>
+  <% else %>
+    <%= f.submit "Submit", class: "btn btn-primary w-100"  %>
+  <% end %>
+<% end %>
