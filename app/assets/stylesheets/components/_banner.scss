@@ -36,3 +36,8 @@
   margin-top: 8px;
 }
 .banner__cta:hover { filter: brightness(.96); text-decoration: none; }
+
+.banner__content {
+  text-align: center;
+  flex: 1;
+}

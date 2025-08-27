@@ -1,17 +1,31 @@
-<div class="head-banner">
-<h1>Grievances</h1>
-</div>
-
-<p> Be honest here - Your partner wants to listen. </p>
-
-<%= link_to "New Grievances", new_partnership_grievance_path(@user.current_partnership) %>
-
-<h2>Communication Growth Notes</h2>
-
-<div class="grievance-list">
-<% @grievances.each do |grievance| %>
-  <div class="grievance-card">
-    <%= link_to "#{grievance.topic}", grievance_path(grievance) %>
+<div class="whole-page">
+  <div class="banner">
+    <div class="banner__row">
+      <div class="banner__content">
+        <h2>Grievances</h2>
+        <p>Be honest here – your partner wants to listen.</p>
+        <%= link_to new_partnership_grievance_path(@user.current_partnership), class: "btn banner__cta" do %>
+          New Grievance
+        <% end %>
+      </div>
+      <%= image_tag "user_one.jpg", class: "banner__avatar", alt: @user.username %>
+    </div>
   </div>
-<% end %>
+  <div class="section-header">
+    <h2>Communication Growth Notes</h2>
+  </div>
+  <div class="card mood-log" style="margin-top:16px">
+    <div class="grievance-list">
+      <% viewed = session[:viewed_grievances] || [] %>
+      <% @grievances.each do |grievance| %>
+        <div class="grievance-card d-flex align-items-center gap-3 <%= 'faded' if viewed.include?(grievance.id) %>">
+          <%= image_tag "user_two.jpg", class: "checkin-avatar", alt: @user.current_partner.username %>
+          <div>
+            <%= link_to grievance.topic, grievance_path(grievance), class: "grievance-link" %>
+            <div class="checkin-time"><%= grievance.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
