@@ -82,7 +82,7 @@ Partnership.create(
 
 puts "Creating Checkins"
 
-(1..5).each do |num|
+(1..7).each do |num|
   date = Date.today - num.day
   one_mood = MOODS.sample
   two_mood = MOODS.sample
