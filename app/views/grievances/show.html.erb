@@ -1,46 +1,62 @@
-<div class="container">
-  Sent on <%= @grievance.created_at %>
-</div>
-<div class="topic-container">
-  <h3>Topic</h3>
-  <%= @grievance.topic %>
-</div>
-<div class="made-me-feel">
-  <%= inline_svg_tag "icons/#{@grievance.feeling.downcase}.svg", class: "icon" %>
-</div>
-<div class="situation-container">
-  <h3>Description of the situation</h3>
-  <p>
-    <%= @grievance.situation %>
-  </p>
-</div>
-
 <%# app/views/grievances/show.html.erb %>
-
-<div class="mb-3 intensity-block">
-  <h3 class="mb-2">Intensity Scale</h3>
-
-  <% value = (@grievance.intensity_scale || 0).to_i.clamp(0,5) %>
-
-  <input
-    type="range"
-    min="0"
-    max="5"
-    step="1"
-    value="<%= value %>"
-    class="intensity-slider intensity-slider--readonly"
-    disabled
-    aria-disabled="true"
-  />
-
-  <div class="d-flex justify-content-between small text-muted mt-1 align-items-center">
-    <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+<div class="whole-page">
+  <div class="banner banner--center">
+    <h2>Grievance Drop</h2>
+    <p>Share calmly. Reflect thoughtfully.</p>
   </div>
-
-  <div class="text-end mt-1">
-    <span class="badge rounded-pill bg-light text-dark">
-      <strong><%= value %></strong> / 5
-    </span>
-
+  <div class="container small text-muted mb-2">
+    Sent on <%= defined?(l) ? l(@grievance.created_at, format: :long) : @grievance.created_at.in_time_zone.strftime("%Y-%m-%d %H:%M") %>
+  </div>
+  <div class="card form-card flow">
+    <div class="topic-container">
+      <h3>Topic</h3>
+      <p class="mb-0"><%= h @grievance.topic %></p>
+    </div>
+    <div class="made-me-feel">
+      <h2 class="section-title">How it made me feel...</h2>
+      <% feelings = [["Tired","tired"], ["Sad","sad"], ["Upset","upset"], ["Anxious","anxious"]] %>
+      <div class="category-wrapper">
+        <% feelings.each do |label, val| %>
+          <% checked = @grievance.feeling.to_s.downcase == val %>
+          <div class="category-item">
+            <input
+              type="radio"
+              name="feeling_readonly"
+              id="feeling_<%= val %>"
+              class="category-selector"
+              <%= "checked" if checked %>
+              disabled
+              aria-disabled="true"
+            >
+              <label for="feeling_<%= val %>">
+                <%= inline_svg_tag "icons/#{val}.svg", class: "icon" %>
+                <span><%= label %></span>
+              </label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="situation-container">
+        <h3>Description of the situation...</h3>
+        <div class="prose"><%= simple_format h(@grievance.situation) %></div>
+      </div>
+      <div class="mb-3 intensity-block">
+        <h3 class="mb-2">Intensity Scale</h3>
+        <% value = (@grievance.intensity_scale || 0).to_i.clamp(0,5) %>
+        <input
+        type="range" min="0" max="5" step="1"
+        value="<%= value %>"
+        class="intensity-slider intensity-slider--readonly"
+        disabled aria-disabled="true"
+      />
+      <div class="d-flex justify-content-between small text-muted mt-1 align-items-center">
+        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+      </div>
+      <div class="text-end mt-1">
+        <span class="badge rounded-pill bg-light text-dark">
+          <strong><%= value %></strong> / 5
+        </span>
+      </div>
+    </div>
   </div>
 </div>

@@ -7,7 +7,7 @@
   <div class="card form-card">
     <%= simple_form_for [@partnership, @grievance], html: { id: "new_grievance" } do |f| %>
       <%= f.input :topic, placeholder: "e.g. Plans changed last minute" %>
-      <h2 class="section-title">How are you feeling?</h2>
+      <h2 class="section-title">How it made me feel...</h2>
       <%= f.input :feeling,
         as: :radio_buttons,
         collection: [["Tired","tired"], ["Sad","sad"], ["Upset","upset"], ["Anxious","anxious"]],
@@ -17,12 +17,25 @@
         item_wrapper_class: "category-item",
         input_html: { class: "category-selector" },
         label: false %>
-      <%= f.input :situation, placeholder: "What happened? Keep it brief but clear." %>
+      <%= f.input :situation, placeholder: "What happened? Keep it brief but clear.", label: "Description of the situation..."%>
       <div class="mb-3 intensity-block">
         <label class="form-label" for="grievance_intensity_scale">Intensity Scale</label>
-        <%= f.range_field :intensity_scale, min: 0, max: 5, step: 1, class: "intensity-slider", id: "grievance_intensity_scale" %>
-        <div class="d-flex justify-content-between small text-muted mt-1">
-          <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <div class="intensity-scale">
+          <div class="scale-icon scale-icon--min">
+            <%= inline_svg_tag "icons/leaf.svg", class: "icon" %>
+          </div>
+          <div class="scale-slider">
+            <%= f.range_field :intensity_scale,
+            min: 0, max: 6, step: 1,
+            class: "intensity-slider",
+            id: "grievance_intensity_scale" %>
+            <div class="scale-ticks" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="scale-icon scale-icon--max">
+            <%= inline_svg_tag "icons/fire.svg", class: "icon" %>
+          </div>
         </div>
       </div>
       <div class="form-actions">

@@ -60,3 +60,10 @@
 
 /* submit */
 .form-actions { margin-top: 16px; }
+
+.made-me-feel .category-selector:not(:checked) + label { opacity: .45; }
+.made-me-feel .category-selector:checked + label { opacity: 1; }
+
+.made-me-feel .icon [fill]:not([fill="none"]) { fill: currentColor !important; }
+
+.intensity-slider--readonly { width: 100%; accent-color: var(--brand, #6ED3CF); pointer-events: none; }
