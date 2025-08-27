@@ -296,3 +296,15 @@ a:hover { text-decoration: underline; }
   height: 28px;
   fill: currentColor; /* inline SVGs inherit .nav-icon text color */
 }
+
+a.btn,
+a.btn-primary,
+a.banner__cta {
+  text-decoration: none;
+}
+
+a.btn:hover,
+a.btn-primary:hover,
+a.banner__cta:hover {
+  text-decoration: none;
+}

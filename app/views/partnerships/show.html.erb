@@ -1,29 +1,33 @@
 <div class="whole-page">
   <div class="banner">
-    <h2>Hello, <%= @user.username %></h2>
+    <h2>Hello, <%= @user.username %>!</h2>
     <p>How's your mood today?</p>
-    <%= link_to new_partnership_checkin_path(@user.current_partnership) do %>
+    <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
       Mood Check-in
     <% end %>
   </div>
-  <div class="my-mood">
-    <h3>Your Daily Mood Log</h3>
-    <div class="container d-flex gap-3">
-    <% @user.checkins.order(created_at: :desc).limit(5).each do |checkin| %>
-      <%= inline_svg_tag "icons/#{checkin.mood.downcase}.svg", class: "icon" %>
-    <% end %>
+  <div class="card mood-log" style="margin-top:16px">
+    <h3>Daily Mood Log</h3>
+    <div class="mood-log__row">
+      <% @user.checkins.order(created_at: :desc).limit(7).reverse.each do |checkin| %>
+        <div class="mood-log__cell">
+          <%= inline_svg_tag "icons/#{checkin.mood.downcase}.svg", class: "btn-icon" %>
+          <div class="mood-log__label"><%= checkin.created_at.strftime("%A") %></div>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="two-buttons d-flex justify-content-between">
-    <%= link_to "AI Bot Coach", "#", class:"btn btn-primary" %>
-    <%= link_to "Grievance Drop", grievances_path, class:"btn btn-primary" %>
+    <%= link_to "AIBot Coach", "#", class:"btn btn-coach w-full", style: "margin-right:8px" %>
+    <%= link_to "Grievance Drop", grievances_path, class:"btn btn-grievance w-full", style: "margin-left:8px" %>
   </div>
-  <div class="bulma header">
+  <div class="bulma header" style="margin-top:16px">
     <h2><%= @user.current_partner.username %>'s Mood Check-in</h2>
   </div>
   <div class="mood-list">
     <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
       <div class="check-in-card">
-        <%= link_to "#{@user.current_partner.username} checked in", "#" %> <!-- checkin_path(checkin) -->
+        <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", "#" %>
       </div>
     <% end %>
   </div>
