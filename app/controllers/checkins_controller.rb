@@ -19,9 +19,10 @@ class CheckinsController < ApplicationController
 
 def show
   @checkin = Checkin.find(params[:id])
-  session[:viewed_checkins] ||= []
-  session[:viewed_checkins] << @checkin.id
-  session[:viewed_checkins].uniq!
+  @partnership = @checkin.partnership
+  # session[:viewed_checkins] ||= []
+  # session[:viewed_checkins] << @checkin.id
+  # session[:viewed_checkins].uniq!
 end
 
   private
