@@ -1,24 +1,33 @@
-<div class="container">
-  <%= simple_form_for [@partnership, @grievance] do |f| %>
-    <%= f.input :topic %>
-    <h2>How are you feeling?</h2>
-    <%= f.input :feeling,
-            as: :radio_buttons,
-            collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'category-wrapper',
-            item_wrapper_class: 'category-item',
-            input_html: {class: 'category-selector'},
-            collection: Grievance::FEELINGS %>
-     <%= f.input :situation  %>
-     <div class="mb-3">
-      <%= f.label :intensity_scale, "Intensity Scale" %>
-      <%= f.range_field :intensity_scale,
-            min: 0, max: 5, step: 1,
-            class: "intensity-slider" %>
-      <div class="d-flex justify-content-between small text-muted mt-1">
-        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+<!-- app/views/grievances/new.html.erb (or _form.html.erb) -->
+<div class="whole-page">
+  <div class="banner banner--center">
+    <h2>Grievance Drop</h2>
+    <p>Share calmly. Reflect thoughtfully.</p>
+  </div>
+  <div class="card form-card">
+    <%= simple_form_for [@partnership, @grievance], html: { id: "new_grievance" } do |f| %>
+      <%= f.input :topic, placeholder: "e.g. Plans changed last minute" %>
+      <h2 class="section-title">How are you feeling?</h2>
+      <%= f.input :feeling,
+        as: :radio_buttons,
+        collection: [["Tired","tired"], ["Sad","sad"], ["Upset","upset"], ["Anxious","anxious"]],
+        label_method: :first, value_method: :last,
+        collection_wrapper_tag: "div",
+        collection_wrapper_class: "category-wrapper",
+        item_wrapper_class: "category-item",
+        input_html: { class: "category-selector" },
+        label: false %>
+      <%= f.input :situation, placeholder: "What happened? Keep it brief but clear." %>
+      <div class="mb-3 intensity-block">
+        <label class="form-label" for="grievance_intensity_scale">Intensity Scale</label>
+        <%= f.range_field :intensity_scale, min: 0, max: 5, step: 1, class: "intensity-slider", id: "grievance_intensity_scale" %>
+        <div class="d-flex justify-content-between small text-muted mt-1">
+          <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        </div>
       </div>
-    </div>
-     <%= f.submit "Submit", class: "btn btn-primary"  %>
-<% end %>
+      <div class="form-actions">
+        <%= f.submit "Submit", class: "btn btn-primary w-100" %>
+      </div>
+    <% end %>
+  </div>
 </div>
