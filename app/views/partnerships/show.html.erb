@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="card mood-log" style="margin-top:16px">
-    <h3>Daily Mood Log</h3>
+    <h3>Your Daily Mood Log</h3>
     <div class="mood-log__row">
       <% @user.checkins.order(created_at: :desc).limit(7).reverse.each do |checkin| %>
         <div class="mood-log__cell">

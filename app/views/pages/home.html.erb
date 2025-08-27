@@ -7,7 +7,19 @@
         Stay emotionally in sync, resolve friction gently,
         and communicate in a way that feels natural.
       </p>
-      <%= link_to "Get started", "#", class: "btn btn-primary hero-cta" %>
+      <% if user_signed_in? && current_user.current_partnership %>
+        <%= link_to "Get started",
+              partnership_path(current_user.current_partnership),
+              class: "btn btn-primary hero-cta" %>
+      <% elsif user_signed_in? %>
+        <%= link_to "Start a partnership",
+              new_partnership_path,
+              class: "btn btn-primary hero-cta" %>
+      <% else %>
+        <%= link_to "Get started",
+              new_user_session_path,
+              class: "btn btn-primary hero-cta" %>
+      <% end %>
     </div>
   </header>
   <!-- Value Proposition / Intro -->
