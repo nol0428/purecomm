@@ -9,9 +9,16 @@
             item_wrapper_class: 'category-item',
             input_html: {class: 'category-selector'},
             collection: Grievance::FEELINGS %>
-    <%= f.input :situation  %>
-    <%= f.input :intensity_scale %>
-    <%= f.input :timing %>
-    <%= f.submit "Submit", class: "btn btn-primary"  %>
-  <% end %>
+     <%= f.input :situation  %>
+     <div class="mb-3">
+      <%= f.label :intensity_scale, "Intensity Scale" %>
+      <%= f.range_field :intensity_scale,
+            min: 0, max: 5, step: 1,
+            class: "intensity-slider" %>
+      <div class="d-flex justify-content-between small text-muted mt-1">
+        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+      </div>
+    </div>
+     <%= f.submit "Submit", class: "btn btn-primary"  %>
+<% end %>
 </div>
