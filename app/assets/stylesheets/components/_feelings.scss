@@ -5,8 +5,14 @@
 }
 
 .category-wrapper {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-wrap: wrap;
+}
+
+.checkin_mood .category-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   flex-wrap: wrap;
 }
 
@@ -26,7 +32,6 @@
   width: 100%;
   font-size: 12px;
   text-align: left;
-  padding: 48px;
 }
 
 .category-selector:checked + label {
@@ -106,46 +111,46 @@
 
 }
 
-#checkin_my_day_good + label {
-  color: transparent;
-  background-image: asset-url("icons/good.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
+// #checkin_my_day_good + label {
+//   color: transparent;
+//   background-image: asset-url("icons/good.svg");
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
 
-#checkin_my_day_good:checked + label {
-  color: transparent;
-}
+// #checkin_my_day_good:checked + label {
+//   color: transparent;
+// }
 
-#checkin_my_day_bad + label {
-  color: transparent;
-  background-image: asset-url("icons/bad.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
+// #checkin_my_day_bad + label {
+//   color: transparent;
+//   background-image: asset-url("icons/bad.svg");
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
 
-#checkin_my_day_bad:checked + label {
-  color: transparent;
-}
+// #checkin_my_day_bad:checked + label {
+//   color: transparent;
+// }
 
-#checkin_discuss_true + label {
-  color: transparent;
-  background-image: asset-url("icons/yes.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
+// #checkin_discuss_true + label {
+//   color: transparent;
+//   background-image: asset-url("icons/yes.svg");
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
 
-#checkin_discuss_true:checked + label {
-  color: transparent;
-}
+// #checkin_discuss_true:checked + label {
+//   color: transparent;
+// }
 
-#checkin_discuss_false + label {
-  color: transparent;
-  background-image: asset-url("icons/no.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
+// #checkin_discuss_false + label {
+//   color: transparent;
+//   background-image: asset-url("icons/no.svg");
+//   background-repeat: no-repeat;
+//   background-position: center;
+// }
 
-#checkin_discuss_false:checked + label {
-  color: transparent;
-}
+// #checkin_discuss_false:checked + label {
+//   color: transparent;
+// }
