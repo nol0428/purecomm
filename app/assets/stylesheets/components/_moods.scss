@@ -55,73 +55,111 @@
 }
 
 #checkin_mood_fine + label {
+  width: 48x;
+  height: 48px;
   color: transparent;
-  background-image: asset-url("icons/fine.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #FFD166; // default color
+  -webkit-mask: asset-url("icons/fine.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/fine.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_mood_fine:checked + label {
   color: transparent;
+  background-color: #6ED3CF;
 }
 
 #checkin_mood_tired + label {
+  width: 48x;
+  height: 48px;
   color: transparent;
-  background-image: asset-url("icons/tired.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #FFD166; // default color
+  -webkit-mask: asset-url("icons/tired.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/tired.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_mood_tired:checked + label {
   color: transparent;
-
+  background-color: #6ED3CF;
 }
 
 #checkin_mood_sad + label {
+  width: 48x;
+  height: 48px;
   color: transparent;
-  background-image: asset-url("icons/sad.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #FFD166; // default color
+  -webkit-mask: asset-url("icons/sad.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/sad.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_mood_sad:checked + label {
   color: transparent;
-
+  background-color: #6ED3CF;
 }
 
 #checkin_mood_upset + label {
+  width: 48x;
+  height: 48px;
   color: transparent;
-  background-image: asset-url("icons/upset.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #FFD166; // default color
+  -webkit-mask: asset-url("icons/upset.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/upset.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_mood_upset:checked + label {
   color: transparent;
-
+  background-color: #6ED3CF;
 }
 
 #checkin_mood_anxious + label {
+  width: 48x;
+  height: 48px;
   color: transparent;
-  background-image: asset-url("icons/anxious.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #FFD166; // default color
+  -webkit-mask: asset-url("icons/anxious.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/anxious.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_mood_anxious:checked + label {
   color: transparent;
-
+  background-color: #6ED3CF;
 }
 
 #checkin_my_day_good + label {
+  width: 48x;
+  height: 48px;
   color: transparent;
-  background-image: asset-url("icons/good.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #FFD166; // default color
+  -webkit-mask: asset-url("icons/good.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/good.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_my_day_good:checked + label {
   color: transparent;
+  background-color: #6ED3CF;
 }
 
 #checkin_my_day_bad + label {

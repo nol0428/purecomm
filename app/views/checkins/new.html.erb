@@ -24,7 +24,8 @@
             item_wrapper_class: 'category-item',
             input_html: {class: 'category-selector'},
             collection: [true, false] %>
-    <%= f.input :comment  %>
+    <%= f.input :comment,
+                placeholder: "Anything you’d like to share?"  %>
     <%= f.submit "Submit", class: "btn btn-primary"  %>
   <% end %>
 </div>
