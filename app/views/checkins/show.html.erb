@@ -1,0 +1,9 @@
+<div class="container">
+  <% if @checkin.discuss.nil? %>
+    <%= render 'checkins/discuss_form', checkin: @checkin %>
+    <%# This partial doesn't exist (yet) ☝️ %>
+  <% else %>
+    <%= render 'checkins/show', checkin: @checkin %>
+    <%# This partial doesn't exist (yet) ☝️ %>
+  <% end %>
+</div>

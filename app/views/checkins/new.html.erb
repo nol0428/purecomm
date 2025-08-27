@@ -11,7 +11,7 @@
     <h2>My day was...</h2>
     <%= f.input :my_day,
                 as: :radio_buttons, label: false,
-                collection: [['Good','good'], ['Bad','bad']],
+                collection: [['Good','Good'], ['Bad','Bad']],
                 label_method: :first, value_method: :last,
                 collection_wrapper_tag: 'div',
                 collection_wrapper_class: 'category-wrapper',
@@ -27,7 +27,7 @@
             collection: [true, false] %>
     <%= f.input :comment,
                 label: false,
-                placeholder: "Anything you’d like to share?"  %>
+                placeholder: "Anything you'd like to share?"  %>
     <%= f.submit "Submit", class: "btn btn-primary"  %>
   <% end %>
 </div>
