@@ -297,9 +297,12 @@ a:hover { text-decoration: underline; }
   fill: currentColor; /* inline SVGs inherit .nav-icon text color */
 }
 
-a.btn,
-a.btn-primary,
-a.banner__cta {
+/* Remove main padding only for landing page */
+.site-main.no-padding {
+  padding-block: 0 !important; /* ensure it wins over the @media rule */
+  a.btn,
+  a.btn-primary,
+  a.banner__cta {
   text-decoration: none;
 }
 

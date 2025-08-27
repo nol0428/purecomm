@@ -1,87 +1,325 @@
-/* Scope all landing tweaks so they don't affect the rest of the app */
+/* =======================================
+   Landing Page Global
+======================================= */
 .landing-page {
-  padding-block: 3rem; /* vertical breathing room */
-}
-
-/* Change font color for landing page only */
-.landing-page {
-  color: #222; /* your chosen color */
+  color: #222;
+  padding-bottom: 0; /* remove dead space at very bottom */
 }
 
 .landing-page h1,
 .landing-page h2,
 .landing-page h3,
 .landing-page p,
-.landing-page li {
-  color: #222; /* ensures headings & body text follow landing page style */
-}
+.landing-page li { color: #222; }
 
-/* If you want a different muted tone here too */
-.landing-page .muted {
-  color: #666;
-}
-/* Centered hero */
+.landing-page .muted { color: #666; }
+
+/* Only landing page should remove main padding */
+.site-main.no-padding { padding-block: 0; }
+
+/* =======================================
+   Hero Section (flush to top)
+======================================= */
 .landing-page .hero {
-  text-align: center;
-  max-width: 56rem;
-  margin-inline: auto;
+  position: relative;
+  margin: 0;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  padding-top: clamp(2rem, 6vw, 4rem);
+  padding-inline: clamp(2rem, 6vw, 4rem);
+
+  background-image: url("https://res.cloudinary.com/dt4jctqz1/image/upload/v1756252983/coupleholdinghands_loffsc.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 0;
+  color: #fff;
+
+  isolation: isolate; /* contain overlays */
 }
 
-.landing-page .hero-cta { margin-top: 0.75rem; }
+.landing-page .hero::before {
+  /* dark overlay for readability */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+  pointer-events: none;
+}
 
-/* Responsive grid:
-   - Mobile: cards stack, each ~square-ish
-   - Desktop: 2 per row, balanced width
-*/
+.landing-page .hero-overlay {
+  position: relative;
+  z-index: 2; /* above overlay */
+  max-width: 640px;
+  margin-top: 1rem;
+}
+
+.landing-page .hero-overlay h1 {
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: 800;
+  color: #FFF9F5;
+  margin-bottom: 1rem;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+}
+
+.landing-page .hero-overlay p {
+  font-size: clamp(1.25rem, 2.25vw, 1.75rem);
+  font-weight: 500;
+  color: #FFF9F5;
+  margin-bottom: 2rem;
+  max-width: 42ch;
+}
+
+.landing-page .hero-cta {
+  margin-top: 0.75rem;
+  position: relative;
+  z-index: 3; /* ensure clickable */
+}
+
+/* =======================================
+   Intro + Subheading
+======================================= */
+.landing-page .landing-intro {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.landing-page .landing-intro p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #333333;
+}
+
+.landing-page .landing-subheading {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  color: #FFF9F5; /* used if placed over imagery */
+}
+
+/* =======================================
+   Features Grid (tight to hero)
+======================================= */
 .landing-page .features-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 1.25rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  margin-top: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-
-  /* ensure all cards in a row have equal height */
   align-items: stretch;
 }
 
+/* Transparent cards (no frosted), readable over images */
 .landing-page .feature-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* keep h2 pinned to the top */
-  padding: 1.5rem;
+  align-items: center;
+  text-align: center;
 
-  /* equal sizing */
-  min-height: 280px; /* adjust as needed */
+  color: #FFF9F5; /* bright text over imagery */
+  position: relative;
+  z-index: 2;     /* above any section overlays */
 }
 
-/* Make headings consistent */
+.landing-page .feature-card h2,
+.landing-page .feature-card p,
+.landing-page .feature-card .muted {
+  color: #FFF9F5;
+  text-shadow: 0 1px 2px rgba(0,0,0,.55); /* keep readable on light areas */
+}
+
 .landing-page .feature-card h2 {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   font-size: 1.25rem;
   line-height: 1.3;
 }
 
-/* On tablets/desktops, drop strict squares and use a comfy min-height */
 @media (min-width: 768px) {
-  .landing-page .feature-card {
-    aspect-ratio: auto;
-    min-height: 240px;
-  }
+  .landing-page .feature-card { min-height: 240px; }
 }
 
-/* Bottom CTA centered */
-.landing-page .landing-cta {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* SVG feature icons */
+/* =======================================
+   Feature Icons
+======================================= */
 .landing-page .feature-icon {
   width: 48px;
   height: 48px;
-  margin-bottom: 0.75rem;
-  fill: currentColor; /* matches the card text color */
+  margin-bottom: 0.5rem;
+  fill: currentColor; /* inherits white */
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.45));
   display: block;
   margin-left: auto;
-  margin-right: auto; /* centers the icon */
+  margin-right: auto;
+}
+
+/* =======================================
+   Secondary CTA
+======================================= */
+.landing-page .landing-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* =======================================
+   Bottom Banner (with fade into white)
+   - no fixed min-height; uses padding
+   - smooth fade to white at bottom
+======================================= */
+.landing-page .landing-banner {
+  position: relative;
+  margin-top: 2rem;
+  border-radius: 0;
+  background-image: url("https://image.pollinations.ai/prompt/pastel%20background?width=1200&height=500&seed=12690&enhance=true&nologo=true&model=kontext");
+  background-size: cover;
+  background-position: center;
+  padding: 2rem 1rem 4rem; /* control total height via padding */
+  text-align: center;
+  isolation: isolate;       /* contain overlays */
+}
+
+.landing-page .landing-banner::before {
+  /* dark overlay for text/card visibility */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* fade bottom into white (page bg) */
+.landing-page .landing-banner::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.landing-page .landing-banner__overlay,
+.landing-page .overlap-cards {
+  position: relative;
+  z-index: 3; /* above overlay and fade */
+}
+
+.landing-page .landing-banner__overlay h2,
+.landing-page .landing-banner__overlay p {
+  color: #FFF9F5;
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+
+/* =======================================
+   iPhone-size optimization (<= 430px)
+======================================= */
+@media (max-width: 430px) {
+  .landing-page .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .landing-page .feature-card {
+    min-height: 160px;
+    padding: 12px;
+  }
+
+  .landing-page .feature-card h2 {
+    font-size: 1rem;
+    margin-bottom: .5rem;
+  }
+
+  .landing-page .feature-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: .5rem;
+  }
+
+  .landing-page .feature-card p {
+    font-size: .9rem;
+  }
+}
+
+/* ===== Make landing section fill the viewport and push banner to bottom ===== */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;  /* full safe viewport height */
+  padding-bottom: 0;   /* no dead space at bottom */
+}
+
+/* The banner sits at the bottom unless content is taller than the screen */
+.landing-page .landing-banner {
+  margin-top: auto;          /* pushes banner to the bottom */
+  border-radius: 0;
+  position: relative;
+  background-image: url("https://image.pollinations.ai/prompt/pastel%20background?width=1200&height=500&seed=12690&enhance=true&nologo=true&model=kontext");
+  background-size: cover;
+  background-position: center;
+  padding: 2rem 1rem 2rem;   /* use padding to control height, not min-height */
+  text-align: center;
+  isolation: isolate;        /* contain overlays */
+}
+
+/* optional: keep a subtle dark overlay for text contrast */
+.landing-page .landing-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.30); /* slightly lighter than before for a softer look */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Fade the TOP of the banner into white (page background) */
+.landing-page .landing-banner::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 140px;  /* tweak to taste */
+  background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0) 100%);
+  z-index: 2;     /* above overlay, below content */
+  pointer-events: none;
+}
+
+/* Keep banner content above overlays/fade */
+.landing-page .landing-banner__overlay,
+.landing-page .overlap-cards {
+  position: relative;
+  z-index: 3;
+}
+
+/* Kill any accidental bottom spacing from last child margins */
+.landing-page > :last-child { margin-bottom: 0 !important; }
+
+/* ===== Bottom Banner Heading Refinement ===== */
+.landing-page .landing-banner__overlay h2 {
+  margin-top: 2.5rem;                  /* more space above */
+  font-size: clamp(2rem, 5vw, 3rem);  /* bigger & responsive */
+  font-weight: 900;                   /* extra bold */
+  letter-spacing: -0.5px;             /* modern tighter feel */
+  color: #FFF9F5;                     /* keep it warm white */
+  line-height: 1.1;
+}
+
+.btn,
+.btn:hover,
+.landing-page .btn,
+.landing-page .btn:hover {
+  text-decoration: none;
 }

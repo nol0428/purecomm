@@ -1,49 +1,65 @@
 <section class="landing-page app-container flow">
   <!-- Hero -->
   <header class="hero flow">
-    <h1>PureComm</h1>
-    <p class="muted">
-      Stay emotionally in sync, resolve friction gently, and communicate in a way that fits you.
-    </p>
-    <%= link_to "Get started", "#", class: "btn btn-primary hero-cta" %>
+    <div class="hero-overlay">
+      <h1>PureComm</h1>
+      <p>
+        Stay emotionally in sync, resolve friction gently,
+        and communicate in a way that feels natural.
+      </p>
+      <%= link_to "Get started", "#", class: "btn btn-primary hero-cta" %>
+    </div>
   </header>
-  <!-- Features -->
-  <div class="features-grid">
-    <!-- Mood Check-In -->
-    <section class="card flow feature-card">
-      <h2>Mood Check-In</h2>
-      <%= inline_svg_tag "checkin-navbar.svg", class: "feature-icon" %>
-      <p class="muted">
-        A quick daily touchpoint that replaces guesswork with clarity—so your partner knows how to show up for you.
-      </p>
-    </section>
-    <!-- Grievance Drop -->
-    <section class="card flow feature-card">
-      <h2>Grievance Drop</h2>
-      <%= inline_svg_tag "grievance-navbar.svg", class: "feature-icon" %>
-      <p class="muted">
-        Capture small hurts before they grow. Share calmly and revisit when you’re both ready.
-      </p>
-    </section>
-    <!-- AI Coach -->
-    <section class="card flow feature-card">
-      <h2>AI Coach</h2>
-      <%= inline_svg_tag "bot.svg", class: "feature-icon" %>
-      <p class="muted">
-        Guidance tuned to your love language and temperament—so advice actually lands.
-      </p>
-    </section>
-    <!-- PureComm Space -->
-    <section class="card flow feature-card">
-      <h2>PureComm Space</h2>
-      <%= inline_svg_tag "message-navbar.svg", class: "feature-icon" %>
-      <p class="muted">
-        Keep relationship talks in their own lane—without disrupting the vibe of everyday chats, plans, or family updates.
-      </p>
-    </section>
-  </div>
-  <!-- Secondary CTA -->
-  <div class="landing-cta">
-    <%= link_to "Create your account", "#", class: "btn btn-primary" %>
-  </div>
-</section>
+  <!-- Value Proposition / Intro -->
+  <section class="landing-intro">
+    <p>
+      PureComm is built to help couples stay emotionally connected every day.
+      By combining quick check-ins, thoughtful reflection tools, and an AI-powered coach,
+      we give you a private space to share openly, resolve gently, and protect the vibe of your everyday conversations.
+    </p>
+  </section>
+  <!-- Section heading -->
+  <section class="landing-banner">
+    <div class="landing-banner__overlay">
+      <h2>Your Tools for Better Communication</h2>
+    </div>
+    <!-- Features -->
+    <div class="features-grid">
+      <!-- Mood Check-In -->
+      <section class="card flow feature-card">
+        <h2>Mood Check-In</h2>
+        <%= inline_svg_tag "icons/checkin-navbar.svg", class: "feature-icon" %>
+        <p class="muted">
+          A quick daily touchpoint that replaces guesswork with clarity—so your partner knows how to show up for you.
+        </p>
+      </section>
+      <!-- Grievance Drop -->
+      <section class="card flow feature-card">
+        <h2>Grievance Drop</h2>
+        <%= inline_svg_tag "icons/grievance-navbar.svg", class: "feature-icon" %>
+        <p class="muted">
+          Capture small hurts before they grow. Share calmly and revisit when you’re both ready.
+        </p>
+      </section>
+      <!-- AI Coach -->
+      <section class="card flow feature-card">
+        <h2>AI Coach</h2>
+        <%= inline_svg_tag "icons/bot.svg", class: "feature-icon" %>
+        <p class="muted">
+          Guidance tuned to your love language and temperament—so advice actually lands.
+        </p>
+      </section>
+      <!-- PureComm Space -->
+      <section class="card flow feature-card">
+        <h2>PureComm Space</h2>
+        <%= inline_svg_tag "icons/message-navbar.svg", class: "feature-icon" %>
+        <p class="muted">
+          Keep relationship talks in their own lane—without disrupting the vibe of everyday chats, plans, or family updates.
+        </p>
+      </section>
+    </div>
+    <!-- Secondary CTA -->
+    <div class="landing-cta">
+      <%= link_to "Create your account", "#", class: "btn btn-primary" %>
+    </div>
+  </section>
