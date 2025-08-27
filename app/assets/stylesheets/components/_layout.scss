@@ -1,6 +1,7 @@
 /* app/assets/stylesheets/_layout.scss */
 
 /* ===== CSS Variables (light/dark aware) ===== */
+
 :root {
   --bg: #FFF9F5;
   --surface: #FAFAFA;
@@ -311,4 +312,5 @@ a:hover { text-decoration: underline; }
   a.banner__cta:hover {
     text-decoration: none;
   }
+}
 }

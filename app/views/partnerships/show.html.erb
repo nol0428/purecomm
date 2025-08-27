@@ -31,7 +31,7 @@
   </div>
   <div class="mood-list">
     <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
-      <div class="check-in-card d-flex align-items-center gap-3">
+      <div class="check-in-card d-flex align-items-center gap-3 <%= 'faded' if session[:viewed_checkins]&.include?(checkin.id) %>">
         <%= image_tag "user_two.jpg", class: "checkin-avatar", alt: @user.current_partner.username %>
         <div>
           <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", checkin_path(checkin) %>

@@ -3,12 +3,25 @@
 .my-mood { margin-top: 16px; }
 .my-mood h3 { font-weight: 800; color: #333; }
 
+.mood-log, .mood-list {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.mood-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
 .mood-log {
   margin-top: 12px;
-  border: 2px solid #6ED3CF;
-  border-radius: 16px;
   padding: 12px;
+  border: none;
+  background: transparent;
 }
+
 .mood-log__row {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -33,6 +46,9 @@
   border: 1.5px solid #6ED3CF;
   border-radius: 14px;
   padding: 12px 14px;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  will-change: transform;
 }
 .check-in-card a { color: #333; font-weight: 600; text-decoration: none; }
 .check-in-card a:hover { text-decoration: underline; }
@@ -40,6 +56,31 @@
 .two-buttons { margin-top: 12px; gap: 12px; }
 .two-buttons .btn-primary { background: #6ED3CF; }
 
+.two-buttons {
+  margin-top: 12px;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .check-in-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,.12);
+    background: #fff;
+    border-color: #6ED3CF;
+    cursor: pointer;
+  }
+}
+.check-in-card:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.check-in-card.faded:hover,
+.check-in-card.faded:active {
+  transform: none;
+  box-shadow: none;
+}
 .mood-log__row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -98,4 +139,14 @@
 .checkin-time {
   font-size: 0.8rem;
   color: #777;
+}
+
+.check-in-card.faded {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.bulma.header {
+  margin-top: 16px;
+  padding: 0 16px;
 }

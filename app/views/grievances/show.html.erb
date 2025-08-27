@@ -1,16 +1,13 @@
 <div class="container">
   Sent on <%= @grievance.created_at %>
 </div>
-
 <div class="topic-container">
   <h3>Topic</h3>
   <%= @grievance.topic %>
 </div>
-
 <div class="made-me-feel">
   <%= inline_svg_tag "icons/#{@grievance.feeling.downcase}.svg", class: "icon" %>
 </div>
-
 <div class="situation-container">
   <h3>Description of the situation</h3>
   <p>
@@ -44,5 +41,6 @@
     <span class="badge rounded-pill bg-light text-dark">
       <strong><%= value %></strong> / 5
     </span>
+
   </div>
 </div>

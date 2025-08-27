@@ -22,6 +22,8 @@ class GrievancesController < ApplicationController
 
   def show
     @grievance = Grievance.find(params[:id])
+    session[:viewed_grievances] ||= []
+    session[:viewed_grievances] |= [@grievance.id]
   end
 
   private
