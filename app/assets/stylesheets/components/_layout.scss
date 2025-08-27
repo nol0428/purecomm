@@ -38,19 +38,60 @@
 
 html, body { height: 100%; }
 
+/* ===== Typography ===== */
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  font: 500 16px/1.5 system-ui, -apple-system, "Inter", Roboto, Arial, sans-serif;
+  font-family: "Raleway", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-weight: 600;  /* SemiBold */
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-/* Better default headings on small screens */
-h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); margin: 0 0 var(--space-3); }
-h2 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); margin: 0 0 var(--space-2); }
-h3 { font-size: clamp(1.1rem, 2vw, 1.25rem); margin: 0 0 var(--space-2); }
+/* Headings */
+h1 {
+  font-family: "Raleway", system-ui, -apple-system, sans-serif;
+  font-weight: 800; /* ExtraBold */
+  font-size: clamp(2rem, 5vw, 2.5rem); /* keeps responsive scaling */
+  line-height: 1.2;
+  margin: 0 0 var(--space-3);
+  color: var(--text);
+}
 
+h2 {
+  font-family: "Raleway", system-ui, -apple-system, sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  line-height: 1.2;
+  margin: 0 0 var(--space-2);
+  color: var(--text);
+}
+
+h3 {
+  font-family: "Raleway", system-ui, -apple-system, sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  line-height: 1.2;
+  margin: 0 0 var(--space-2);
+  color: var(--text);
+}
+
+/* Paragraphs and list items */
+p, li {
+  font-size: 1rem;
+  font-weight: 600; /* SemiBold */
+  color: var(--text);
+}
+
+/* Muted / secondary text */
+.muted {
+  color: var(--muted);
+  font-weight: 400; /* lighter contrast */
+}
+
+/* Links */
 a { color: var(--brand); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -254,4 +295,19 @@ a:hover { text-decoration: underline; }
   width: 28px;
   height: 28px;
   fill: currentColor; /* inline SVGs inherit .nav-icon text color */
+}
+
+/* Remove main padding only for landing page */
+.site-main.no-padding {
+  padding-block: 0 !important; /* ensure it wins over the @media rule */
+  a.btn,
+  a.btn-primary,
+  a.banner__cta {
+  text-decoration: none;
+}
+
+a.btn:hover,
+a.btn-primary:hover,
+a.banner__cta:hover {
+  text-decoration: none;
 }
