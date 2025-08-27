@@ -38,13 +38,18 @@
 
 #checkin_mood_happy + label {
   color: transparent;
-  background-image: asset-url("icons/happy.svg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #aaa; // default color
+  -webkit-mask: asset-url("icons/happy.svg") no-repeat center;
+  -webkit-mask-size: contain;
+  mask: asset-url("icons/happy.svg") no-repeat center;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 #checkin_mood_happy:checked + label {
   color: transparent;
+  background-color: #ff4444;
 }
 
 #checkin_mood_fine + label {
