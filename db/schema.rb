@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_26_021123) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_27_045008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_26_021123) do
     t.bigint "place_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "kind"
+    t.string "mood"
+    t.string "day"
+    t.string "wants_to_talk"
+    t.string "love_language"
+    t.string "temperament"
+    t.text "note"
+    t.text "advice"
     t.index ["partnership_id"], name: "index_messages_on_partnership_id"
     t.index ["place_type", "place_id"], name: "index_messages_on_place"
     t.index ["user_id"], name: "index_messages_on_user_id"
