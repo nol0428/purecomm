@@ -9,22 +9,22 @@
             input_html: {class: 'category-selector'},
             collection: Checkin::MOODS %>
     <h2>My day was...</h2>
-    <%= f.input :my_day, legend: false,
-            as: :radio_buttons,
-            collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'category-wrapper',
-            item_wrapper_class: 'category-item',
-            input_html: {class: 'category-selector'},
-            collection: Checkin::MY_DAY %>
+    <%= f.input :my_day,
+                as: :radio_buttons, label: false,
+                collection: [['Good','good'], ['Bad','bad']],
+                label_method: :first, value_method: :last,
+                collection_wrapper_tag: 'div',
+                collection_wrapper_class: 'category-wrapper',
+                item_wrapper_class: 'category-item',
+                input_html: { class: 'choice-input visually-hidden' } %>
     <h2>Do you want to talk about it?</h2>
     <%= f.input :discuss,
-            as: :radio_buttons,
-            collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'category-wrapper',
-            item_wrapper_class: 'category-item',
-            input_html: {class: 'category-selector'},
-            collection: [true, false] %>
-    <%= f.input :comment  %>
-    <%= f.submit "Submit", class: "btn btn-primary"  %>
+                as: :radio_buttons, label: false,
+                collection: [['Yes', true], ['No', false]],
+                label_method: :first, value_method: :last,
+                collection_wrapper_tag: 'div',
+                collection_wrapper_class: 'category-wrapper',
+                item_wrapper_class: 'category-item',
+                input_html: { class: 'choice-input visually-hidden' } %>
   <% end %>
 </div>

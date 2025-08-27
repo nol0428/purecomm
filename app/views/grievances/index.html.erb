@@ -9,7 +9,7 @@
 <h2>Communication Growth Notes</h2>
 
 <div class="grievance-list">
-<% @grievances.each do |grievance| %>
+<% @grievances.order(created_at: :desc).each do |grievance| %>
   <div class="grievance-card">
     <%= link_to "#{grievance.topic}", grievance_path(grievance) %>
   </div>
