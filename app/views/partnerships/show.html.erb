@@ -2,30 +2,30 @@
   <div class="banner">
     <h2>Hello, <%= @user.username %></h2>
     <p>How's your mood today?</p>
-    <%= link_to "#" do %> <!-- new_partnership_checkin_path -->
+    <%= link_to new_partnership_checkin_path(@user.current_partnership) do %> <!-- new_partnership_checkin_path -->
       Mood Check-in
     <% end %>
   </div>
   <div class="my-mood">
     <h3>Your Daily Mood Log</h3>
     <div class="container d-flex gap-3">
-    <% @user.checkins.order(created_at: :desc).limit(5).each do |checkin| %>
-      <%= inline_svg_tag "icons/#{checkin.mood.downcase}.svg", class: "icon" %>
-    <% end %>
+      <% @user.checkins.order(created_at: :desc).limit(5).each do |checkin| %>
+        <%= inline_svg_tag "icons/#{checkin.mood.downcase}.svg", class: "icon" %>
+      <% end %>
+    </div>
+    <div class="two-buttons d-flex justify-content-between">
+      <%= link_to "AI Bot Coach", "#", class:"btn btn-primary" %>
+      <%= link_to "Grievance Drop", grievances_path, class:"btn btn-primary" %>
+    </div>
+    <div class="bulma header">
+      <h2><%= @user.current_partner.username %>'s Mood Check-in</h2>
+    </div>
+    <div class="mood-list">
+      <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
+        <div class="check-in-card">
+          <%= link_to "#{@user.current_partner.username} checked in", "#" %> <!-- checkin_path(checkin) -->
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="two-buttons d-flex justify-content-between">
-    <%= link_to "AI Bot Coach", "#", class:"btn btn-primary" %>
-    <%= link_to "Grievance Drop", grievances_path, class:"btn btn-primary" %>
-  </div>
-  <div class="bulma header">
-    <h2><%= @user.current_partner.username %>'s Mood Check-in</h2>
-  </div>
-  <div class="mood-list">
-    <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
-      <div class="check-in-card">
-        <%= link_to "#{@user.current_partner.username} checked in", "#" %> <!-- checkin_path(checkin) -->
-      </div>
-    <% end %>
-  </div>
-</div>
 </div>
