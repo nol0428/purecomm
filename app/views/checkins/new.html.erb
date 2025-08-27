@@ -22,10 +22,11 @@
             as: :radio_buttons,
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'category-wrapper',
-            item_wrapper_class: 'category-item',
-            input_html: {class: 'category-selector'},
+            item_wrapper_class: 'talk-item',
+            input_html: {class: 'category-selector', checked: false},
             collection: [true, false] %>
     <%= f.input :comment,
+                label: false,
                 placeholder: "Anything you’d like to share?"  %>
     <%= f.submit "Submit", class: "btn btn-primary"  %>
   <% end %>
