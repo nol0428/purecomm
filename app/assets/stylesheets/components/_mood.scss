@@ -46,7 +46,16 @@
   gap: 12px;
 }
 .mood-log__cell { display: grid; place-items: center; text-align: center; }
-.mood-icon { width: 48px; height: 48px; display: block; }
+.mood-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  color: #6ED3CF;
+}
+
+.mood-icon:hover {
+  filter: brightness(0.95);
+}
 .mood-log__label { margin-top: 6px; font-size: .9rem; color: #333; }
 
 .btn-coach {
