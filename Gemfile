@@ -52,6 +52,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "ostruct"
 gem "inline_svg", "~> 1.9"
+gem "ruby_llm"
 
 group :development, :test do
   gem "dotenv-rails"

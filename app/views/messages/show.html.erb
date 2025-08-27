@@ -1,0 +1,42 @@
+<%= form_with model: @message, local: true do |f| %>
+  <%= f.hidden_field :kind, value: "coach" %>
+  <fieldset class="card">
+    <legend><strong>How are you feeling?</strong></legend>
+    <% %w[happy fine tired sad upset anxious].each do |m| %>
+      <label style="margin-right:.75rem;">
+        <%= f.radio_button :mood, m %> <%= m.capitalize %>
+      </label>
+    <% end %>
+  </fieldset>
+  <fieldset class="card">
+    <legend><strong>My day was…</strong></legend>
+    <% %w[good bad].each do |d| %>
+      <label style="margin-right:.75rem;">
+        <%= f.radio_button :day, d %> <%= d.capitalize %>
+      </label>
+    <% end %>
+  </fieldset>
+  <fieldset class="card">
+    <legend><strong>Do you want to talk about it?</strong></legend>
+    <% %w[yes no].each do |a| %>
+      <label style="margin-right:.75rem;">
+        <%= f.radio_button :wants_to_talk, a %> <%= a.capitalize %>
+      </label>
+    <% end %>
+  </fieldset>
+  <div class="card stack">
+    <div>
+      <label>Love language</label>
+      <%= f.select :love_language, options_for_select(%w[Words Touch Acts QualityTime Gifts]) %>
+    </div>
+    <div>
+      <label>Temperament</label>
+      <%= f.select :temperament, options_for_select(%w[Sanguine Choleric Melancholic Phlegmatic]) %>
+    </div>
+    <div>
+      <%= f.label :note, "Notes (optional)" %>
+      <%= f.text_area :note, rows: 3 %>
+    </div>
+    <%= f.submit "Get Coach Advice", class: "btn btn-primary" %>
+  </div>
+<% end %>
