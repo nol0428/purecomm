@@ -300,4 +300,14 @@ a:hover { text-decoration: underline; }
 /* Remove main padding only for landing page */
 .site-main.no-padding {
   padding-block: 0 !important; /* ensure it wins over the @media rule */
+  a.btn,
+  a.btn-primary,
+  a.banner__cta {
+  text-decoration: none;
+}
+
+a.btn:hover,
+a.btn-primary:hover,
+a.banner__cta:hover {
+  text-decoration: none;
 }
