@@ -2,8 +2,6 @@ class Chat < ApplicationRecord
   belongs_to :partnership
   has_many :messages, dependent: :destroy
 
-  acts_as_chat message_class: "Message"
-
   before_validation :set_default_model
 
   private
