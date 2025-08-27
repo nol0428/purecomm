@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :partnerships, only: [:show, :create] do
     resources :checkins, only: [:new, :create]
     resources :grievances, only: [:new, :create]
-    resources :messages, only: [:create]
+    resources :messages, only: [:index, :create]
   end
   resources :checkins, only: [:show]
   resources :grievances, only: [:index, :show, :edit, :update, :destroy]
