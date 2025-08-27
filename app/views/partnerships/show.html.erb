@@ -1,8 +1,10 @@
 <div class="whole-page">
   <div class="banner">
     <h2>Hello, <%= @user.username %>!</h2>
-    <p>How’s your mood today?</p>
-    <%= link_to "Mood Check-in", "#", class: "btn banner__cta" %>
+    <p>How's your mood today?</p>
+    <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
+      Mood Check-in
+    <% end %>
   </div>
   <div class="card mood-log" style="margin-top:16px">
     <h3>Daily Mood Log</h3>

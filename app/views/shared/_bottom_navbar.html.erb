@@ -1,6 +1,8 @@
 <div class="bottom-navbar">
-  <%= link_to '#', class: "nav-icon" do %>
-    <%= inline_svg_tag "icons/home-navbar.svg" %>
+  <% if current_user %>
+    <%= link_to partnership_path(current_user.current_partnership), class: "nav-icon" do %>
+      <%= inline_svg_tag "icons/home-navbar.svg" %>
+    <% end %>
   <% end %>
   <%= link_to root_path, class: "nav-icon" do %>
     <%= inline_svg_tag "icons/checkin-navbar.svg" %>
@@ -8,7 +10,7 @@
   <%= link_to grievances_path, class: "nav-icon" do %>
     <%= inline_svg_tag "icons/grievance-navbar.svg" %>
   <% end %>
-  <%= link_to root_path, class: "nav-icon" do %>
+  <%= link_to "#", class: "nav-icon" do %>
     <%= inline_svg_tag "icons/message-navbar.svg" %>
   <% end %>
 </div>

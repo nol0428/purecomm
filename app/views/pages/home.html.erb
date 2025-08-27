@@ -1,17 +1,49 @@
-<section class="card">
-  <h2 class="mb-3">Pick your mood</h2>
-  <div class="feelings-grid">
-    <button class="btn-icon">
-      <%= inline_svg_tag "icons/happy.svg"%>
-    </button>
-    <button class="btn btn-icon">
-      <%= inline_svg_tag "icons/sad.svg"%>
-    </button>
-    <button class="btn btn-icon">
-      <%= inline_svg_tag "icons/anxious.svg"%>
-    </button>
-    <button class="btn btn-icon">
-      <%= inline_svg_tag "icons/upset.svg"%>
-    </button>
+<section class="landing-page app-container flow">
+  <!-- Hero -->
+  <header class="hero flow">
+    <h1>PureComm</h1>
+    <p class="muted">
+      Stay emotionally in sync, resolve friction gently, and communicate in a way that fits you.
+    </p>
+    <%= link_to "Get started", "#", class: "btn btn-primary hero-cta" %>
+  </header>
+  <!-- Features -->
+  <div class="features-grid">
+    <!-- Mood Check-In -->
+    <section class="card flow feature-card">
+      <h2>Mood Check-In</h2>
+      <%= inline_svg_tag "checkin-navbar.svg", class: "feature-icon" %>
+      <p class="muted">
+        A quick daily touchpoint that replaces guesswork with clarity—so your partner knows how to show up for you.
+      </p>
+    </section>
+    <!-- Grievance Drop -->
+    <section class="card flow feature-card">
+      <h2>Grievance Drop</h2>
+      <%= inline_svg_tag "grievance-navbar.svg", class: "feature-icon" %>
+      <p class="muted">
+        Capture small hurts before they grow. Share calmly and revisit when you’re both ready.
+      </p>
+    </section>
+    <!-- AI Coach -->
+    <section class="card flow feature-card">
+      <h2>AI Coach</h2>
+      <%= inline_svg_tag "bot.svg", class: "feature-icon" %>
+      <p class="muted">
+        Guidance tuned to your love language and temperament—so advice actually lands.
+      </p>
+    </section>
+    <!-- PureComm Space -->
+    <section class="card flow feature-card">
+      <h2>PureComm Space</h2>
+      <%= inline_svg_tag "message-navbar.svg", class: "feature-icon" %>
+      <p class="muted">
+        Keep relationship talks in their own lane—without disrupting the vibe of everyday chats, plans, or family updates.
+      </p>
+    </section>
+  </div>
+  <!-- Secondary CTA -->
+  <div class="landing-cta">
+    <%= link_to "Create your account", "#", class: "btn btn-primary" %>
   </div>
 </section>

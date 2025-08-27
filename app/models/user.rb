@@ -28,5 +28,4 @@ class User < ApplicationRecord
   # User.find(current_partnership.select(:user_one_id, :user_two_id)).where.not(id: self)
   current_partnership.partner_of(self)
   end
-
 end

@@ -1,0 +1,87 @@
+/* Scope all landing tweaks so they don't affect the rest of the app */
+.landing-page {
+  padding-block: 3rem; /* vertical breathing room */
+}
+
+/* Change font color for landing page only */
+.landing-page {
+  color: #222; /* your chosen color */
+}
+
+.landing-page h1,
+.landing-page h2,
+.landing-page h3,
+.landing-page p,
+.landing-page li {
+  color: #222; /* ensures headings & body text follow landing page style */
+}
+
+/* If you want a different muted tone here too */
+.landing-page .muted {
+  color: #666;
+}
+/* Centered hero */
+.landing-page .hero {
+  text-align: center;
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+.landing-page .hero-cta { margin-top: 0.75rem; }
+
+/* Responsive grid:
+   - Mobile: cards stack, each ~square-ish
+   - Desktop: 2 per row, balanced width
+*/
+.landing-page .features-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  /* ensure all cards in a row have equal height */
+  align-items: stretch;
+}
+
+.landing-page .feature-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* keep h2 pinned to the top */
+  padding: 1.5rem;
+
+  /* equal sizing */
+  min-height: 280px; /* adjust as needed */
+}
+
+/* Make headings consistent */
+.landing-page .feature-card h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+/* On tablets/desktops, drop strict squares and use a comfy min-height */
+@media (min-width: 768px) {
+  .landing-page .feature-card {
+    aspect-ratio: auto;
+    min-height: 240px;
+  }
+}
+
+/* Bottom CTA centered */
+.landing-page .landing-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* SVG feature icons */
+.landing-page .feature-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.75rem;
+  fill: currentColor; /* matches the card text color */
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* centers the icon */
+}
