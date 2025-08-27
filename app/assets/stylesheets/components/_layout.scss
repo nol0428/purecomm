@@ -306,8 +306,9 @@ a:hover { text-decoration: underline; }
   text-decoration: none;
 }
 
-a.btn:hover,
-a.btn-primary:hover,
-a.banner__cta:hover {
-  text-decoration: none;
+  a.btn:hover,
+  a.btn-primary:hover,
+  a.banner__cta:hover {
+    text-decoration: none;
+  }
 }
