@@ -1,10 +1,15 @@
 <div class="whole-page">
   <div class="banner">
-    <h2>Hello, <%= @user.username %>!</h2>
-    <p>How's your mood today?</p>
-    <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
-      Mood Check-in
-    <% end %>
+    <div class="banner__row">
+      <div class="banner__content">
+        <h2>Hello, <%= @user.username %>!</h2>
+        <p>How's your mood today?</p>
+        <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
+          Mood Check-in
+        <% end %>
+      </div>
+      <%= image_tag "user_one.jpg", class: "banner__avatar", alt: "User One" %>
+    </div>
   </div>
   <div class="card mood-log" style="margin-top:16px">
     <h3>Daily Mood Log</h3>
@@ -26,8 +31,12 @@
   </div>
   <div class="mood-list">
     <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
-      <div class="check-in-card">
-        <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", "#" %>
+      <div class="check-in-card d-flex align-items-center gap-3">
+        <%= image_tag "user_two.jpg", class: "checkin-avatar", alt: @user.current_partner.username %>
+        <div>
+          <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", "#" %>
+          <div class="checkin-time"><%= checkin.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+        </div>
       </div>
     <% end %>
   </div>

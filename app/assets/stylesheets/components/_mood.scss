@@ -71,3 +71,31 @@
   border: none !important;
 }
 .btn-grievance:hover { filter: brightness(.97); text-decoration: none; }
+
+.banner__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.banner__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+}
+
+.checkin-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.checkin-time {
+  font-size: 0.8rem;
+  color: #777;
+}
