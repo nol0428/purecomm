@@ -12,6 +12,6 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    partnership_path(@user.current_partnership)
+    partnership_path(current_user.current_partnership)
   end
 end
