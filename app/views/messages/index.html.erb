@@ -1,4 +1,5 @@
 <h1>Coach Chat</h1>
+<%= turbo_stream_from [@partnership, :messages] %>
 <section class="chat">
   <!-- Turbo Stream target for appending new messages -->
   <div id="messages">

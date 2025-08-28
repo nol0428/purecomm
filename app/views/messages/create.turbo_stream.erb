@@ -1,9 +1,8 @@
-<!-- app/views/messages/create.turbo_stream.erb -->
 <turbo-stream action="append" target="messages">
   <template>
-    <!-- First append the user's message -->
+    <!-- user's message -->
     <%= render partial: "messages/message", formats: [:html], locals: { message: @message } %>
-    <!-- Then append the assistant's reply if it exists -->
+    <!-- assistant reply (if it was created) -->
     <% if defined?(@assistant_message) && @assistant_message.present? %>
       <%= render partial: "messages/message", formats: [:html], locals: { message: @assistant_message } %>
     <% end %>

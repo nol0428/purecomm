@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags if respond_to?(:javascript_importmap_tags) %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap", rel: "stylesheet" %>
+    <%= action_cable_meta_tag %>
   </head>
   <body class="app-shell has-bottom-nav">
     <a class="skip-link" href="#content">Skip to content</a>

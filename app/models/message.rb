@@ -16,6 +16,15 @@ class Message < ApplicationRecord
   # If a message has a chat but no partnership assigned yet, copy it from the chat
   before_validation :backfill_partnership_from_chat
 
+  # Broadcast assistant replies only (so user msgs aren't double-rendered)
+  after_create_commit :broadcast_assistant_reply
+
+  # --- small helper ---
+  def assistant?
+    role.to_s == "assistant"
+  end
+  # --------------------
+
   private
 
   def user_presence_for_user_messages
@@ -28,5 +37,17 @@ class Message < ApplicationRecord
     if partnership_id.nil? && chat&.partnership_id
       self.partnership_id = chat.partnership_id
     end
+  end
+
+  # Only append to the stream when this is an assistant message
+  def broadcast_assistant_reply
+    return unless assistant? && partnership.present?
+
+    broadcast_append_later_to(
+      [partnership, :messages],   # matches turbo_stream_from in index
+      target: "messages",         # <div id="messages"> ... </div>
+      partial: "messages/message",
+      locals: { message: self }
+    )
   end
 end
