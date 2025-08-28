@@ -1,8 +1,9 @@
 import { Application } from "@hotwired/stimulus"
 
-const application = Application.start()
+export const application = Application.start()
 
-// Configure Stimulus development experience here, if you want.
-// application.debug = false
+// Optional: enable logs
+// application.debug = true
 
-export { application }
+// Expose globally so we can check on Heroku
+window.Stimulus = application
