@@ -1,11 +1,26 @@
-.nudge-wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+body:has(#nudge_form) .bottom-navbar {
+  display: none;
 }
 
-.nudge-item {
+#nudge_form {
+  margin-top: 10vh;
+}
+
+.nudge-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.nudge-item label {
   flex: 0 0 30%;
+  height: 84px;
+  width: 100%;
+  color: transparent;
+  background-color: #FFD166; // default color
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
 }
 
 .nudge-selector {
@@ -13,17 +28,30 @@
   transform: scale(0);
 }
 
-.nudge-selector + label {
-  display: block;
-  cursor: pointer;
-  box-sizing: border-box;
-  width: 100%;
-  font-size: 12px;
-  text-align: left;
-  padding: 10px 10px 30px 10px;
-  border: 1px solid #EAEAEA;
-  border-radius: 4px;
-  background-color: #FFD166;
+#now + label {
+   -webkit-mask: asset-url("icons/now.svg") no-repeat center;
+  mask: asset-url("icons/now.svg") no-repeat center;
+}
+
+#hours-1 + label {
+   -webkit-mask: asset-url("icons/one-hour.svg") no-repeat center;
+  mask: asset-url("icons/one-hour.svg") no-repeat center;
+}
+#hours-2 + label {
+   -webkit-mask: asset-url("icons/two-hours.svg") no-repeat center;
+  mask: asset-url("icons/two-hours.svg") no-repeat center;
+}
+#hours-3 + label {
+   -webkit-mask: asset-url("icons/three-hours.svg") no-repeat center;
+  mask: asset-url("icons/three-hours.svg") no-repeat center;
+}
+#hours-6 + label {
+   -webkit-mask: asset-url("icons/six-hours.svg") no-repeat center;
+  mask: asset-url("icons/six-hours.svg") no-repeat center;
+}
+#hours-12 + label {
+   -webkit-mask: asset-url("icons/twelve-hours.svg") no-repeat center;
+  mask: asset-url("icons/twelve-hours.svg") no-repeat center;
 }
 
 .nudge-selector:checked + label {

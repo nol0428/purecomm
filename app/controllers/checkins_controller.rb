@@ -4,6 +4,11 @@ class CheckinsController < ApplicationController
     @partnership = Partnership.find(params[:partnership_id])
   end
 
+  def edit
+    @checkin = Checkin.find(params[:id])
+    @partnership = Partnership.find(params[:partnership_id])
+  end
+
   def create
     @partnership = Partnership.find(params[:partnership_id])
     @checkin = Checkin.new(checkin_params)
@@ -23,7 +28,7 @@ class CheckinsController < ApplicationController
       redirect_to checkin_path(@checkin), notice: "Checked-in!"
     else
       @partnership = @checkin.partnership
-      @times = [['Now', Time.now], ['1h', Time.now + 1.hour], ["2h", Time.now + 2.hours]]
+      @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
       render 'show', status: :unprocessable_entity
     end
   end
