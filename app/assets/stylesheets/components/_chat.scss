@@ -127,8 +127,9 @@
 }
 
 #new_message .field textarea:focus {
-  box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.3); /* soft glow in #FFD166 */
-  border-color: var(--user-border);
+  outline: none; /* remove browser default outline */
+  border: 2px solid var(--user-border); /* force yellow border */
+  box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.3); /* soft yellow glow */
 }
 
 #new_message .actions {
