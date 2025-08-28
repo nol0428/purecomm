@@ -16,7 +16,7 @@
     <div class="mood-log__row">
       <% @user.checkins.order(created_at: :desc).limit(6).reverse.each do |checkin| %>
         <div class="mood-log__cell">
-          <%= inline_svg_tag "icons/#{checkin.mood.downcase}.svg", class: "mood-icon" %>
+          <%= inline_svg_tag "icons/#{checkin.mood.downcase}-icon.svg", class: "mood-icon" %>
           <div class="mood-log__label"><%= weekday_mixed_abbr(checkin.created_at) %></div>
         </div>
       <% end %>
