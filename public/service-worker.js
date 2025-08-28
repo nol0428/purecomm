@@ -66,30 +66,43 @@
 //     })
 //   );
 // });
-const RUNTIME_CACHE = "runtime-v1";
+// const RUNTIME_CACHE = "runtime-v1";
 
-// Install quickly (no precache, avoids 404 issues)
-self.addEventListener("install", (event) => {
+// // Install quickly (no precache, avoids 404 issues)
+// self.addEventListener("install", (event) => {
+//   self.skipWaiting();
+// });
+
+// // Take control immediately on activate
+// self.addEventListener("activate", (event) => {
+//   event.waitUntil(clients.claim());
+// });
+
+// // Runtime cache: network-first for GET requests, fallback to cache
+// self.addEventListener("fetch", (event) => {
+//   if (event.request.method !== "GET") return;
+
+//   event.respondWith(
+//     fetch(event.request)
+//       .then((response) => {
+//         // Cache a copy of successful responses
+//         const copy = response.clone();
+//         caches.open(RUNTIME_CACHE).then((cache) => cache.put(event.request, copy));
+//         return response;
+//       })
+//       .catch(() => caches.match(event.request)) // fallback to any cached version
+//   );
+// });
+
+self.addEventListener('install', (event) => {
+  // activate immediately on update
   self.skipWaiting();
 });
 
-// Take control immediately on activate
-self.addEventListener("activate", (event) => {
-  event.waitUntil(clients.claim());
+self.addEventListener('activate', (event) => {
+  // take control of open pages
+  event.waitUntil(self.clients.claim());
 });
 
-// Runtime cache: network-first for GET requests, fallback to cache
-self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
-
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Cache a copy of successful responses
-        const copy = response.clone();
-        caches.open(RUNTIME_CACHE).then((cache) => cache.put(event.request, copy));
-        return response;
-      })
-      .catch(() => caches.match(event.request)) // fallback to any cached version
-  );
-});
+// No caching, no fetch handling (lets the network do everything)
+self.addEventListener('fetch', () => {});
