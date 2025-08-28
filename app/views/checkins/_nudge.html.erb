@@ -10,7 +10,9 @@
       <% end %>
     </div>
   </fieldset>
-  <%= link_to "Back", edit_partnership_checkin_path(partnership, checkin),
-              class: "btn btn-primary hero-cta" %>
-  <%= f.submit class: "btn btn-primary hero-cta" %>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <%= f.submit "Nudge", class: "btn btn-primary hero-cta w-full mb-3" %>
+    <%= link_to "Back", edit_partnership_checkin_path(partnership, checkin),
+              class: "btn btn-coach w-full" %>
+  </div>
 <% end %>
