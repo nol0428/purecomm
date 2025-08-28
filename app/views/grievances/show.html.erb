@@ -53,12 +53,12 @@
             type="range"
             id="grievance_intensity_scale"
             class="intensity-slider"
-            min="0" max="6" step="1"
+            min="0" max="5" step="1"
             value="<%= @grievance.intensity_scale || 0 %>"
             disabled
           >
             <div class="scale-ticks" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
           </div>
           <div class="scale-icon scale-icon--max">
@@ -66,5 +66,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="form-actions">
+      <%= link_to "Back", grievances_path, class: "btn btn-coach w-100" %>
     </div>
   </div>
