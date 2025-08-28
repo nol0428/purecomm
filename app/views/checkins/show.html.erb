@@ -1,4 +1,16 @@
-<div class="container">
+<div class="container checkin-scope">
+  <% owner =
+      (@checkin.respond_to?(:user) && @checkin.user.presence) ||
+      (@partnership&.user_two) || (@partnership&.user_one) || @user %>
+  <% avatar_name = owner&.try(:username).presence || "default_avatar" %>
+  <div class="meta-chip">
+    <div class="meta-chip__text">
+      Sent on: <%= @checkin.created_at.strftime("%Y/%m/%d") %>
+    </div>
+    <%= image_tag "#{avatar_name}.png",
+          class: "meta-chip__avatar",
+          alt: (owner&.try(:username) || "avatar") %>
+  </div>
   <% if @checkin.nudge.nil? %>
     <%= render 'checkins/nudge', checkin: @checkin, partnership: @partnership %>
   <% else %>

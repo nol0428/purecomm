@@ -1,0 +1,18 @@
+.checkin-scope .meta-chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin: 0 0 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
+}
+.checkin-scope .meta-chip__text { font-size: 16px; color: #222; }
+.checkin-scope .meta-chip__avatar {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.10);
+  border: 4px solid #fff;
+  outline: 2px solid var(--brand);
+}
