@@ -1,21 +1,13 @@
-<h1>PureComm Coach</h1>
-<div class="card" style="max-width: 720px; margin: 0 auto;">
-  <div class="stack" style="min-height: 320px;">
-    <% @messages.each do |m| %>
-      <div class="<%= m.assistant? ? 'assistant' : 'user' %>">
-        <strong><%= m.assistant? ? "Coach" : current_user.username.presence || "You" %>:</strong>
-        <p><%= simple_format m.content %></p>
-      </div>
-    <% end %>
-  </div>
-  <%= form_with(model: [@partnership, @message], local: true, class: "cluster", style: "margin-top:1rem; gap:.5rem;") do |f| %>
-    <%= f.text_area :content, rows: 2, class: "w-full", placeholder: "Type your message…" %>
-    <%= f.submit "Send", class: "btn btn-primary" %>
+<h1>Coach Chat</h1>
+<div class="messages">
+  <% @messages.each do |m| %>
+    <div class="message <%= m.role %>">
+      <strong><%= m.role.presence || m.author_kind %>:</strong>
+      <%= simple_format(m.content) %>
+    </div>
   <% end %>
 </div>
-<style>
-  /* Quick inline styles so you can see it immediately */
-  .user p       { background: var(--surface, #f5f5f5); padding:.5rem .75rem; border-radius: 10px; }
-  .assistant p  { background: #eef6ff; padding:.5rem .75rem; border-radius: 10px; }
-  .user, .assistant { margin-bottom: .5rem; }
-</style>
+<%= form_with model: @message, url: partnership_messages_path(@partnership), local: true do |f| %>
+  <%= f.text_area :content, rows: 3 %><br>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
