@@ -1,13 +1,13 @@
 module ApplicationHelper
   def weekday_mixed_abbr(date)
     map = {
-      0 => "Su", # Sunday
-      1 => "M",  # Monday
-      2 => "Tu", # Tuesday
-      3 => "W",  # Wednesday
-      4 => "Th", # Thursday
-      5 => "F",  # Friday
-      6 => "Sa"  # Saturday
+      0 => "Sun.", # Sunday
+      1 => "Mon.",  # Monday
+      2 => "Tue.", # Tuesday
+      3 => "Wed.",  # Wednesday
+      4 => "Thu.", # Thursday
+      5 => "Fri.",  # Friday
+      6 => "Sat."  # Saturday
     }
     map[date.wday]
   end
