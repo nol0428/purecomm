@@ -13,7 +13,7 @@ class Message < ApplicationRecord
   # Require a user only for human-authored messages
   validate :user_presence_for_user_messages
 
-  validates :content, length: { maximum: (ENV.fetch("AI_MAX_INPUT_CHARS", "140").to_i) }
+  validates :content, length: { maximum: (ENV.fetch("AI_MAX_INPUT_CHARS", "1000").to_i) }
 
   # If a message has a chat but no partnership assigned yet, copy it from the chat
   before_validation :backfill_partnership_from_chat
