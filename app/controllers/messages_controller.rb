@@ -7,10 +7,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    # 1) Ensure chat exists
     chat = @partnership.ensure_chat!
 
-    # 2) Save the user's message
     @message = @partnership.messages.create!(
       chat: chat,
       content: params.require(:message)[:content],
@@ -19,20 +17,20 @@ class MessagesController < ApplicationController
       role: "user"
     )
 
-    # 3) Enqueue AI reply (async) — page stays snappy, assistant will arrive via broadcast
+    # enqueue background reply
     AiReplyJob.perform_later(@message.id)
 
-    # 4) Trim old messages (keep 60 most recent for this chat)
-    ids_to_keep = @partnership.messages.where(chat: chat).order(created_at: :desc).limit(60).pluck(:id)
+    # keep recent messages only (no system message management here)
+    max_keep    = 60
+    ids_to_keep = @partnership.messages.where(chat: chat).order(created_at: :desc).limit(max_keep).pluck(:id)
     @partnership.messages.where(chat: chat).where.not(id: ids_to_keep).delete_all
 
-    # 5) Turbo Stream or HTML fallback
     respond_to do |format|
-      format.turbo_stream  # renders app/views/messages/create.turbo_stream.erb
+      format.turbo_stream  # renders create.turbo_stream.erb
       format.html { redirect_to partnership_messages_path(@partnership) }
     end
   rescue ActiveRecord::RecordInvalid
-    @message = @partnership.messages.new # re-render form with errors
+    @message = @partnership.messages.new
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(

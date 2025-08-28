@@ -1,12 +1,17 @@
-<h1>Coach Chat</h1>
-<%= turbo_stream_from [@partnership, :messages] %>
-<section class="chat">
-  <!-- Turbo Stream target for appending new messages -->
-  <div id="messages">
+<!-- app/views/messages/index.html.erb -->
+<section class="chat-wrap">
+  <!-- Live updates -->
+  <%= turbo_stream_from [@partnership, :messages] %>
+  <!-- Header -->
+  <header class="chat-header">
+    <h1 class="chat-title">Coach Chat</h1>
+  </header>
+  <!-- Messages -->
+  <div id="messages" data-controller="autoscroll" class="chat-messages">
     <%= render @messages %>
   </div>
-  <!-- Form container (so we can replace it on validation errors) -->
-  <div id="new_message">
+  <!-- Composer -->
+  <footer class="chat-composer" id="new_message">
     <%= render partial: "messages/form", locals: { partnership: @partnership, message: @message } %>
-  </div>
+  </footer>
 </section>
