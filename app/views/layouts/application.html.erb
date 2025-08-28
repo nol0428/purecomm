@@ -9,6 +9,11 @@
     <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags if respond_to?(:javascript_importmap_tags) %>
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap", rel: "stylesheet" %>
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+    <meta name="theme-color" content="#6ED3CF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="/icons/pwa-192.png">
   </head>
   <body class="app-shell has-bottom-nav">
     <a class="skip-link" href="#content">Skip to content</a>

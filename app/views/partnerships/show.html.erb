@@ -8,7 +8,7 @@
           Mood Check-in
         <% end %>
       </div>
-      <%= image_tag "#{@user.username}.jpg", class: "banner__avatar", alt: "User One" %>
+      <%= image_tag "#{@user.username}.png", class: "banner__avatar", alt: "User One" %>
     </div>
   </div>
   <div class="card mood-log" style="margin-top:16px">
@@ -32,7 +32,7 @@
   <div class="mood-list">
     <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
       <div class="check-in-card d-flex align-items-center gap-3 <%= 'faded' if session[:viewed_checkins]&.include?(checkin.id) %>">
-        <%= image_tag "#{@user.current_partner.username}.jpg", class: "checkin-avatar", alt: @user.current_partner.username %>
+        <%= image_tag "#{@user.current_partner.username}.png", class: "checkin-avatar", alt: @user.current_partner.username %>
         <div>
           <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", checkin_path(checkin) %>
           <div class="checkin-time"><%= checkin.created_at.strftime("%Y-%m-%d %H:%M") %></div>

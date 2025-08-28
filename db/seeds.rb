@@ -53,8 +53,8 @@ User.destroy_all
 
 puts "Creating users..."
 User.create(
-  username: "Bob",
-  email: "bob@email.com",
+  username: "Paul",
+  email: "paul@email.com",
   password: "password",
   personality: "Melancholic",
   love_language: "Words of Affirmation",
@@ -64,8 +64,8 @@ User.create(
 )
 
 User.create(
-  username: "Karen",
-  email: "karen@email.com",
+  username: "Mai",
+  email: "mai@email.com",
   password: "password",
   personality: "Sanguine",
   love_language: "Physical Touch",
