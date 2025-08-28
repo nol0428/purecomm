@@ -1,13 +1,10 @@
-/* ================== PureComm • Grievances (new/show) ================== */
 
-/* ---- Theme tokens (fallbacks) ---- */
 :root {
-  --brand: #6ED3CF;                          /* 你的主题青绿 */
-  --brand-bg: rgba(110, 211, 207, 0.12);     /* 主题浅底 */
-  --face-yellow: #F6C23E;                    /* 黄脸默认色 */
+  --brand: #6ED3CF;
+  --brand-bg: rgba(110, 211, 207, 0.12);
+  --face-yellow: #F6C23E;
 }
 
-/* ---- List & cards ---- */
 .grievance-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -37,7 +34,6 @@
 
 .section-header { padding: 0 16px; }
 
-/* ---- Intensity slider ---- */
 .intensity-scale {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -59,7 +55,6 @@
   outline: none;
 }
 
-/* WebKit track & thumb */
 .intensity-slider::-webkit-slider-runnable-track {
   height: 10px;
   background: linear-gradient(to right, #4caf50, #ffeb3b, #f44336);
@@ -123,7 +118,7 @@
 }
 
 /* ---- Feelings grid (shared by new/show) ---- */
-.category-wrapper.readonly-feelings { pointer-events: none; } /* 展示态禁交互 */
+.category-wrapper.readonly-feelings { pointer-events: none; }
 
 .category-item {
   border: 2px solid #e6e6e6;
@@ -136,16 +131,42 @@
   height: 108px; background: #fff;
 }
 
-/* 只展示大图标（无文字） */
-.category-item.only-icon { /* 已包含通用尺寸与布局 */ }
 
-/* ✅ 仅 grievance 页面 */
+.category-item.only-icon {  }
+
+
 .grievance-scope .mood-icon { width: 72px; height: 72px; color: var(--face-yellow); }
 .grievance-scope .category-item--selected .mood-icon { color: var(--brand); }
-.grievance-scope .category-item { /* 只展示大图标的卡片等 */
+.grievance-scope .category-item {
   display: grid; place-items: center; padding: 18px; height: 108px;
 }
-/* 选中：主题色 */
+.grievance-scope .meta-chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin: 0 0 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
+}
+
+.grievance-scope .meta-chip__text {
+  font-size: 16px;
+  color: #222;
+}
+
+.grievance-scope .meta-chip__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.10);
+  border: 4px solid #fff;
+  outline: 2px solid var(--brand);
+}
+
 .category-item--selected {
   border-color: var(--brand);
   background: var(--brand-bg);
@@ -153,7 +174,6 @@
 }
 
 
-/* 未选中：黄脸但整体变暗 */
 .category-item--dim { opacity: .45; }
 
 /* a11y */
