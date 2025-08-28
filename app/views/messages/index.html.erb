@@ -1,13 +1,11 @@
 <h1>Coach Chat</h1>
-<div class="messages">
-  <% @messages.each do |m| %>
-    <div class="message <%= m.role %>">
-      <strong><%= m.role.presence || m.author_kind %>:</strong>
-      <%= simple_format(m.content) %>
-    </div>
-  <% end %>
-</div>
-<%= form_with model: @message, url: partnership_messages_path(@partnership), local: true do |f| %>
-  <%= f.text_area :content, rows: 3 %><br>
-  <%= f.submit "Send", class: "btn btn-primary" %>
-<% end %>
+<section class="chat">
+  <!-- Turbo Stream target for appending new messages -->
+  <div id="messages">
+    <%= render @messages %>
+  </div>
+  <!-- Form container (so we can replace it on validation errors) -->
+  <div id="new_message">
+    <%= render partial: "messages/form", locals: { partnership: @partnership, message: @message } %>
+  </div>
+</section>

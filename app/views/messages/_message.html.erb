@@ -1,0 +1,11 @@
+<!-- app/views/messages/_message.html.erb -->
+<div class="message <%= message.role %>">
+  <% if message.user.present? %>
+    <strong><%= message.user.username || "User" %>:</strong>
+  <% elsif message.assistant? %>
+    <strong>Coach:</strong>
+  <% elsif message.role == "system" %>
+    <strong>System:</strong>
+  <% end %>
+  <%= simple_format(message.content) %>
+</div>

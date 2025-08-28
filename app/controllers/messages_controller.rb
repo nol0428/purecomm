@@ -6,10 +6,13 @@ class MessagesController < ApplicationController
     @message  = @partnership.messages.new
   end
 
+  # app/controllers/messages_controller.rb
   def create
+    # 1) Ensure chat exists
     chat = @partnership.ensure_chat!
 
-    user_msg = @partnership.messages.create!(
+    # 2) Save the user's message
+    @message = @partnership.messages.create!(
       chat: chat,
       content: params.require(:message)[:content],
       user: current_user,
@@ -17,25 +20,21 @@ class MessagesController < ApplicationController
       role: "user"
     )
 
-    # Build lightweight context from the last few messages
+    # 3) Context (last 6 non-system messages)
     recent = @partnership.messages
-      .where(chat: chat)
-      .where.not(role: "system")
-      .order(:created_at)
-      .last(6)
+              .where(chat: chat).where.not(role: "system")
+              .order(:created_at).last(6)
 
-    context_lines = recent.map do |m|
-      who = m.assistant? ? "Assistant" : "User"
-      "#{who}: #{m.content.to_s.strip}"
-    end
+    context_lines = recent.map { |m| "#{m.assistant? ? 'Assistant' : 'User'}: #{m.content.to_s.strip}" }
 
     prompt_with_context = <<~TEXT.strip
       Previous context (most recent first):
       #{context_lines.join("\n")}
 
-      Current User: #{user_msg.content.to_s.strip}
+      Current User: #{@message.content.to_s.strip}
     TEXT
 
+    # 4) AI reply (your existing service)
     reply_text =
       begin
         Ai::Chat.call(
@@ -48,20 +47,37 @@ class MessagesController < ApplicationController
         "Sorry — I had trouble responding just now. Please try again."
       end
 
-    @partnership.messages.create!(
+    # 5) Persist the assistant reply and keep a reference
+    @assistant_message = @partnership.messages.create!(
       chat: chat,
       content: reply_text,
       author_kind: :assistant,
       role: "assistant"
-      # user: nil is fine if your column allows null; otherwise tie to a system/bot user
+      # user: nil is fine here
     )
 
-    # Trim old messages (keep most recent 60 in this chat)
+    # 6) Trim old messages (keep 60 most recent for this chat)
     max_keep = 60
     ids_to_keep = @partnership.messages.where(chat: chat).order(created_at: :desc).limit(max_keep).pluck(:id)
     @partnership.messages.where(chat: chat).where.not(id: ids_to_keep).delete_all
 
-    redirect_to partnership_messages_path(@partnership)
+    # 7) Turbo Stream or HTML fallback
+    respond_to do |format|
+      format.turbo_stream # renders app/views/messages/create.turbo_stream.erb
+      format.html { redirect_to partnership_messages_path(@partnership) }
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    @message = @partnership.messages.new # re-render form with errors
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "new_message",
+          partial: "messages/form",
+          locals: { partnership: @partnership, message: @message }
+        ), status: :unprocessable_entity
+      end
+      format.html { render :index, status: :unprocessable_content }
+    end
   end
 
   private

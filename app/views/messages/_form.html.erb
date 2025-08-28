@@ -1,0 +1,10 @@
+<%= form_with model: [partnership, message],
+              data: { turbo_stream: true },
+              id: "message_form" do |f| %>
+  <div class="field">
+    <%= f.text_area :content, rows: 3, placeholder: "Type a message…", autofocus: true %>
+  </div>
+  <div class="actions" style="margin-top:.5rem;">
+    <%= f.submit "Send", class: "btn btn-primary", data: { disable_with: "Sending…" } %>
+  </div>
+<% end %>
