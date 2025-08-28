@@ -99,9 +99,8 @@ a:hover { text-decoration: underline; }
 /* ===== Safe-area padding (iPhone 16 family) ===== */
 .app-shell {
   min-height: 100svh;
-  /* Sass-safe literal CSS so max(env(), 0px) passes through */
-  padding-left: #{'max(env(safe-area-inset-left), 0px)'};
-  padding-right: #{'max(env(safe-area-inset-right), 0px)'};
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 /* If the page uses a fixed bottom nav, add extra bottom space so content isn't hidden */
