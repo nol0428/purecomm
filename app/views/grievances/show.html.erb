@@ -1,5 +1,17 @@
 <!-- app/views/grievances/show.html.erb -->
 <div class="whole-page grievance-show grievance-scope">
+  <!-- Sent-on chip -->
+  <% sender = @grievance.respond_to?(:user) && @grievance.user.present? ? @grievance.user : @user %>
+  <div class="meta-chip">
+    <div class="meta-chip__text">
+      Sent on: <%= @grievance.created_at.strftime("%Y/%m/%d") %>
+    </div>
+    <%= image_tag(
+        (sender&.username ? "#{sender.username}.png" : "default_avatar.png"),
+        class: "meta-chip__avatar",
+        alt: (sender&.username || "avatar")
+      ) %>
+  </div>
   <div class="banner banner--center">
     <h2>Grievance Drop</h2>
     <p>Share calmly. Reflect thoughtfully.</p>
