@@ -1,12 +1,10 @@
 <turbo-stream action="append" target="messages">
   <template>
-    <!-- Append the user's just-sent message immediately -->
     <%= render partial: "messages/message", formats: [:html], locals: { message: @message } %>
   </template>
 </turbo-stream>
 <turbo-stream action="replace" target="new_message">
   <template>
-    <!-- Reset the form after submit -->
     <%= render partial: "messages/form", formats: [:html], locals: { partnership: @partnership, message: Message.new } %>
   </template>
 </turbo-stream>

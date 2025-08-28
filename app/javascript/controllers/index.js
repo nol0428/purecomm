@@ -5,6 +5,10 @@ eagerLoadControllersFrom("controllers", application)
 
 import { Application } from "@hotwired/stimulus"
 import AutoscrollController from "./autoscroll_controller"
+application.register("autoscroll", AutoscrollController)
+
+import ComposeController from "./compose_controller"
+application.register("compose", ComposeController)
 
 window.Stimulus = Application.start()
 Stimulus.register("autoscroll", AutoscrollController)

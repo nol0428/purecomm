@@ -17,19 +17,19 @@ class MessagesController < ApplicationController
       role: "user"
     )
 
-    # enqueue background reply
+    # Enqueue background job for AI reply
     AiReplyJob.perform_later(@message.id)
 
-    # keep recent messages only (no system message management here)
-    max_keep    = 60
+    # Trim old messages (keep last 60)
+    max_keep   = 60
     ids_to_keep = @partnership.messages.where(chat: chat).order(created_at: :desc).limit(max_keep).pluck(:id)
     @partnership.messages.where(chat: chat).where.not(id: ids_to_keep).delete_all
 
     respond_to do |format|
-      format.turbo_stream  # renders create.turbo_stream.erb
+      format.turbo_stream
       format.html { redirect_to partnership_messages_path(@partnership) }
     end
-  rescue ActiveRecord::RecordInvalid
+  rescue ActiveRecord::RecordInvalid => e
     @message = @partnership.messages.new
     respond_to do |format|
       format.turbo_stream do
