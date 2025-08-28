@@ -11,3 +11,5 @@ eagerLoadControllersFrom("controllers", application)
 
 // Optional export; harmless if unused
 export { application }
+
+window.Stimulus = application
