@@ -123,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_27_131332) do
   add_foreign_key "checkins", "users"
   add_foreign_key "grievances", "partnerships"
   add_foreign_key "grievances", "users"
+  add_foreign_key "messages", "chats"
   add_foreign_key "messages", "partnerships"
   add_foreign_key "messages", "users"
   add_foreign_key "partnerships", "users", column: "user_one_id"
