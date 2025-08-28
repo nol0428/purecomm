@@ -1,0 +1,60 @@
+body:has(#nudge_form) .bottom-navbar {
+  display: none;
+}
+
+#nudge_form {
+  margin-top: 10vh;
+}
+
+.nudge-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.nudge-item label {
+  flex: 0 0 30%;
+  height: 84px;
+  width: 100%;
+  color: transparent;
+  background-color: #FFD166; // default color
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  border: none;
+  cursor: pointer;
+}
+
+.nudge-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+#now + label {
+   -webkit-mask: asset-url("icons/now.svg") no-repeat center;
+  mask: asset-url("icons/now.svg") no-repeat center;
+}
+
+#hours-1 + label {
+   -webkit-mask: asset-url("icons/one-hour.svg") no-repeat center;
+  mask: asset-url("icons/one-hour.svg") no-repeat center;
+}
+#hours-2 + label {
+   -webkit-mask: asset-url("icons/two-hours.svg") no-repeat center;
+  mask: asset-url("icons/two-hours.svg") no-repeat center;
+}
+#hours-3 + label {
+   -webkit-mask: asset-url("icons/three-hours.svg") no-repeat center;
+  mask: asset-url("icons/three-hours.svg") no-repeat center;
+}
+#hours-6 + label {
+   -webkit-mask: asset-url("icons/six-hours.svg") no-repeat center;
+  mask: asset-url("icons/six-hours.svg") no-repeat center;
+}
+#hours-12 + label {
+   -webkit-mask: asset-url("icons/twelve-hours.svg") no-repeat center;
+  mask: asset-url("icons/twelve-hours.svg") no-repeat center;
+}
+
+.nudge-selector:checked + label {
+  color: white !important;
+  background-color: $green;
+}

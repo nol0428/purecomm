@@ -3,7 +3,7 @@
   <%= f.input :mood,
             as: :radio_buttons,
             collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'category-wrapper',
+            collection_wrapper_class: 'category-feeling',
             item_wrapper_class: 'category-item',
             input_html: { data: {disable_inputs_target: "input"}, class: 'category-selector'},
             collection: Checkin::MOODS %>
@@ -38,7 +38,7 @@
                 label: false,
                 placeholder: "Anything you'd like to share?",
                 input_html: { data: {disable_inputs_target: "input" } } %>
-  <% if checkin.id %>
+  <% if checkin.id && !current_page?(edit_partnership_checkin_path(partnership, checkin)) %>
     <%= link_to "Back", partnership_path(partnership), class: 'btn btn-secondary w-100'  %>
   <% else %>
     <%= f.submit "Submit", class: "btn btn-primary w-100"  %>

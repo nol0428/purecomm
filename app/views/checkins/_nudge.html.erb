@@ -1,3 +1,16 @@
-<%= simple_form_for [partnership, checkin] do |f| %>
-  <%= f.input :nudge %>
+<%= simple_form_for [partnership, checkin] , html: {id: :nudge_form} do |f| %>
+  <h2 class="checkin-title">Thanks for checking-in!</h2>
+  <fieldset class="mb-3 radio_buttons optional checkin_nudge">
+    <div class="nudge-wrapper"><input type="hidden" name="checkin[nudge]" value="" autocomplete="off">
+      <% @times.each do |(label,time)| %>
+        <div class="nudge-item">
+          <input class="form-check-input radio_buttons optional nudge-selector" data-disable-inputs-target="input" type="radio" value="<%= time %>" name="checkin[nudge]" id="<%= label.downcase.split.reverse.join('-') %>">
+          <label class="form-check-label collection_radio_buttons" for="<%= label.downcase.split.reverse.join('-') %>"><%= label %></label>
+        </div>
+      <% end %>
+    </div>
+  </fieldset>
+  <%= link_to "Back", edit_partnership_checkin_path(partnership, checkin),
+              class: "btn btn-primary hero-cta" %>
+  <%= f.submit class: "btn btn-primary hero-cta" %>
 <% end %>
