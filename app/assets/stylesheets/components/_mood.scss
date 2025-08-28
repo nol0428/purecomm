@@ -151,25 +151,22 @@
   padding: 0 16px;
 }
 
-/* 让整个 feelings 区块更松散一些 */
 .category-feeling {
   display: flex;
-  gap: 16px;                /* 图标横向间距 */
-  margin: 20px 0;           /* 跟上下标题的距离 */
-  flex-wrap: wrap;          /* 小屏幕换行 */
-  justify-content: center;  /* 居中 */
+  gap: 16px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* 每个图标卡片 */
 .category-feeling .category-item {
   display: flex;
-  flex-direction: column;   /* 图标在上，文字在下 */
+  flex-direction: column;
   align-items: center;
   padding: 12px 8px;
-  gap: 8px;                 /* 图标和文字之间的距离 */
+  gap: 8px;
 }
 
-/* 图标大小统一，增加下边距 */
 .category-feeling .mood-icon {
   width: 56px;
   height: 56px;

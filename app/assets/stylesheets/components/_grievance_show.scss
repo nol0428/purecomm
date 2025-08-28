@@ -1,0 +1,199 @@
+// Use a top-level class to wrap all styles, ensuring no conflicts
+.grievance-show-page {
+
+  // --- Layout and Card Styles ---
+  // (These are the same as before)
+  .banner {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #f8f9fa;
+    margin-bottom: 2rem;
+    h2 { font-weight: bold; }
+    p { color: #6c757d; font-size: 1.1rem; }
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .form-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+  }
+
+  .flow > * + * {
+    margin-top: 2rem;
+    border-top: 1px solid #e9ecef;
+    padding-top: 2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+
+  // --- **NEW & IMPROVED ICON STYLING** ---
+  .made-me-feel {
+    .category-wrapper {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .category-item {
+      position: relative;
+
+      .category-selector {
+        opacity: 0;
+        position: absolute;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+        width: 100px;
+        height: 100px;
+        transition: all 0.2s ease-in-out;
+        background-color: #f8f9fa;
+        cursor: not-allowed;
+
+        // **KEY CHANGE HERE**
+        // We set the default text color of the label.
+        // The part of your SVG with `fill="currentColor"` will now be this color.
+        // The hardcoded letters will remain #333333.
+        color: #6c757d; // Default icon color (for the sad face part)
+
+        span {
+          margin-top: 0.5rem;
+          font-weight: 500;
+          color: #212529; // Keep the text label black for readability
+        }
+
+        .icon {
+          width: 40px;
+          height: 40px;
+
+          // **REMOVED THE AGGRESSIVE `path { fill: initial; }` RULE**
+          // We no longer need to force-reset the color. We will let the
+          // SVG's own fill attributes (`#333333` and `currentColor`) do their job.
+        }
+      }
+
+      // When the radio is checked, we change the label's text color.
+      // This will automatically update the `currentColor` part of the SVG!
+      .category-selector:checked + label {
+        border-color: #0d6efd;
+        background-color: #e7f1ff;
+        color: #0d6efd; // This makes the sad face blue when selected!
+      }
+    }
+  }
+
+  // --- Intensity Slider & Other Styles ---
+  // (These are the same as before)
+  .intensity-block {
+    /* ... styles from previous response ... */
+  }
+
+  .actions-footer {
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+}
+
+.grievance-show-page {
+  /* 你已有的变量/布局保留 */
+
+  /* —— 颜色变量 —— */
+  --feeling-default: #6c757d;   /* 未选中图标/文字灰 */
+  --feeling-active:  #22c55e;   /* 选中用的绿色（Tailwind风格绿）*/
+  --tile-border:     transparent; /* 不要灰边框 */
+  --tile-bg:         transparent; /* 不要灰底 */
+
+  .made-me-feel {
+    .category-wrapper {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .category-item {
+      position: relative;
+
+      .category-selector {
+        opacity: 0;
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      /* —— 重点：去掉灰色框和底色 —— */
+      label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        /* 取消卡片化外观，彻底无框无底 */
+        padding: .25rem 0;
+        border: 0;                       /* 去边框 */
+        border-radius: 0;                /* 去圆角 */
+        width: auto;
+        height: auto;
+        background: var(--tile-bg) !important;
+        box-shadow: none !important;
+
+        color: var(--feeling-default);
+
+        span {
+          margin-top: 0.4rem;
+          font-weight: 500;
+          color: #212529;
+          line-height: 1;
+        }
+      }
+
+      /* 选中时，只改变颜色，不加边框/背景 */
+      .category-selector:checked + label {
+        background: transparent !important;
+        border-color: transparent !important;
+        color: var(--feeling-active);            /* 让 currentColor 变绿 */
+      }
+    }
+  }
+
+  /* —— 图标（关键：彻底防污染 + 用 currentColor 上色）—— */
+  .feeling-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+
+    /* 清干扰：任何背景/mask/阴影/边框都不要 */
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+
+    object-fit: contain;
+
+    /* 如果 SVG 内部写死了 fill/stroke（常见：fill="#000"），强制接管为 currentColor */
+    /* ↓ 这两条是关键，会把黑色改成跟随 label 的 color（灰/绿） */
+    [fill]   { fill:   currentColor !important; }
+    [stroke] { stroke: currentColor !important; }
+  }
+}
