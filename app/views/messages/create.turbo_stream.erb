@@ -1,0 +1,14 @@
+<turbo-stream action="append" target="messages">
+  <template>
+    <%= render partial: "messages/message", formats: [:html], locals: { message: @message } %>
+    <% if defined?(@assistant_message) && @assistant_message.present? %>
+      <%= render partial: "messages/message", formats: [:html], locals: { message: @assistant_message } %>
+    <% end %>
+  </template>
+</turbo-stream>
+<!-- was action="replace" -->
+<turbo-stream action="update" target="new_message">
+  <template>
+    <%= render partial: "messages/form", formats: [:html], locals: { partnership: @partnership, message: Message.new } %>
+  </template>
+</turbo-stream>

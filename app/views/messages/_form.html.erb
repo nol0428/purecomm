@@ -1,0 +1,16 @@
+<%= form_with model: [partnership, message],
+              data: { controller: "compose",
+                      action: "turbo:submit-end->compose#reset" },
+              id: "message_form" do |f| %>
+  <div class="field">
+    <%= f.text_area :content,
+          rows: 3,
+          placeholder: "Type a message…",
+          data: { compose_target: "textarea", action: "keydown->compose#keydown" } %>
+  </div>
+  <div class="actions" style="margin-top:.5rem;">
+    <%= f.submit "Send",
+          class: "btn btn-primary",
+          data: { compose_target: "submit", disable_with: "Sending…" } %>
+  </div>
+<% end %>

@@ -1,0 +1,157 @@
+/* =======================================
+   Chat UI — PureComm clean style
+   File: components/_chat.scss
+======================================= */
+
+/* --- Theme tokens --- */
+:root {
+  --chat-bg: #FFFFFF;       /* app background */
+  --chat-surface: #FFFFFF;  /* chat area surface */
+  --chat-border: #E0E4EC;
+  --chat-text: #222;
+
+  --coach-bg: #F5F7FA;      /* light gray for coach */
+  --coach-text: #222;
+
+  --user-bg: #FFFFFF;       /* white bubble with border */
+  --user-text: #222;
+  --user-border: #FFD166;   /* golden border for user */
+
+  --system-bg: #EEEEEE;     /* system ribbon */
+  --system-text: #444;
+
+  --radius-xl: 18px;
+  --radius-lg: 14px;
+
+  --gap-1: .5rem;
+  --gap-2: .75rem;
+  --gap-3: 1rem;
+  --gap-4: 1.25rem;
+}
+
+/* --- Layout wrapper --- */
+.chat {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--gap-3);
+  background: var(--chat-bg);
+  font-family: "Raleway", sans-serif;
+}
+
+.chat-messages {
+  max-height: 70vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: 1rem;
+}
+
+/* --- Messages list --- */
+#messages {
+  background: var(--chat-surface);
+  border: 1px solid var(--chat-border);
+  border-radius: var(--radius-xl);
+  padding: var(--gap-3);
+  overflow: auto;
+  max-height: calc(min(70vh, 800px));
+  scroll-behavior: smooth;
+}
+
+#messages > .message + .message {
+  margin-top: var(--gap-2);
+}
+
+/* --- Bubbles --- */
+.message {
+  max-width: 80%;
+  padding: .75rem .9rem;
+  border-radius: var(--radius-lg);
+  line-height: 1.45;
+  word-wrap: break-word;
+  color: var(--chat-text);
+  animation: chat-pop .14s ease-out;
+
+  strong {
+    display: block;
+    opacity: .7;
+    font-size: .8rem;
+    margin-bottom: .25rem;
+  }
+}
+
+.message.assistant {
+  background: var(--coach-bg);
+  color: var(--coach-text);
+  border-top-left-radius: 6px;
+}
+
+.message.user {
+  margin-left: auto;
+  background: var(--user-bg);
+  color: var(--user-text);
+  border: 2px solid var(--user-border); /* ✅ border instead of fill */
+  border-top-right-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.message.system {
+  margin: 0 auto;
+  background: var(--system-bg);
+  color: var(--system-text);
+  border-radius: 999px;
+  padding: .4rem .75rem;
+  max-width: 60%;
+  text-align: center;
+
+  strong { display: none; }
+}
+
+/* --- Form area --- */
+#new_message {
+  position: sticky;
+  bottom: 0;
+  background: var(--chat-bg);
+  padding: var(--gap-2);
+  border-top: 1px solid var(--chat-border);
+  border-radius: var(--radius-xl);
+}
+
+#new_message .field textarea {
+  width: 100%;
+  border: 1px solid var(--chat-border);
+  border-radius: var(--radius-lg);
+  background: var(--chat-surface);
+  color: var(--chat-text);
+  padding: .75rem .9rem;
+  resize: vertical;
+  min-height: 72px;
+}
+
+#new_message .field textarea:focus {
+  outline: none; /* remove browser default outline */
+  border: 2px solid var(--user-border); /* force yellow border */
+  box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.3); /* soft yellow glow */
+}
+
+#new_message .actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .5rem;
+}
+
+#new_message .actions .btn-primary {
+  background: var(--user-border);
+  border-color: var(--user-border);
+  color: #222;
+  font-weight: 600;
+}
+
+#new_message .actions .btn-primary:hover {
+  background: #fbcf5c;
+  border-color: #fbcf5c;
+}
+
+/* --- Animations --- */
+@keyframes chat-pop {
+  from { transform: translateY(2px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}

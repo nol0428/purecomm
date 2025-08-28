@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   def create
     chat = @partnership.ensure_chat!
 
-    user_msg = @partnership.messages.create!(
+    @message = @partnership.messages.create!(
       chat: chat,
       content: params.require(:message)[:content],
       user: current_user,
@@ -17,51 +17,30 @@ class MessagesController < ApplicationController
       role: "user"
     )
 
-    # Build lightweight context from the last few messages
-    recent = @partnership.messages
-      .where(chat: chat)
-      .where.not(role: "system")
-      .order(:created_at)
-      .last(6)
+    # Enqueue background job for AI reply
+    AiReplyJob.perform_later(@message.id)
 
-    context_lines = recent.map do |m|
-      who = m.assistant? ? "Assistant" : "User"
-      "#{who}: #{m.content.to_s.strip}"
-    end
-
-    prompt_with_context = <<~TEXT.strip
-      Previous context (most recent first):
-      #{context_lines.join("\n")}
-
-      Current User: #{user_msg.content.to_s.strip}
-    TEXT
-
-    reply_text =
-      begin
-        Ai::Chat.call(
-          system: "You are PureComm’s gentle relationship coach. Be brief, warm, practical. "\
-                  "Use the context to remember names and preferences when helpful.",
-          user_text: prompt_with_context
-        )
-      rescue => e
-        Rails.logger.error("[AI ERROR] #{e.class}: #{e.message}")
-        "Sorry — I had trouble responding just now. Please try again."
-      end
-
-    @partnership.messages.create!(
-      chat: chat,
-      content: reply_text,
-      author_kind: :assistant,
-      role: "assistant"
-      # user: nil is fine if your column allows null; otherwise tie to a system/bot user
-    )
-
-    # Trim old messages (keep most recent 60 in this chat)
-    max_keep = 60
+    # Trim old messages (keep last 60)
+    max_keep   = 60
     ids_to_keep = @partnership.messages.where(chat: chat).order(created_at: :desc).limit(max_keep).pluck(:id)
     @partnership.messages.where(chat: chat).where.not(id: ids_to_keep).delete_all
 
-    redirect_to partnership_messages_path(@partnership)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to partnership_messages_path(@partnership) }
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    @message = @partnership.messages.new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "new_message",
+          partial: "messages/form",
+          locals: { partnership: @partnership, message: @message }
+        ), status: :unprocessable_entity
+      end
+      format.html { render :index, status: :unprocessable_content }
+    end
   end
 
   private
