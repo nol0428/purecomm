@@ -17,17 +17,29 @@ class CheckinsController < ApplicationController
     end
   end
 
-def show
-  @checkin = Checkin.find(params[:id])
-  @partnership = @checkin.partnership
-  session[:viewed_checkins] ||= []
-  session[:viewed_checkins] << @checkin.id
-  session[:viewed_checkins].uniq!
-end
+  def update
+    @checkin = Checkin.find(params[:id])
+    if @checkin.update(checkin_params)
+      redirect_to checkin_path(@checkin), notice: "Checked-in!"
+    else
+      @partnership = @checkin.partnership
+      @times = [['Now', Time.now], ['1h', Time.now + 1.hour], ["2h", Time.now + 2.hours]]
+      render 'show', status: :unprocessable_entity
+    end
+  end
+
+  def show
+    @checkin = Checkin.find(params[:id])
+    @partnership = @checkin.partnership
+    # session[:viewed_checkins] ||= []
+    # session[:viewed_checkins] << @checkin.id
+    # session[:viewed_checkins].uniq!
+    @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
+  end
 
   private
 
   def checkin_params
-  params.require(:checkin).permit(:mood, :my_day, :discuss, :comment, :nudge)
+    params.require(:checkin).permit(:mood, :my_day, :discuss, :comment, :nudge)
   end
 end
