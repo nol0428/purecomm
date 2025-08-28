@@ -42,6 +42,8 @@ class AiReplyJob < ApplicationJob
         end
     end
     # --- end kill switch ---
+    # heroku config:set OPENAI_API_KEY=sk-your-openai-key-here -a purecomm
+    # heroku config:set RUBYLLM_DEFAULT_MODEL=gpt-4o-mini -a purecomm
 
     # Save the assistant reply
     partnership.messages.create!(
