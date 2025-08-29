@@ -14,7 +14,7 @@ class GrievancesController < ApplicationController
     @grievance.partnership = Partnership.find(params[:partnership_id])
     @grievance.user = current_user
     if @grievance.save
-      redirect_to grievance_path(@grievance)
+      redirect_to grievances_path
     else
       render :new, status: :unprocessable_content
     end
