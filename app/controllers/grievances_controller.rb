@@ -1,7 +1,7 @@
 class GrievancesController < ApplicationController
   def index
     @user = current_user
-    @grievances = @user.current_partnership.grievances
+    @grievances = @user.current_partnership.grievances.order(created_at: :desc)
   end
 
   def new

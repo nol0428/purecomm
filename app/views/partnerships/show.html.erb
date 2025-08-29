@@ -1,4 +1,8 @@
 <div class="whole-page">
+  <%= button_to "Log out",
+              destroy_user_session_path,
+              method: :delete,
+              class: "btn btn-secondary w-100" %>
   <div class="banner">
     <div class="banner__row">
       <div class="banner__content">

@@ -36,9 +36,9 @@ class CheckinsController < ApplicationController
   def show
     @checkin = Checkin.find(params[:id])
     @partnership = @checkin.partnership
-    # session[:viewed_checkins] ||= []
-    # session[:viewed_checkins] << @checkin.id
-    # session[:viewed_checkins].uniq!
+    session[:viewed_checkins] ||= []
+    session[:viewed_checkins] << @checkin.id
+    session[:viewed_checkins].uniq!
     @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
   end
 
