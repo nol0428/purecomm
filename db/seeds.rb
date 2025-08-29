@@ -228,6 +228,9 @@
 # db/seeds.rb
 # Deterministic seeds for demo (no randomness)
 
+puts "Clearing existing data..."
+Partnership.destroy_all
+User.destroy_all
 puts "== Seeding deterministic demo data =="
 
 # --- Helpers ---------------------------------------------------------------
