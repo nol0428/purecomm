@@ -27,8 +27,8 @@
     </div>
   </div>
   <div class="two-buttons d-flex justify-content-between">
-    <%= link_to "AIBot Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
-    <%= link_to "Grievance Drop", grievances_path, class:"btn btn-grievance w-full", style: "margin-left:8px" %>
+    <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
+    <%= link_to "Grievance Drop", new_partnership_grievance_path(@partnership), class:"btn btn-grievance w-full", style: "margin-left:8px" %>
   </div>
   <div class="bulma header" style="margin-top:16px">
     <h2><%= @user.current_partner.username %>'s Mood Check-in</h2>
