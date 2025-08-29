@@ -15,9 +15,17 @@
       Mood Check-in
     <% end %>
   </div>
-  <div class="card mood-log" style="margin-top:16px">
-    <h3>Your Daily Mood Log</h3>
-    <div class="mood-log__row">
+  <div class="card mood-log" id="mood-log-card" style="margin-top:16px">
+    <div class="mood-log__header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <!-- 标题 -->
+      <h3 id="mood-log-title">Your Daily Mood Log</h3>
+      <!-- 切换按钮 -->
+      <button type="button" id="toggle-mood-log" class="btn btn-secondary" style="white-space:nowrap;">
+        Show Partner
+      </button>
+    </div>
+    <!-- 我的 6 个 -->
+    <div class="mood-log__row" id="mine-row">
       <% @user.checkins.order(created_at: :desc).limit(6).reverse.each do |checkin| %>
         <div class="mood-log__cell">
           <%= inline_svg_tag "icons/#{checkin.mood.downcase}-icon.svg", class: "mood-icon" %>
@@ -25,7 +33,45 @@
         </div>
       <% end %>
     </div>
+    <!-- Partner 的 6 个（初始隐藏） -->
+    <div class="mood-log__row" id="partner-row" style="display:none">
+      <% @user.current_partner.checkins.order(created_at: :desc).limit(6).reverse.each do |checkin| %>
+        <div class="mood-log__cell">
+          <%= inline_svg_tag "icons/#{checkin.mood.downcase}-icon.svg", class: "mood-icon" %>
+          <div class="mood-log__label"><%= weekday_mixed_abbr(checkin.created_at) %></div>
+        </div>
+      <% end %>
+    </div>
   </div>
+  <script>
+    (function () {
+      const card = document.getElementById('mood-log-card');
+      if (!card) return;
+
+      const btn = card.querySelector('#toggle-mood-log');
+      const title = card.querySelector('#mood-log-title');
+      const mine = card.querySelector('#mine-row');
+      const partner = card.querySelector('#partner-row');
+
+      btn.addEventListener('click', () => {
+        const showingMine = mine.style.display !== 'none';
+
+        if (showingMine) {
+          // 切到 Partner
+          mine.style.display = 'none';
+          partner.style.display = '';
+          title.textContent = "<%= @user.current_partner.username %>'s Daily Mood Log";
+          btn.textContent = 'Show Me';
+        } else {
+          // 切回 Me
+          partner.style.display = 'none';
+          mine.style.display = '';
+          title.textContent = "Your Daily Mood Log";
+          btn.textContent = 'Show Partner';
+        }
+      });
+    })();
+  </script>
   <div class="two-buttons d-flex justify-content-between">
     <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
     <%= link_to "Grievance Drop", new_partnership_grievance_path(@partnership), class:"btn btn-grievance w-full", style: "margin-left:8px" %>
