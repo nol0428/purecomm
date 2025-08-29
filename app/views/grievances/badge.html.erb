@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "grievance_badge_#{current_user.id}" do %>
+  <%= render "grievances/badge", count: @count %>
+<% end %>

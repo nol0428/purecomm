@@ -24,6 +24,15 @@ class GrievancesController < ApplicationController
     @grievance = Grievance.find(params[:id])
     session[:viewed_grievances] ||= []
     session[:viewed_grievances] |= [@grievance.id]
+    mark_grievance_viewed!(@grievance) if @grievance.user_id != current_user.id
+  end
+
+  def badge
+    partnership = current_user.current_partnership
+    viewed_ids  = viewed_grievance_ids(partnership)
+    scope = partnership.grievances.where.not(user_id: current_user.id)
+    @count = scope.where.not(id: viewed_ids).count
+    render :badge
   end
 
   private
