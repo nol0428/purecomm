@@ -10,11 +10,17 @@
   gap: 10px;
 }
 
+.banner p {
+  margin: 0;
+  text-align: left;
+}
+
 .banner h2 {
   margin: 0;
   font-weight: 900;
   font-style: italic;
   font-size: clamp(20px, 4.5vw, 28px);
+  text-align: left;
 }
 
 .banner p {
@@ -34,6 +40,8 @@
   box-shadow: 0 2px 6px rgba(0,0,0,.08);
   display: inline-block;
   margin-top: 8px;
+  width: fit-content;
+  margin: 8px auto 0 auto !important;
 }
 .banner__cta:hover { filter: brightness(.96); text-decoration: none; }
 

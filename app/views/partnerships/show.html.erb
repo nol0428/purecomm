@@ -8,12 +8,12 @@
       <div class="banner__content">
         <h2>Hello, <%= @user.username %>!</h2>
         <p>How's your mood today?</p>
-        <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
-          Mood Check-in
-        <% end %>
       </div>
       <%= image_tag "#{@user.username}.png", class: "banner__avatar", alt: "User One" %>
     </div>
+    <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
+      Mood Check-in
+    <% end %>
   </div>
   <div class="card mood-log" style="margin-top:16px">
     <h3>Your Daily Mood Log</h3>
