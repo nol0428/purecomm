@@ -7,9 +7,8 @@
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
-max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
-min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
-threads min_threads_count, max_threads_count
+threads_count = Integer(ENV.fetch("RAILS_MAX_THREADS", 5))
+threads threads_count, threads_count
 
 rails_env = ENV.fetch("RAILS_ENV") { "development" }
 
@@ -26,6 +25,9 @@ if rails_env == "production"
   else
     preload_app!
   end
+
+  preload_app!   # <-- add this line so it always preloads in prod
+
 end
 # Specifies the `worker_timeout` threshold that Puma will use to wait before
 # terminating a worker in development environments.
@@ -36,6 +38,11 @@ port ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 environment rails_env
+
+on_worker_boot do
+  # Reconnect DB for each worker (Heroku best practice)
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
+end
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
