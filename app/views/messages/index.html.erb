@@ -5,12 +5,23 @@
   <header class="chat-header">
     <h1 class="chat-title">Coach Chat</h1>
   </header>
-  <!-- Messages -->
+  <!-- Messages (ONE container, ONE id) -->
   <div id="messages" data-controller="autoscroll" class="chat-messages">
     <%= render @messages %>
   </div>
-  <!-- Composer -->
+  <!-- Status strip (thinking + error badges go here) -->
+  <div class="chat-status">
+    <%= render "messages/thinking_badge" %>
+    <%= render "messages/error_badge" %>
+  </div>
+  <!-- Composer (ONE footer, ONE id) -->
   <footer class="chat-composer" id="new_message">
-    <%= render partial: "messages/form", locals: { partnership: @partnership, message: @message } %>
+    <!-- Status strip lives inside the footer now -->
+    <div class="chat-status">
+      <%= render "messages/thinking_badge" %>
+      <%= render "messages/error_badge" %>
+    </div>
+    <%= render partial: "messages/form",
+               locals: { partnership: @partnership, message: @message } %>
   </footer>
 </section>
