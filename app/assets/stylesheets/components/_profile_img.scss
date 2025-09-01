@@ -1,0 +1,50 @@
+.profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .profile-pic {
+    width: 120px;   // adjust size
+    height: 120px;
+    object-fit: cover;
+    border: 3px solid #00bfa5; // optional border
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+  }
+}
+
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+
+  .profile-pic {
+    width: 120px;  // adjust as needed
+    height: 120px;
+    object-fit: cover;
+  }
+
+  .camera-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background 0.2s ease;
+
+    i {
+      color: #333;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background: #f0f0f0;
+    }
+  }
+}

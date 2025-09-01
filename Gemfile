@@ -54,6 +54,7 @@ gem "ostruct"
 gem "inline_svg", "~> 1.9"
 gem "ruby_llm"
 gem "redis", "~> 5.0"
+gem "chartkick"
 
 group :development, :test do
   gem "dotenv-rails"

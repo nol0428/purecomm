@@ -8,13 +8,11 @@ class User < ApplicationRecord
   has_many :grievances, dependent: :destroy
   has_many :messages, dependent: :destroy
 
-  PRONOUNS = ["He/Him", "She/Her", "They/Them"]
+  LOVE_LANGUAGES = ["Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "Physical Touch"]
 
   validates :username, presence: true, uniqueness: true
   validates :personality, presence: true
-  validates :love_language, presence: true
-  validates :pronouns, presence: true, inclusion: { in: PRONOUNS }
-  validates :birthday, presence: true
+  validates :love_language, presence: true, inclusion: { in: LOVE_LANGUAGES }
 
   def partnerships
     Partnership.where(user_one: self).or(Partnership.where(user_two: self))

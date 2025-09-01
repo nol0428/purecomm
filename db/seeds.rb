@@ -209,20 +209,14 @@ def create_users!
   paul = User.find_or_create_by!(email: "paul@email.com") do |u|
     u.username     = "Paul"
     u.password     = "password"
-    u.personality  = "Melancholic"
+    u.personality  = {"Sanguine": 0.15, "Choleric": 0.25, "Melancholic": 0.40, "Phlegmatic": 0.20}
     u.love_language = "Words of Affirmation"
-    u.pronouns     = "He/Him"
-    u.hobbies      = "Cycling, beer, motorsports"
-    u.birthday     = Date.new(1983, 4, 10)
   end
   mai = User.find_or_create_by!(email: "mai@email.com") do |u|
     u.username     = "Mai"
     u.password     = "password"
-    u.personality  = "Sanguine"
+    u.personality  = {"Sanguine": 0.15, "Choleric": 0.25, "Melancholic": 0.40, "Phlegmatic": 0.20}
     u.love_language = "Physical Touch"
-    u.pronouns     = "She/Her"
-    u.hobbies      = "Foodie, travel, shopping"
-    u.birthday     = Date.new(1989, 6, 23)
   end
   [paul, mai]
 end

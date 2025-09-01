@@ -7,18 +7,18 @@
     <%= link_to new_partnership_checkin_path(current_user.current_partnership), class: "nav-icon" do %>
       <%= inline_svg_tag "icons/checkin-navbar.svg" %>
     <% end %>
-  <% end %>
-  <%= link_to (current_user ? grievances_path : new_user_session_path), class: "nav-icon" do %>
-    <%= inline_svg_tag "icons/grievance-navbar.svg" %>
-    <% if current_user&.current_partnership.present? %>
-      <%= turbo_stream_from [:grievance_badge,
-                             current_user.current_partnership.id,
-                             current_user.id] %>
-      <%= turbo_frame_tag "grievance_badge_#{current_user.id}",
-            src: badge_grievances_path(partnership_id: current_user.current_partnership.id) %>
+    <%= link_to (current_user ? grievances_path : new_user_session_path), class: "nav-icon" do %>
+      <%= inline_svg_tag "icons/grievance-navbar.svg" %>
+      <% if current_user&.current_partnership.present? %>
+        <%= turbo_stream_from [:grievance_badge,
+                              current_user.current_partnership.id,
+                              current_user.id] %>
+        <%= turbo_frame_tag "grievance_badge_#{current_user.id}",
+              src: badge_grievances_path(partnership_id: current_user.current_partnership.id) %>
+      <% end %>
     <% end %>
-  <% end %>
-  <%= link_to "#", class: "nav-icon" do %>
-    <%= inline_svg_tag "icons/message-navbar.svg" %>
+    <%= link_to "#", class: "nav-icon" do %>
+      <%= inline_svg_tag "icons/message-navbar.svg" %>
+    <% end %>
   <% end %>
 </div>

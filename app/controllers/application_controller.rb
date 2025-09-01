@@ -1,12 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :personality, :love_language, :pronouns, :hobbies, :birthday])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :personality, :love_language])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :personality, :love_language, :pronouns, :hobbies, :birthday])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :personality, :love_language])
   end
 
   helper_method :viewed_grievance_ids_key, :viewed_grievance_ids, :mark_grievance_viewed!
