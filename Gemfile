@@ -55,6 +55,7 @@ gem "inline_svg", "~> 1.9"
 gem "ruby_llm"
 gem "redis", "~> 5.0"
 gem "chartkick"
+gem "solid_queue"
 
 group :development, :test do
   gem "dotenv-rails"

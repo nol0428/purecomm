@@ -172,3 +172,39 @@
   height: 56px;
   margin-bottom: 6px;
 }
+
+#mood-log-card .mood-log__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+#mood-log-title {
+  margin: 0;
+  line-height: 1.1;
+}
+
+#toggle-mood-log {
+  align-self: center;
+  line-height: 1;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+}
+
+#toggle-mood-log {
+  background-color: #6ED3CF;
+  color: #fff;
+  border: none;
+}
+
+#toggle-mood-log:hover,
+#toggle-mood-log:active,
+#toggle-mood-log:focus {
+  background-color: #6ED3CF;
+  color: #fff;
+  outline: none;
+  box-shadow: none;
+}

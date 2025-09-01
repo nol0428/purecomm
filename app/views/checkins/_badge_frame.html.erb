@@ -1,0 +1,3 @@
+<!-- app/views/checkins/_badge_frame.html.erb -->
+<%= turbo_frame_tag "checkin_badge_#{uid}",
+      src: badge_checkins_path(partnership_id: partnership.id, ts: ts) %>

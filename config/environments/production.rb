@@ -69,9 +69,11 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :resque
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
   # config.active_job.queue_name_prefix = "purecomm_production"
-  config.active_job.queue_adapter = :async
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
 
   config.action_mailer.perform_caching = false
 
@@ -96,4 +98,11 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.action_cable.url = ENV.fetch("ACTION_CABLE_URL", "wss://#{ENV.fetch('APP_HOST', 'purecomm-44227c50794a.herokuapp.com')}/cable")
+  config.action_cable.allowed_request_origins = [
+  "https://#{ENV.fetch('APP_HOST', 'purecomm-44227c50794a.herokuapp.com')}"
+  ]
+  config.action_cable.disable_request_forgery_protection = true
+  # Make Action Cable/Turbo Streams log clearly in production
+  config.action_cable.logger = Logger.new(STDOUT)
 end

@@ -24,14 +24,20 @@
         </ul>
       </div>
     </div>
-    <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
-      Mood Check-in
+    <% if checkin = current_user.checkin_today(@partnership) %>
+      <%= link_to checkin_path(checkin), class: "btn banner__cta" do %>
+        View your check-in
+      <% end %>
+    <% else %>
+      <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
+        Mood Check-in
+      <% end %>
     <% end %>
   </div>
   <div class="card mood-log" id="mood-log-card" style="margin-top:16px">
-    <div class="mood-log__header" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <div class="mood-log__header">
       <h3 id="mood-log-title">Your Daily Mood Log</h3>
-      <button type="button" id="toggle-mood-log" class="btn btn-secondary" style="white-space:nowrap;">
+      <button type="button" id="toggle-mood-log" class="btn btn-secondary">
         Show Partner
       </button>
     </div>
@@ -88,7 +94,7 @@
   <div class="bulma header" style="margin-top:16px">
     <h2><%= @user.current_partner.username %>'s Mood Check-in</h2>
   </div>
-  <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;">
+  <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;padding-left:16px;">
     <select id="checkin-sort" class="form-select" style="max-width: 200px;">
       <option value="newest" selected>Newest</option>
       <option value="oldest">Oldest</option>
@@ -96,20 +102,13 @@
       <option value="read">Read</option>
     </select>
   </div>
+  <% if current_user&.current_partnership.present? %>
+    <%= turbo_stream_from [:checkins_list, @user.current_partnership.id, current_user.id] %>
+  <% end %>
   <div class="mood-list" id="partner-checkins">
     <% viewed = session[:viewed_checkins] || [] %>
     <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
-      <% read = viewed.include?(checkin.id) %>
-      <div
-      class="check-in-card d-flex align-items-center gap-3 <%= 'faded' if read %>"
-      data-created-at="<%= checkin.created_at.to_i %>"
-      data-read="<%= read %>">
-        <%= image_tag "#{@user.current_partner.username}.png", class: "checkin-avatar", alt: @user.current_partner.username %>
-        <div>
-          <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", checkin_path(checkin) %>
-          <div class="checkin-time"><%= checkin.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-        </div>
-      </div>
+      <%= render "checkins/card", checkin:, read: viewed.include?(checkin.id) %>
     <% end %>
   </div>
 </div>
