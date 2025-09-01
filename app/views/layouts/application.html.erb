@@ -30,7 +30,7 @@
     <% unless controller_name == "pages" && action_name == "home" %>
       <%= render "shared/bottom_navbar" %>
     <% end %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%# <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %> %>
     <script>
       document.addEventListener("turbo:after-stream-render", (e) => {
         if (document.getElementById('partner-checkins')) {
