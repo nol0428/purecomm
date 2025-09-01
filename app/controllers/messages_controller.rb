@@ -18,10 +18,16 @@ class MessagesController < ApplicationController
     )
 
     # Enqueue background job for AI reply
-    AiReplyJob.perform_later(@message.id)
+    if ENV["AI_SYNC"] == "1"
+      Rails.logger.info "[messages#create] AI_SYNC=1 → performing now for message_id=#{@message.id}"
+      AiReplyJob.perform_now(@message.id)
+    else
+      Rails.logger.info "[messages#create] enqueue AiReplyJob message_id=#{@message.id}"
+      AiReplyJob.perform_later(@message.id)
+    end
 
     # Trim old messages (keep last 60)
-    max_keep   = 60
+    max_keep    = 60
     ids_to_keep = @partnership.messages.where(chat: chat).order(created_at: :desc).limit(max_keep).pluck(:id)
     @partnership.messages.where(chat: chat).where.not(id: ids_to_keep).delete_all
 
@@ -39,7 +45,8 @@ class MessagesController < ApplicationController
           locals: { partnership: @partnership, message: @message }
         ), status: :unprocessable_entity
       end
-      format.html { render :index, status: :unprocessable_content }
+      # NOTE: Rails status is usually :unprocessable_entity. If :unprocessable_content is intentional, keep it.
+      format.html { render :index, status: :unprocessable_entity }
     end
   end
 
