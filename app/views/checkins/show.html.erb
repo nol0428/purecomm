@@ -11,9 +11,17 @@
           class: "meta-chip__avatar",
           alt: (owner&.try(:username) || "avatar") %>
   </div>
-  <% if @checkin.nudge.nil? %>
-    <%= render 'checkins/nudge', checkin: @checkin, partnership: @partnership %>
+  <% todays_checkin = current_user.checkins.where(created_at: Time.zone.today.all_day).first %>
+  <% if todays_checkin.present? %>
+    <p class="already-checked-in-msg">
+      You've already checked in today! Here's your entry:
+    </p>
+    <%= render 'checkins/show', checkin: todays_checkin, partnership: @partnership %>
   <% else %>
-    <%= render 'checkins/show', checkin: @checkin, partnership: @partnership %>
+    <% if @checkin.nudge.nil? %>
+      <%= render 'checkins/nudge', checkin: @checkin, partnership: @partnership %>
+    <% else %>
+      <%= render 'checkins/show', checkin: @checkin, partnership: @partnership %>
+    <% end %>
   <% end %>
 </div>

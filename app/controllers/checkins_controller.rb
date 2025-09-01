@@ -18,7 +18,7 @@ class CheckinsController < ApplicationController
     if @checkin.save
       redirect_to checkin_path(@checkin)
     else
-      render :new, status: :unprocessable_entity
+      redirect_to partnership_path(@partnership), alert: "You already checked-in today"
     end
   end
 
