@@ -1,35 +1,202 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="whole-page">
+  <h2 class="pt-3">Profile</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <div class="profile-image text-center py-4">
+    <div class="profile-pic-container position-relative d-inline-block">
+      <%= image_tag "#{current_user.username}.png", class: "rounded-circle img-thumbnail profile-pic", alt: "Profile Image" %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
-
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+      <button type="button" class="camera-btn">
+        <i class="fa fa-camera"></i>
+      </button>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+  <ul class="list-group mb-4">
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong class="fw-bold">Username</strong><br>
+        <span class="text-muted"><%= resource.username %></span>
+      </div>
+      <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editUsernameModal">
+        Edit
+      </button>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong class="fw-bold">Love Language</strong><br>
+        <span class="text-muted"><%= resource.love_language %></span>
+      </div>
+      <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editLoveModal">
+        Edit
+      </button>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong class="fw-bold">Email</strong><br>
+        <span class="text-muted"><%= current_user.email %></span>
+      </div>
+      <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editEmailModal">
+        Edit
+      </button>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong class="fw-bold">Password</strong><br>
+        <span class="text-muted"><%= current_user.password %></span>
+      </div>
+      <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editPasswordModal">
+        Edit
+      </button>
+    </li>
+  </ul>
+
+  <hr>
+      <div class="list-group-item">
+        <strong class="fw-bold">Temperaments</strong>
+
+        <% raw_data   = current_user.personality || {} %>
+        <% ordered    = ["Choleric", "Sanguine", "Melancholic", "Phlegmatic"] %>
+        <% color_map  = {
+          "Choleric"     => "#e74c3c",
+          "Sanguine"     => "#f1c40f",
+          "Melancholic"  => "#2e86de",
+          "Phlegmatic"   => "#27ae60"
+        } %>
+        <% chart_data   = ordered.select { |k| raw_data[k].present? }.map { |k| [k, raw_data[k]] } %>
+        <% chart_colors = chart_data.map { |k,_| color_map[k] } %>
+
+        <div class="chart-box mx-auto">
+          <%= pie_chart chart_data,
+                colors: chart_colors,
+                legend: false %> <!-- hide Chart.js legend -->
+        </div>
+
+        <!-- Custom legend -->
+        <div class="legend-grid mx-auto">
+          <% chart_data.each do |label, _| %>
+            <div class="legend-item">
+              <span class="swatch" style="background-color:<%= color_map[label] %>"></span>
+              <span class="label"><%= label %></span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+  <div class="mt-4">
+    <h4 class="fw-semibold">Temperament Overview</h4>
+    <p>
+      You're seeing your mix across the four classical temperaments—shorthand for natural traits that shape how we think, feel, and act.
+    </p>
+    <dl>
+      <dt><strong class="fw-semibold">Choleric</strong></dt>
+      <dd>Result-oriented, decisive, and driven—these individuals naturally take charge and get things done.</dd>
+
+      <dt><strong class="fw-semibold">Sanguine</strong></dt>
+      <dd>Friendly, outgoing, and enthusiastic—sanguines thrive around people and bring lightness and energy into every moment.</dd>
+
+      <dt><strong class="fw-semibold">Melancholic</strong></dt>
+      <dd>Reflective, thoughtful, and analytical—melancholics seek meaning and depth, often with a creative or perfectionist edge.</dd>
+
+      <dt><strong class="fw-semibold">Phlegmatic</strong></dt>
+      <dd>Calm, steady, and compassionate—phlegmatics are supportive, grounded, and great at keeping the peace.</dd>
+    </dl>
+    <p class="small text-muted">
+      *Basic definitions adapted from <a href="https://fourtemperaments.com/4-primary-temperaments/" target="_blank" rel="noopener">fourtemperaments.com</a>.
+    </p>
   </div>
-<% end %>
+  <hr>
 
-<h3>Cancel my account</h3>
+  <div class="text-danger">
+    <%= button_to "Cancel my account",
+                  registration_path(resource_name),
+                  data: { turbo_confirm: "Are you sure?" },
+                  method: :delete,
+                  class: "btn btn-danger" %>
+  </div>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+  <div class="modal fade" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editUsernameLabel">Edit Username</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.input :username %>
+            <%= f.button :submit, "Update Username", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= link_to "Back", :back %>
+  <div class="modal fade" id="editLoveModal" tabindex="-1" aria-labelledby="editLoveLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editLoveLabel">Edit Love Language</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.input :love_language,
+                        collection: User::LOVE_LANGUAGES %>
+              <%= f.button :submit, "Update Love Language", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="editEmailLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editEmailLabel">Edit Email</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.input :email, required: true %>
+            <%= f.input :current_password, required: true,
+                        input_html: { autocomplete: "current-password" } %>
+            <%= f.button :submit, "Update Email", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="editPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPasswordLabel">Edit Email</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.input :password,
+                    label: "New password",
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+              <%= f.input :password_confirmation,
+                    label: "Confirm new password",
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+              <%= f.input :current_password,
+                    label: "Current password",
+                    hint: "We need your current password to confirm changes",
+                    required: true,
+                    input_html: { autocomplete: "current-password" } %>
+            <%= f.button :submit, "Update Password", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

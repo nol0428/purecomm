@@ -2,6 +2,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+import "chartkick"
+import "Chart.bundle"
 
 // Register SW (only in production or whenever you like)
 if ('serviceWorker' in navigator) {

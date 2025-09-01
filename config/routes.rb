@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "pages#home"
   get "grievances/badge", to: "grievances#badge", as: :badge_grievances
   get "checkins/badge", to: "checkins#badge", as: :badge_checkins

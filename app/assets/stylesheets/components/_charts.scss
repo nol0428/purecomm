@@ -1,0 +1,33 @@
+.chart-box {
+  max-width: 340px;
+  margin: 8px auto 0;
+}
+.chart-box canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 6px 18px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1;
+}
+.legend-item .swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legend-grid { padding-left: 8px; }
