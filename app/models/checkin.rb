@@ -11,6 +11,7 @@ class Checkin < ApplicationRecord
   # validates :nudge, presence: true
 
   after_create_commit :broadcast_badge_refresh
+  after_create_commit :broadcast_list_prepend
 
   def recipients
     ids = [partnership.user_one_id, partnership.user_two_id].compact
@@ -27,6 +28,17 @@ class Checkin < ApplicationRecord
         target: "checkin_badge_#{uid}",
         partial: "checkins/badge_frame",
         locals: { partnership: partnership, uid: uid, ts: ts }
+      )
+    end
+  end
+
+  def broadcast_list_prepend
+    recipients.each do |uid|
+      Turbo::StreamsChannel.broadcast_prepend_to(
+        [:checkins_list, partnership.id, uid],
+        target: "partner-checkins",
+        partial: "checkins/card",
+        locals: { checkin: self, read: false }
       )
     end
   end
