@@ -102,4 +102,5 @@ Rails.application.configure do
   config.action_cable.allowed_request_origins = [
   "https://#{ENV.fetch('APP_HOST', 'purecomm-44227c50794a.herokuapp.com')}"
   ]
+  config.action_cable.disable_request_forgery_protection = true
 end
