@@ -103,4 +103,6 @@ Rails.application.configure do
   "https://#{ENV.fetch('APP_HOST', 'purecomm-44227c50794a.herokuapp.com')}"
   ]
   config.action_cable.disable_request_forgery_protection = true
+  # Make Action Cable/Turbo Streams log clearly in production
+  config.action_cable.logger = Logger.new(STDOUT)
 end
