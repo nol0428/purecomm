@@ -96,20 +96,13 @@
       <option value="read">Read</option>
     </select>
   </div>
+  <% if current_user&.current_partnership.present? %>
+    <%= turbo_stream_from [:checkins_list, @user.current_partnership.id, current_user.id] %>
+  <% end %>
   <div class="mood-list" id="partner-checkins">
     <% viewed = session[:viewed_checkins] || [] %>
     <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
-      <% read = viewed.include?(checkin.id) %>
-      <div
-      class="check-in-card d-flex align-items-center gap-3 <%= 'faded' if read %>"
-      data-created-at="<%= checkin.created_at.to_i %>"
-      data-read="<%= read %>">
-        <%= image_tag "#{@user.current_partner.username}.png", class: "checkin-avatar", alt: @user.current_partner.username %>
-        <div>
-          <%= link_to "#{@user.current_partner.username} checked in as #{checkin.mood}", checkin_path(checkin) %>
-          <div class="checkin-time"><%= checkin.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-        </div>
-      </div>
+      <%= render "checkins/card", checkin:, read: viewed.include?(checkin.id) %>
     <% end %>
   </div>
 </div>
