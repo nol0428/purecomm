@@ -20,12 +20,6 @@ $topbar-fg: #ffffff;
   padding: 0 12px;
 }
 
-.brand-logo .logo-img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-
 .site-main {
   padding-top: $topbar-height;
   min-height: 100dvh;
@@ -37,11 +31,12 @@ $topbar-fg: #ffffff;
   align-items: center;
 }
 
-.brand-logo .logo-img {
-  height: 40px;
-  width: auto;
-  display: block;
-  object-fit: contain;
+.brand-logo {
+  background-image: url('icons/logo.png');
+  height: 35px;
+  width: 40px;
+  background-size: 145%;
+  background-position: center;
 }
 
 .topbar__center {
