@@ -44,6 +44,15 @@ class CheckinsController < ApplicationController
     session[:viewed_checkins] << @checkin.id
     session[:viewed_checkins].uniq!
     @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
+    mark_checkin_viewed!(@checkin) if @checkin.user_id != current_user.id
+  end
+
+  def badge
+    partnership = current_user.current_partnership
+    viewed_ids  = viewed_checkin_ids(partnership)
+    scope = partnership.checkins.where.not(user_id: current_user.id)
+    @count = scope.where.not(id: viewed_ids).count
+    render :badge
   end
 
   private

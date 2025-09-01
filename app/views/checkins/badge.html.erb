@@ -1,0 +1,4 @@
+<!-- app/views/checkins/badge.html.erb -->
+<%= turbo_frame_tag "checkin_badge_#{current_user.id}" do %>
+  <%= render "checkins/badge", count: @count %>
+<% end %>
