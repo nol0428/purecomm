@@ -15,6 +15,14 @@
     <h2>Communication Growth Notes</h2>
   </div>
   <%= turbo_stream_from [:grievances_list, @user.current_partnership.id] %>
+  <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;">
+    <select id="grievance-sort" class="form-select" style="max-width: 220px;">
+      <option value="newest" selected>Newest</option>
+      <option value="oldest">Oldest</option>
+      <option value="unread">Unread</option>
+      <option value="read">Read</option>
+    </select>
+  </div>
   <div class="card mood-log" style="margin-top:16px">
     <div class="grievance-list" id="grievance_list">
       <% viewed = session[:viewed_grievances] || [] %>
@@ -23,6 +31,47 @@
             grievance: grievance,
             read: viewed.include?(grievance.id) %>
       <% end %>
+      <script>
+        (function () {
+          const select = document.getElementById('grievance-sort');
+          const list   = document.getElementById('grievance_list');
+          if (!select || !list) return;
+          function sortGrievances() {
+            const value = select.value;
+            const items = Array.from(list.children);
+            items.forEach(el => el.style.display = '');
+            let visible = items;
+            if (value === 'unread_only') {
+              visible = items.filter(el => el.dataset.read === 'false');
+              items.forEach(el => { if (el.dataset.read !== 'false') el.style.display = 'none'; });
+            }
+            const byTimeDesc = (a, b) => (+b.dataset.createdAt) - (+a.dataset.createdAt);
+            const byTimeAsc  = (a, b) => (+a.dataset.createdAt) - (+b.dataset.createdAt);
+            const unreadFirst = (a, b) => {
+              const ua = (a.dataset.read === 'false') ? 0 : 1;
+              const ub = (b.dataset.read === 'false') ? 0 : 1;
+              return ua - ub || byTimeDesc(a, b);
+            };
+            const readFirst = (a, b) => {
+              const ra = (a.dataset.read === 'true') ? 0 : 1;
+              const rb = (b.dataset.read === 'true') ? 0 : 1;
+              return ra - rb || byTimeDesc(a, b);
+            };
+            let sorter = byTimeDesc;
+            if (value === 'oldest') sorter = byTimeAsc;
+            if (value === 'unread') sorter = unreadFirst;
+            if (value === 'read')   sorter = readFirst;
+            if (value === 'unread_only') sorter = byTimeDesc;
+            visible.sort(sorter).forEach(el => list.appendChild(el));
+          }
+          select.addEventListener('change', sortGrievances);
+          window.sortGrievances = sortGrievances;
+          sortGrievances();
+        })();
+        document.addEventListener("turbo:after-stream-render", () => {
+          if (window.sortGrievances) window.sortGrievances();
+        });
+      </script>
     </div>
   </div>
 </div>
