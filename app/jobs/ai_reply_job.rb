@@ -3,7 +3,7 @@ class AiReplyJob < ApplicationJob
   queue_as :default
 
   def perform(message_id)
-    Rails.logger.info "[AiReplyJob] start message_id=#{message_id}"
+    # Rails.logger.info "[AiReplyJob] start message_id=#{message_id}"
 
     user_msg    = Message.find(message_id)
     partnership = user_msg.partnership
@@ -36,7 +36,7 @@ class AiReplyJob < ApplicationJob
             user_text: prompt_with_context
           )
         rescue => e
-          Rails.logger.error "[AiReplyJob] error message_id=#{message_id} #{e.class}: #{e.message}"
+          # Rails.logger.error "[AiReplyJob] error message_id=#{message_id} #{e.class}: #{e.message}"
           "Sorry — I had trouble responding just now. Please try again."
         end
       end
@@ -57,6 +57,6 @@ class AiReplyJob < ApplicationJob
       locals:  { message: assistant }
     )
 
-    Rails.logger.info "[AiReplyJob] done message_id=#{message_id}"
+    # Rails.logger.info "[AiReplyJob] done message_id=#{message_id}"
   end
 end
