@@ -54,14 +54,13 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # append the assistant message to the chat stream
+    # Broadcast normally — rely on append order
     Turbo::StreamsChannel.broadcast_append_to(
       [partnership, :messages],
-      target:  "messages",               # <div id="messages">
+      target: "messages",
       partial: "messages/message",
-      locals:  { message: assistant }
+      locals: { message: assistant }
     )
-
     Rails.logger.info "[AiReplyJob] done message_id=#{message_id}"
   end
 end
