@@ -3,7 +3,7 @@
     <%= render partial: "messages/message", formats: [:html], locals: { message: @message } %>
   </template>
 </turbo-stream>
-<turbo-stream action="update" target="new_message">
+<turbo-stream action="update" target="message_form">
   <template>
     <%= render partial: "messages/form", formats: [:html], locals: { partnership: @partnership, message: Message.new } %>
   </template>

@@ -1,7 +1,7 @@
 <%= form_with model: [partnership, message],
               data: { controller: "compose",
                       action: "turbo:submit-start->compose#hideError turbo:submit-start->compose#showThinking turbo:submit-end->compose#hideThinking turbo:submit-error->compose#hideThinking turbo:submit-end->compose#reset turbo:submit-end->compose#checkStatus" },
-              id: "new_message" do |f| %>
+              id: "message_form" do |f| %>
   <div class="field">
     <%= f.text_area :content,
           rows: 3,
