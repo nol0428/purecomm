@@ -6,5 +6,7 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV["REDIS_URL"] %>
+  url: <%= ENV.fetch("CABLE_REDIS_URL") { ENV.fetch("REDIS_URL") } %>
   channel_prefix: purecomm_production
+  ssl_params:
+    verify_mode: 0   # OpenSSL::SSL::VERIFY_NONE
