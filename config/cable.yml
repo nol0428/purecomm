@@ -6,7 +6,8 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV["CABLE_REDIS_URL"] || ENV["REDIS_URL"] %>
+  url: <%= ENV["REDIS_URL"] %>
   channel_prefix: purecomm_production
   ssl_params:
-    verify_mode: 0  # (keeps the TLS self-signed cert error from killing the listener)
+    # OpenSSL::SSL::VERIFY_NONE to work around Heroku Redis cert chain in ActionCable
+    verify_mode: 0
