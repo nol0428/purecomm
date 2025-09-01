@@ -98,4 +98,8 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.action_cable.url = ENV.fetch("ACTION_CABLE_URL", "wss://#{ENV.fetch('APP_HOST', 'purecomm-44227c50794a.herokuapp.com')}/cable")
+  config.action_cable.allowed_request_origins = [
+  "https://#{ENV.fetch('APP_HOST', 'purecomm-44227c50794a.herokuapp.com')}"
+  ]
 end
