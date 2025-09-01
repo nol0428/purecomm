@@ -198,7 +198,7 @@
 }
 /* === restore message box size (only) === */
 #new_message { display: block; width: 100%; }
-#message_form { display: block; width: 100%; }
+#message_form, #new_message { display: block; width: 100%; }
 
 #message_content {
   display: block;
@@ -219,7 +219,7 @@
 }
 
 /* === keep Send on the right (clean) === */
-#message_form .actions [type="submit"] {
+#message_form, #new_message .actions [type="submit"] {
   margin-left: auto !important;  /* pushes it to the far right */
   width: auto !important;        /* never 100% */
   display: inline-flex;          /* avoid block-level full width */
@@ -259,7 +259,7 @@
 }
 
 /* Form fills the second row, full width */
-#message_form {
+#message_form, #new_message {
   grid-row: 2;
   width: 100%;
 }
@@ -272,27 +272,27 @@
 }
 
 /* Keep Send on the right */
-#message_form .actions {
+#message_form, #new_message .actions {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
 }
-#message_form .actions [type="submit"] {
+#message_form, #new_message .actions [type="submit"] {
   margin-left: auto;
   width: auto;
   display: inline-flex;
 }
 
 /* === restore Send button look + position === */
-#message_form .actions {
+#message_form, #new_message .actions {
   display: flex !important;
   justify-content: flex-end !important;
   align-items: center;
   width: 100%;
 }
 
-#message_form .actions .btn-primary {
+#message_form, #new_message .actions .btn-primary {
   background: var(--user-border) !important;   /* yellow background */
   border-color: var(--user-border) !important;
   color: #222 !important;
@@ -302,7 +302,7 @@
   display: inline-flex !important;
 }
 
-#message_form .actions .btn-primary:hover {
+#message_form, #new_message .actions .btn-primary:hover {
   background: #fbcf5c !important;
   border-color: #fbcf5c !important;
 }
