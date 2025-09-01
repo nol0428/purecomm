@@ -54,13 +54,14 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # Broadcast normally — rely on append order
-    Turbo::StreamsChannel.broadcast_append_to(
+    # Ensure AI reply appears AFTER the user's message
+    Turbo::StreamsChannel.broadcast_after_to(
       [partnership, :messages],
-      target: "messages",
+      target:  dom_id(user_msg),  # insert after the specific user message
       partial: "messages/message",
-      locals: { message: assistant }
+      locals:  { message: assistant }
     )
+
     Rails.logger.info "[AiReplyJob] done message_id=#{message_id}"
   end
 end
