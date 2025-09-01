@@ -54,10 +54,11 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # Ensure AI reply appears AFTER the user's message
-    Turbo::StreamsChannel.broadcast_after_to(
+    # ✅ Deterministic ordering: render assistant AFTER the user's DOM node
+    Turbo::StreamsChannel.broadcast_action_to(
       [partnership, :messages],
-      target:  dom_id(user_msg),  # insert after the specific user message
+      action:  :after,
+      target:  dom_id(user_msg), # insert after the specific user message
       partial: "messages/message",
       locals:  { message: assistant }
     )
