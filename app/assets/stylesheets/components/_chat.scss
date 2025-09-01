@@ -306,3 +306,45 @@
   background: #fbcf5c !important;
   border-color: #fbcf5c !important;
 }
+/* === Message form layout fix === */
+#message_form {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+#message_form .field {
+  flex: 1;
+}
+
+#message_form textarea {
+  width: 100%;
+  resize: none;
+}
+
+#message_form .actions {
+  display: flex;
+  align-items: center;
+}
+/* === Message form layout fix === */
+#message_form {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+#message_form .field {
+  flex: 1;
+}
+
+#message_form textarea {
+  width: 100%;
+  resize: none;
+}
+
+#message_form .actions {
+  display: flex;
+  align-items: center;
+}
