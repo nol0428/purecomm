@@ -19,7 +19,7 @@ class Message < ApplicationRecord
   before_validation :backfill_partnership_from_chat
 
   # Broadcast assistant replies only (so user msgs aren't double-rendered)
-  after_create_commit :broadcast_assistant_reply
+  # after_create_commit :broadcast_assistant_reply
 
   # --- small helper ---
   def assistant?
