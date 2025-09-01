@@ -54,11 +54,10 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # Broadcast AFTER the user message
-    Turbo::StreamsChannel.broadcast_action_to(
+    # ✅ Broadcast assistant reply safely via append
+    Turbo::StreamsChannel.broadcast_append_to(
       [partnership, :messages],
-      action:  :after,
-      target:  dom_id(user_msg), # e.g., "message_230"
+      target:  "messages",                # <div id="messages">
       partial: "messages/message",
       locals:  { message: assistant }
     )
