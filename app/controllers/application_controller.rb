@@ -24,6 +24,21 @@ class ApplicationController < ActionController::Base
     session[key] = (session[key] || []) | [grievance.id]
   end
 
+  helper_method :viewed_checkin_ids, :mark_checkin_viewed!
+
+  def viewed_checkin_ids_key(partnership)
+    "viewed_checkins_p#{partnership.id}_u#{current_user&.id}"
+  end
+
+  def viewed_checkin_ids(partnership)
+    session[viewed_checkin_ids_key(partnership)] ||= []
+  end
+
+  def mark_checkin_viewed!(checkin)
+    key = viewed_checkin_ids_key(checkin.partnership)
+    session[key] = (session[key] || []) | [checkin.id]
+  end
+
   private
 
   def after_sign_in_path_for(resource)

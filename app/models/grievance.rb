@@ -11,7 +11,7 @@ class Grievance < ApplicationRecord
 
   def recipients
     ids = [partnership.user_one_id, partnership.user_two_id].compact
-    ids - [user_id] # 不给自己发
+    ids - [user_id]
   end
 
   after_create_commit :broadcast_badge_refresh
