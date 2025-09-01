@@ -54,10 +54,10 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # ✅ Broadcast assistant reply safely via append
+    # append the assistant message to the chat stream
     Turbo::StreamsChannel.broadcast_append_to(
       [partnership, :messages],
-      target:  "messages",                # <div id="messages">
+      target:  "messages",               # <div id="messages">
       partial: "messages/message",
       locals:  { message: assistant }
     )
