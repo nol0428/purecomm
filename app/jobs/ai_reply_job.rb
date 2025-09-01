@@ -1,16 +1,15 @@
-# app/jobs/ai_reply_job.rb
 class AiReplyJob < ApplicationJob
   queue_as :default
-  include ActionView::RecordIdentifier   # ✅ add this for dom_id(message)
+  include ActionView::RecordIdentifier   # ✅ needed for dom_id(message)
 
   def perform(message_id)
     Rails.logger.info "[AiReplyJob] start message_id=#{message_id}"
 
     user_msg    = Message.find(message_id)
     partnership = user_msg.partnership
-    chat        = user_msg.chat || partnership.ensure_chat!   # ✅ prefer the user_msg.chat if present
+    chat        = user_msg.chat || partnership.ensure_chat!
 
-    # Gather recent messages for context (unchanged)
+    # Gather recent messages for context
     recent = partnership.messages
               .where(chat: chat)
               .where.not(role: "system")
@@ -42,7 +41,12 @@ class AiReplyJob < ApplicationJob
         end
       end
 
-    # ✅ Save the assistant reply and keep a reference
+    # --- tiny ordering delay ---
+    delay_ms = ENV.fetch("AI_REPLY_BROADCAST_DELAY_MS", "500").to_i
+    sleep(delay_ms / 1000.0) if delay_ms.positive?
+    # --------------------------
+
+    # Save assistant reply
     assistant = partnership.messages.create!(
       chat: chat,
       content: reply_text,
@@ -50,11 +54,11 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # ✅ Deterministic ordering: render assistant AFTER the user's DOM node
+    # Broadcast AFTER the user message
     Turbo::StreamsChannel.broadcast_action_to(
       [partnership, :messages],
       action:  :after,
-      target:  dom_id(user_msg),               # e.g., "message_230"
+      target:  dom_id(user_msg), # e.g., "message_230"
       partial: "messages/message",
       locals:  { message: assistant }
     )
