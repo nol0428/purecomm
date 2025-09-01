@@ -1,15 +1,28 @@
 <div class="whole-page">
-  <%= button_to "Log out",
-              destroy_user_session_path,
-              method: :delete,
-              class: "btn btn-secondary w-100" %>
   <div class="banner">
     <div class="banner__row">
       <div class="banner__content">
         <h2>Hello, <%= @user.username %>!</h2>
         <p>How's your mood today?</p>
       </div>
-      <%= image_tag "#{@user.username}.png", class: "banner__avatar", alt: "User One" %>
+      <div class="dropdown">
+        <button class="dropdown-toggle avatar-container" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+          <%= image_tag "#{@user.username}.png", class: "banner__avatar", alt: "User One" %>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <%= link_to "Profile",
+              edit_user_registration_path,
+              class: "btn btn-secondary w-100 dropdown-item" %>
+          </li>
+          <li>
+            <%= link_to "Log out",
+              destroy_user_session_path,
+              class: "btn btn-secondary w-100 dropdown-item",
+              data: { turbo_method: :delete } %>
+          </li>
+        </ul>
+      </div>
     </div>
     <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
       Mood Check-in

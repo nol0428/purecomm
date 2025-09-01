@@ -48,3 +48,33 @@
   text-align: center;
   flex: 1;
 }
+
+.avatar-container {
+  border: none;
+  background: transparent;
+}
+
+.dropdown-menu .btn {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.25rem;
+  vertical-align: 0.25em;
+  content: "";
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-left: .3em solid transparent;
+}
+
+.dropdown-menu .dropdown-item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: $green;
+}
