@@ -24,8 +24,14 @@
         </ul>
       </div>
     </div>
-    <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
-      Mood Check-in
+    <% if checkin = current_user.checkin_today(@partnership) %>
+      <%= link_to checkin_path(checkin), class: "btn banner__cta" do %>
+        View your check-in
+      <% end %>
+    <% else %>
+      <%= link_to new_partnership_checkin_path(@user.current_partnership), class: "btn banner__cta" do %>
+        Mood Check-in
+      <% end %>
     <% end %>
   </div>
   <div class="card mood-log" id="mood-log-card" style="margin-top:16px">

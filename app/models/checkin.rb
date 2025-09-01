@@ -7,6 +7,8 @@ class Checkin < ApplicationRecord
 
   validates :mood, presence: true, inclusion: { in: MOODS }
   validates :my_day, presence: true, inclusion: { in: MY_DAY }
+
+  validate :one_check_in_per_day, on: :create
   # validates :discuss, presence: true
   # validates :nudge, presence: true
 
@@ -40,6 +42,12 @@ class Checkin < ApplicationRecord
         partial: "checkins/card",
         locals: { checkin: self, read: false }
       )
+    end
+  end
+
+  def one_check_in_per_day
+    if user && user.checkins.where(created_at: Date.current.all_day).exists?
+      errors.add(:base, "You can only perform one check-in per day.")
     end
   end
 end
