@@ -1,4 +1,4 @@
-<section class="landing-page app-container flow">
+<section class="landing-page app-container flow position-relative">
   <!-- Hero -->
   <header class="hero flow">
     <div class="hero-overlay">
@@ -22,7 +22,12 @@
       <% end %>
     </div>
   </header>
-  <!-- Value Proposition / Intro -->
+  <div class="position-absolute top-0 end-0 mt-3 me-3">
+    <%= link_to new_user_session_path, class: "d-flex align-items-center gap-2", title: "Log In" do %>
+      <h2 class="m-0">Log In</h2>
+      <i class="brand-logo"></i>
+    <% end %>
+  </div>
   <section class="landing-intro">
     <p>
       PureComm is built to help couples stay emotionally connected every day.
