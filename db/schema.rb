@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_01_033756) do
-
+ActiveRecord::Schema[7.1].define(version: 2025_09_01_084256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +85,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_01_033756) do
     t.datetime "updated_at", null: false
     t.index ["user_one_id"], name: "index_partnerships_on_user_one_id"
     t.index ["user_two_id"], name: "index_partnerships_on_user_two_id"
+  end
+
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.text "channel"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -209,6 +217,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_01_033756) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "talks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "partnership_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["partnership_id"], name: "index_talks_on_partnership_id"
+    t.index ["user_id"], name: "index_talks_on_user_id"
+  end
+
   create_table "tool_calls", force: :cascade do |t|
     t.bigint "message_id", null: false
     t.string "name"
@@ -252,6 +270,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_01_033756) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "talks", "partnerships"
+  add_foreign_key "talks", "users"
   add_foreign_key "tool_calls", "messages"
   add_foreign_key "tool_calls", "messages", column: "result_id"
   add_foreign_key "tool_calls", "tool_calls", column: "parent_tool_call_id"

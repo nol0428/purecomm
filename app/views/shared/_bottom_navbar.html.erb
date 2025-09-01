@@ -24,7 +24,7 @@
               src: badge_grievances_path(partnership_id: current_user.current_partnership.id) %>
       <% end %>
     <% end %>
-    <%= link_to "#", class: "nav-icon" do %>
+    <%= link_to partnership_talks_path(current_user.current_partnership), class: "nav-icon" do %>
       <%= inline_svg_tag "icons/message-navbar.svg" %>
     <% end %>
   <% end %>
