@@ -15,6 +15,7 @@ class Grievance < ApplicationRecord
   end
 
   after_create_commit :broadcast_badge_refresh
+  after_create_commit :broadcast_list_prepend
 
   private
 
@@ -28,5 +29,14 @@ class Grievance < ApplicationRecord
         locals: { partnership: partnership, uid: uid, ts: ts }
       )
     end
+  end
+
+  def broadcast_list_prepend
+    Turbo::StreamsChannel.broadcast_prepend_to(
+      [:grievances_list, partnership.id],
+      target: "grievance_list",
+      partial: "grievances/card",
+      locals: { grievance: self, read: false }
+    )
   end
 end

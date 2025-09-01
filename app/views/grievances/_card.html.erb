@@ -1,0 +1,13 @@
+<% read = local_assigns[:read] || false %>
+<div id="<%= dom_id(grievance) %>"
+     class="grievance-card d-flex align-items-center gap-3 <%= 'faded' if read %>"
+     data-created-at="<%= grievance.created_at.to_i %>"
+     data-read="<%= read %>">
+  <%= image_tag "#{grievance.user.username}.png",
+        class: "checkin-avatar",
+        alt: grievance.user.username %>
+  <div>
+    <%= link_to grievance.topic, grievance_path(grievance), class: "grievance-link" %>
+    <div class="checkin-time"><%= grievance.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+  </div>
+</div>
