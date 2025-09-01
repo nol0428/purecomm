@@ -15,7 +15,7 @@
     <h2>Communication Growth Notes</h2>
   </div>
   <%= turbo_stream_from [:grievances_list, @user.current_partnership.id] %>
-  <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;">
+  <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;padding-left:16px;">
     <select id="grievance-sort" class="form-select" style="max-width: 220px;">
       <option value="newest" selected>Newest</option>
       <option value="oldest">Oldest</option>
