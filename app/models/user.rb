@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :checkins, dependent: :destroy
   has_many :grievances, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :talks, dependent: :destroy
 
   LOVE_LANGUAGES = ["Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "Physical Touch"]
 

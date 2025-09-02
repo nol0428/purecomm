@@ -1,0 +1,10 @@
+<ul
+  id="talks"
+  class="talk-chat"
+  data-controller="talk-scroll"
+  data-talk-scroll-current-user-id-value="<%= current_user.id %>"
+>
+  <% talks.each do |talk| %>
+    <%= render "talk", talk: talk %>
+  <% end %>
+</ul>
