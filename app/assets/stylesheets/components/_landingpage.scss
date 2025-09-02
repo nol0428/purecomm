@@ -12,6 +12,12 @@
 .landing-page p,
 .landing-page li { color: #222; }
 
+.landing-page .login {
+  color: $light-gray;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 500;
+}
+
 .landing-page .muted { color: #666; }
 
 /* Only landing page should remove main padding */
