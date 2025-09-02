@@ -299,3 +299,24 @@
   padding-top: 1rem;
   padding-left: 1rem;
 }
+
+/* === Fix chat composer at bottom of viewport === */
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* take full screen height */
+}
+
+.chat-messages {
+  flex: 1;              /* take remaining space */
+  overflow-y: auto;     /* scroll messages */
+}
+
+#new_message {
+  position: sticky;     /* keeps it at bottom inside .chat */
+  bottom: 0;
+  background: var(--chat-bg);
+  padding: var(--gap-2);
+  border-top: 1px solid var(--chat-border);
+  z-index: 10;
+}
