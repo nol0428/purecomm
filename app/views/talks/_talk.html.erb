@@ -4,10 +4,9 @@
   data-author-id="<%= talk.user_id %>"
 >
   <div class="talk-avatar">
-    <% if talk.user.respond_to?(:avatar_url) && talk.user.avatar_url.present? %>
-      <%= image_tag talk.user.avatar_url, alt: talk.user.username, class: "avatar" %>
-    <% elsif talk.user.username.present? && Rails.application.assets&.find_asset("#{talk.user.username}.png") %>
-      <%= image_tag "#{talk.user.username}.png", alt: talk.user.username, class: "avatar" %>
+    <% path = "/avatars/#{talk.user.username}.png" %>
+    <% if File.exist?(Rails.root.join("public", path.delete_prefix('/'))) %>
+      <%= image_tag path, alt: talk.user.username, class: "avatar" %>
     <% else %>
       <%= image_tag "default-avatar.png", alt: talk.user.username, class: "avatar" %>
     <% end %>
