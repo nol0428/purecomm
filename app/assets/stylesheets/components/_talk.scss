@@ -1,9 +1,9 @@
 
 .talk-thread {
-  list-style: none;
-  margin: 0;
-  padding: 12px 12px 96px;
+  padding: 12px;
+  padding-bottom: calc(var(--bottom-nav-h) + var(--talk-input-h) + 16px);
 }
+
 
 .talk-row {
   display: flex;
@@ -74,14 +74,21 @@
 }
 
 .talk-input-bar {
-  position: sticky;
-  bottom: 0;
+  position: fixed;
   left: 0;
   right: 0;
-  margin: 0;
+  bottom: var(--bottom-nav-h);
+  min-height: var(--talk-input-h);
   padding: 10px 12px;
   background: var(--surface, #FAFAFA);
   border-top: 1px solid var(--border, #e6e7ef);
+  z-index: 100;
+}
+
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .talk-input-bar {
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  }
 }
 
 .talk-btn-send {
