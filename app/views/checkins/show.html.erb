@@ -13,10 +13,14 @@
   </div>
   <% todays_checkin = current_user.checkins.where(created_at: Time.zone.today.all_day).first %>
   <% if todays_checkin.present? %>
-    <p class="already-checked-in-msg">
-      You've already checked in today! Here's your entry:
-    </p>
-    <%= render 'checkins/show', checkin: todays_checkin, partnership: @partnership %>
+    <% if todays_checkin.nudge.nil? %>
+      <%= render 'checkins/nudge', checkin: todays_checkin, partnership: @partnership %>
+    <% else %>
+      <p class="already-checked-in-msg">
+        You've already checked in today! Here's your entry:
+      </p>
+      <%= render 'checkins/show', checkin: todays_checkin, partnership: @partnership %>
+    <% end %>
   <% else %>
     <% if @checkin.nudge.nil? %>
       <%= render 'checkins/nudge', checkin: @checkin, partnership: @partnership %>
