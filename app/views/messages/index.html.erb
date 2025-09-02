@@ -5,18 +5,17 @@
   <header class="chat-header">
     <h1 class="chat-title">Coach Chat</h1>
   </header>
-  <!-- Messages (ONE container, ONE id) -->
+  <!-- Messages -->
   <div id="messages" data-controller="autoscroll" class="chat-messages">
     <%= render @messages %>
   </div>
-  <!-- Status strip (thinking + error badges go here) -->
+  <!-- Status strip -->
   <div class="chat-status">
     <%= render "messages/thinking_badge" %>
     <%= render "messages/error_badge" %>
   </div>
-  <!-- Composer (ONE footer, ONE id) -->
+  <!-- Composer -->
   <footer class="chat-composer" id="new_message">
-    <!-- Status strip lives inside the footer now -->
     <div class="chat-status">
       <%= render "messages/thinking_badge" %>
       <%= render "messages/error_badge" %>
@@ -25,3 +24,16 @@
                locals: { partnership: @partnership, message: @message } %>
   </footer>
 </section>
+<%= javascript_tag do %>
+  document.addEventListener("turbo:load", () => {
+  // Only run on pages that have the chat markup
+  const chat = document.querySelector(".chat-wrap");
+  if (!chat) return;
+  // Scroll the window so the composer is in view (not the messages scroller)
+  const composer = document.getElementById("new_message");
+  if (composer) {
+  const y = composer.getBoundingClientRect().top + window.scrollY - 12; // small offset
+  window.scrollTo({ top: y, behavior: "auto" }); // 'auto' works everywhere
+  }
+  });
+<% end %>
