@@ -5,7 +5,7 @@
 
 /* --- Theme tokens --- */
 :root {
-  --chat-bg: #FFFFFF;       /* app background */
+  --chat-bg: #FFF9F5;       /* app background */
   --chat-surface: #FFFFFF;  /* chat area surface */
   --chat-border: #E0E4EC;
   --chat-text: #222;
@@ -210,4 +210,92 @@
 
 .chat-composer .chat-status > div[hidden] {
   display: none !important;
+}
+
+/* =======================================
+   Custom overrides — swap bubbles + send btn
+======================================= */
+
+/* Coach now has white bubble with golden border */
+.message.assistant {
+  background: var(--user-bg);
+  color: var(--user-text);
+  border: 2px solid var(--user-border);
+  border-top-left-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+/* User now has filled gray bubble */
+.message.user {
+  margin-left: auto;
+  background: var(--coach-bg);
+  color: var(--coach-text);
+  border: none;
+  border-top-right-radius: 6px;
+}
+
+/* Lift send button slightly */
+#message_form .actions .btn-primary {
+  position: relative;
+  top: -4px; /* tweak as needed */
+}
+
+/* 4) Overscroll control */
+.chat-messages, #messages {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 5) Modern scrollbar */
+#messages::-webkit-scrollbar { width: 8px; }
+#messages::-webkit-scrollbar-thumb {
+  background: #d9deea; border-radius: 10px;
+}
+#messages:hover::-webkit-scrollbar-thumb { background: #c6ccdb; }
+#messages { scrollbar-width: thin; scrollbar-color: #c6ccdb transparent; }
+
+
+
+/* 9) Send button pressed state */
+#message_form .actions .btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.05);
+}
+
+/* === Speech-bubble corner styling === */
+
+/* User bubble (right side) */
+.message.user {
+  border-radius: var(--radius-lg);
+  border-bottom-right-radius: 0; /* square corner */
+}
+
+/* Coach/assistant bubble (left side) */
+.message.assistant {
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: 0; /* square corner */
+}
+/* === Coach bubble fill === */
+.message.assistant {
+  background: #FAFAFA;   /* soft gray fill */
+  color: var(--coach-text);
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: 0; /* keep speech-bubble square corner */
+}
+
+/* === Message input box fill === */
+#message_form textarea {
+  background: #FAFAFA;   /* same soft gray */
+}
+
+/* === Lift send button higher === */
+#message_form .actions .btn-primary {
+  position: relative;
+  top: -6px;
+}
+
+
+.chat-header {
+  padding-top: 1rem;
+  padding-left: 1rem;
 }

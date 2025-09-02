@@ -88,15 +88,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_01_084256) do
     t.index ["user_two_id"], name: "index_partnerships_on_user_two_id"
   end
 
-  create_table "solid_cable_messages", force: :cascade do |t|
-    t.text "channel"
-    t.text "payload"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
-    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
-  end
-
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.string "queue_name", null: false
@@ -261,6 +252,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_01_084256) do
   add_foreign_key "checkins", "users"
   add_foreign_key "grievances", "partnerships"
   add_foreign_key "grievances", "users"
+  add_foreign_key "messages", "chats"
   add_foreign_key "messages", "partnerships"
   add_foreign_key "messages", "users"
   add_foreign_key "partnerships", "users", column: "user_one_id"
