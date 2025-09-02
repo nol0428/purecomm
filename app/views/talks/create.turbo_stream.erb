@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "talks" do %>
+  <%= render "messages", talk: @talks.last, talks: @talks %>
+<% end %>
+
+<%= turbo_stream.replace "new_message" do %>
+  <%= render "form", partnership: @partnership, talk: Talk.new %>
+<% end %>
