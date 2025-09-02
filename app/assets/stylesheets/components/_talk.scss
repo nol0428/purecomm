@@ -40,25 +40,22 @@
 
 .talk-bubble {
   display: inline-block;
-
   padding: 10px 14px;
   border-radius: 16px;
-
   word-break: break-word;
-
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
 .talk-row.me .talk-bubble {
   background: #6ED3CF;
   color: #fff;
-  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .talk-row.them .talk-bubble {
   background: #FFD166;
   color: #333;
-  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
 .talk-meta {
