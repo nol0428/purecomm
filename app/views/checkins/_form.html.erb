@@ -39,7 +39,7 @@
   <%= f.input :comment,
                 label: false,
                 placeholder: "Anything you'd like to share?",
-                input_html: { data: {disable_inputs_target: "input" } } %>
+                input_html: { data: {disable_inputs_target: "input" }, rows: 4 } %>
   <% if checkin.id && !current_page?(edit_partnership_checkin_path(partnership, checkin)) %>
     <%= link_to "Back", partnership_path(partnership), class: 'btn btn-coach w-100'  %>
   <% else %>
