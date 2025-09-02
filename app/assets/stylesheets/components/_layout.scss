@@ -45,7 +45,7 @@ body {
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  font-family: "Raleway", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, Roboto, Arial, sans-serif;
   font-weight: 600;  /* SemiBold */
   font-size: 16px;
   line-height: 1.5;
@@ -53,25 +53,25 @@ body {
 
 /* Headings */
 h1 {
-  font-family: "Raleway", system-ui, -apple-system, sans-serif;
+  font-family: "Quicksand", system-ui, -apple-system, sans-serif;
   font-weight: 800; /* ExtraBold */
-  font-size: clamp(2rem, 5vw, 2.5rem); /* keeps responsive scaling */
+  font-size: clamp(3rem, 5vw, 2.5rem); /* keeps responsive scaling */
   line-height: 1.2;
   margin: 0 0 var(--space-3);
   color: var(--text);
 }
 
 h2 {
-  font-family: "Raleway", system-ui, -apple-system, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, sans-serif;
   font-weight: 700;
-  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   line-height: 1.2;
   margin: 0 0 var(--space-2);
   color: var(--text);
 }
 
 h3 {
-  font-family: "Raleway", system-ui, -apple-system, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, sans-serif;
   font-weight: 700; /* Bold */
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   line-height: 1.2;
