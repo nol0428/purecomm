@@ -1,10 +1,8 @@
 // app/javascript/controllers/index.js
 import { Application } from "@hotwired/stimulus"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-import TalkScrollController from "./talk_scroll_controller"
 
 window.Stimulus = Application.start()
-Stimulus.register("talk-scroll", TalkScrollController)
 // Reuse the global Stimulus app if it's already started elsewhere,
 // otherwise start a new one. This avoids double-start problems.
 const application = window.Stimulus || Application.start()
