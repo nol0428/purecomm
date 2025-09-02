@@ -320,3 +320,16 @@
   border-top: 1px solid var(--chat-border);
   z-index: 10;
 }
+
+/* === Make composer sit flush on iPhone bottom nav === */
+#new_message {
+  position: sticky;
+  bottom: 0;
+  background: var(--chat-bg);
+  padding: var(--gap-2);
+  border-top: 1px solid var(--chat-border);
+  z-index: 10;
+
+  /* Fix iOS safe-area whitespace */
+  padding-bottom: calc(var(--gap-2) + env(safe-area-inset-bottom));
+}
