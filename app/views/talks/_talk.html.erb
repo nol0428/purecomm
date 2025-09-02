@@ -1,7 +1,24 @@
 <li
   id="talk-<%= talk.id %>"
-  class="chat-bubble"
+  class="talk-row"
   data-author-id="<%= talk.user_id %>"
 >
-  <%= sanitize(talk.content) %>
+  <div class="talk-avatar">
+    <% if talk.user.respond_to?(:avatar_url) && talk.user.avatar_url.present? %>
+      <%= image_tag talk.user.avatar_url, alt: talk.user.username, class: "avatar" %>
+    <% elsif talk.user.username.present? && Rails.application.assets&.find_asset("#{talk.user.username}.png") %>
+      <%= image_tag "#{talk.user.username}.png", alt: talk.user.username, class: "avatar" %>
+    <% else %>
+      <%= image_tag "default-avatar.png", alt: talk.user.username, class: "avatar" %>
+    <% end %>
+  </div>
+  <div class="talk-content">
+    <div class="talk-bubble">
+      <%= sanitize(talk.content) %>
+    </div>
+    <div class="talk-meta">
+      <span class="talk-username"><%= talk.user.username %></span>
+      <span class="talk-time"><%= talk.created_at.strftime("%H:%M") %></span>
+    </div>
+  </div>
 </li>
