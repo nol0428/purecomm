@@ -1,12 +1,11 @@
-<%= simple_form_for [partnership, talk], html: { class: "w-100", id: "new_message" } do |f| %>
+<%= simple_form_for [partnership, talk], html: { class: "talk-input-bar w-100", id: "new_talk" } do |f| %>
   <div class="d-flex w-100 gap-2 align-items-center">
     <%= f.input :content,
           label: false,
           wrapper_html: { class: "flex-grow-1 mb-0" },
-          input_html:  { class: "form-control", placeholder: "Ask me something..." } %>
-    <div class="icon-button-wrapper">
-      <button type="submit" class="icon-button icon-button-back">
-        <i class="fa-solid fa-paper-plane"></i>
-      </button>
-    </div>
-  <% end %>
+          input_html:  { class: "form-control", placeholder: "Type a message…" } %>
+    <button type="submit" class="icon-button icon-button-send" aria-label="Send">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </div>
+<% end %>

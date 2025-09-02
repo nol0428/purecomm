@@ -8,9 +8,6 @@ class Partnership < ApplicationRecord
   has_many :talks, dependent: :destroy
   has_one :chat, dependent: :destroy
 
-  # NEW: connect each partnership to a Chat
-  has_one :chat, dependent: :destroy
-
   def partner_of(user)
     user_one == user ? user_two : user_one
   end

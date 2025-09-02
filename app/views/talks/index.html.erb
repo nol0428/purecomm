@@ -1,7 +1,3 @@
-Hi from messages
-
 <%= turbo_stream_from [@partnership, :talks] %>
-
-<%= render "messages", talks: @talks %>
-
+<%= render "talks", talks: @talks %>
 <%= render "form", talk: @talk, partnership: @partnership %>
