@@ -1,5 +1,5 @@
 <!-- app/views/messages/_message.html.erb -->
-<div class="message <%= message.role %>">
+<div id="<%= dom_id(message) %>" class="message <%= message.role %>">
   <% if message.user.present? %>
     <strong><%= message.user.username || "User" %>:</strong>
   <% elsif message.assistant? %>

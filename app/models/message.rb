@@ -45,6 +45,7 @@ class Message < ApplicationRecord
   def broadcast_assistant_reply
     return unless assistant? && partnership.present?
 
+    puts "📡 BROADCAST FIRING for message #{id}"   # 👈 add this
     broadcast_append_later_to(
       [partnership, :messages],   # matches turbo_stream_from in index
       target: "messages",         # <div id="messages"> ... </div>

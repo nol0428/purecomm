@@ -5,6 +5,7 @@ class Partnership < ApplicationRecord
   has_many :checkins, dependent: :destroy
   has_many :grievances, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :talks, dependent: :destroy
   has_one :chat, dependent: :destroy
 
   # NEW: connect each partnership to a Chat
