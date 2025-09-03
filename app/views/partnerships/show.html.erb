@@ -38,11 +38,9 @@
       <% end %>
     <% end %>
   </div>
+
   <%= render "health_banner", status: @partnership.health_status_for(@user) %>
-  <div class="two-buttons d-flex justify-content-between">
-    <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
-    <%= link_to "Grievance Drop", new_partnership_grievance_path(@partnership), class:"btn btn-grievance w-full", style: "margin-left:8px" %>
-  </div>
+
   <div class="bulma header" style="margin-top:16px">
     <h2>Mood Check-in Log</h2>
   </div>

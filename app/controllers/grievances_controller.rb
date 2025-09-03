@@ -28,6 +28,7 @@ class GrievancesController < ApplicationController
     session[:viewed_grievances] ||= []
     session[:viewed_grievances] |= [@grievance.id]
     mark_grievance_viewed!(@grievance) if @grievance.user_id != current_user.id
+    GrievanceRead.find_or_create_by(user: current_user, grievance: @grievance).update(read_at: Time.current)
   end
 
   def badge

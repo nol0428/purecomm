@@ -25,9 +25,18 @@ class Partnership < ApplicationRecord
     checkins.left_joins(:checkin_reads).where.not(user_id: user.id).where(checkin_reads: { id: nil }).count
   end
 
-  def recent_bad_mood_ratio(days: 7)
+  def unread_grievances_count_for(user)
+  partner = user.current_partner
+
+  partner_grievance_ids = partner.grievances.select(:id)
+  already_read_ids = GrievanceRead.where(user: user).select(:grievance_id)
+
+  Grievance.where(id: partner_grievance_ids).where.not(id: already_read_ids).count
+  end
+
+  def recent_bad_mood_ratio(user, days: 7)
     start = days.days.ago
-    scope = checkins.where("created_at >= ?", start)
+    scope = checkins.where(user: user).where("created_at >= ?", start)
     total = scope.count
     return 0.0 if total.zero?
 
@@ -37,15 +46,18 @@ class Partnership < ApplicationRecord
 
   def health_status_for(user, days: 7)
     unread = unread_checkins_count_for(user)
-    ratio  = recent_bad_mood_ratio(days: days)
+    user_ratio  = recent_bad_mood_ratio(user, days: days)
+    partner_ratio = recent_bad_mood_ratio(user.current_partner, days: days)
+    ratio = [user_ratio, partner_ratio].max
+    unread_griev = unread_grievances_count_for(user)
 
     level =
-      if unread >= 5 || ratio >= 0.6 then :danger
+      if unread_griev.positive? ||unread >= 5 || ratio >= 0.6 then :danger
       elsif unread >= 3 || ratio >= 0.4 then :warning
       elsif unread >= 1 || ratio >= 0.2 then :info
       else :ok
       end
 
-    { level: level, unread: unread, ratio: ratio.round(2), days: days }
+    { level: level, unread: unread, user_ratio: user_ratio.round(2), partner_ratio: partner_ratio.round(2),unread_grievances: unread_griev, days: days }
   end
 end
