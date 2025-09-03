@@ -38,21 +38,9 @@
       <% end %>
     <% end %>
   </div>
-  <div class="container">
-    <% if @unread_count.positive? || @recent_bad_days.positive? %>
-      <div>
-        <i class="fa-solid fa-bell-exclamation"></i>
-        <div>
-          <% if @unread_count.positive? %>
-            <div><strong><%= @unread_count %></strong> unread check-in<%= 's' if @unread_count != 1 %> from <%= @user.current_partner.username %>.</div>
-          <% end %>
-          <% if @recent_bad_days.positive? %>
-            <div>In the last week, <%= @user.current_partner.username %> had <strong><%= @recent_bad_days %></strong> tough day<%= 's' if @recent_bad_days != 1 %>. Maybe check in? 💛</div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  
+  <%= render "health_banner", status: @partnership.health_status_for(@user) %>
+  
   <div class="two-buttons d-flex justify-content-between">
     <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
     <%= link_to "Grievance Drop", new_partnership_grievance_path(@partnership), class:"btn btn-grievance w-full", style: "margin-left:8px" %>
