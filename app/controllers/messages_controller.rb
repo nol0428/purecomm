@@ -2,8 +2,13 @@ class MessagesController < ApplicationController
   before_action :set_partnership
 
   def index
-    # ⬇️ Hide system messages from the feed
-    @messages = @partnership.messages.visible_to_users.order(:created_at)
+    chat = @partnership.ensure_chat!
+
+    @messages = @partnership.messages
+                            .where(chat: chat)
+                            .visible_to_users
+                            .order(:created_at, :id)
+
     @message  = @partnership.messages.new
   end
 
