@@ -3,8 +3,6 @@ class AiReplyJob < ApplicationJob
   queue_as :default
 
   def perform(message_id)
-    # Rails.logger.info "[AiReplyJob] start message_id=#{message_id}"
-
     user_msg    = Message.find(message_id)
     partnership = user_msg.partnership
     chat        = user_msg.chat || partnership.ensure_chat!
@@ -18,12 +16,34 @@ class AiReplyJob < ApplicationJob
 
     context_lines = recent.map { |m| "#{m.assistant? ? 'Assistant' : 'User'}: #{m.content.to_s.strip}" }
 
-    prompt_with_context = <<~TEXT.strip
-      Previous context:
+    # Partner traits
+    user     = user_msg.user
+    partner  = user&.current_partner
+    love_lang   = partner&.love_language.presence || "not specified"
+    personality = partner&.personality.presence   || "unspecified"
+
+    # === Build full structured system prompt ===
+    system_prompt = <<~PROMPT
+      Persona:
+      You are PureComm’s gentle relationship coach. You are warm, supportive, brief, and practical.
+
+      Context:
+      Partner’s love language: #{love_lang}
+      Partner’s personality: #{personality}
+      Recent messages:
       #{context_lines.join("\n")}
 
-      Current User: #{user_msg.content.to_s.strip}
-    TEXT
+      Task:
+      Read the user’s current message and provide a reply that supports communication,
+      resolves friction gently, and offers practical suggestions when appropriate.
+
+      Format:
+      Write your reply as plain conversational text (no lists unless asked).
+      Keep it concise (1–3 sentences).
+    PROMPT
+
+    # User’s current message
+    prompt_with_context = user_msg.content.to_s.strip
 
     ai_enabled = ActiveModel::Type::Boolean.new.cast(ENV.fetch("PURECOMM_AI_ENABLED", "true"))
     reply_text =
@@ -32,11 +52,10 @@ class AiReplyJob < ApplicationJob
       else
         begin
           Ai::Chat.call(
-            system: "You are PureComm's gentle relationship coach. Be brief, warm, practical. Use the context to remember names and preferences when helpful.",
+            system:    system_prompt,
             user_text: prompt_with_context
-          )
+          ).to_s
         rescue => e
-          # Rails.logger.error "[AiReplyJob] error message_id=#{message_id} #{e.class}: #{e.message}"
           "Sorry — I had trouble responding just now. Please try again."
         end
       end
@@ -49,14 +68,12 @@ class AiReplyJob < ApplicationJob
       role: "assistant"
     )
 
-    # Append to the end of the chat
+    # Append to chat
     Turbo::StreamsChannel.broadcast_append_to(
       [partnership, :messages],
       target:  "messages",
       partial: "messages/message",
       locals:  { message: assistant }
     )
-
-    # Rails.logger.info "[AiReplyJob] done message_id=#{message_id}"
   end
 end
