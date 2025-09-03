@@ -76,7 +76,7 @@ class AiReplyJob < ApplicationJob
     ai_enabled = ActiveModel::Type::Boolean.new.cast(ENV.fetch("PURECOMM_AI_ENABLED", "true"))
     reply_text =
       if !ai_enabled
-        "I’m taking a short maintenance break right now, but I’m here and ready to help again soon."
+        "I'm taking a short maintenance break right now, but I'm here and ready to help again soon."
       else
         begin
           # Helpful debug while testing locally

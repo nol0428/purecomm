@@ -16,3 +16,39 @@
   border: 4px solid #fff;
   outline: 2px solid var(--brand);
 }
+
+.checkin-avatar-wrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+}
+
+.checkin-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.checkin-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--brand, #6ED3CF);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkin-badge__icon {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
