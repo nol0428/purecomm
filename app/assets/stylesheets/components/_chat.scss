@@ -341,3 +341,25 @@
   overscroll-behavior: contain; /* prevent bouncing the whole page on mobile */
   -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
 }
+
+/* ---- Chat order sanity overrides (keep newest at bottom, natural DOM order) ---- */
+#messages,
+.chat-messages,
+#messages-body {
+  display: flex;
+  flex-direction: column;     /* ensure top-to-bottom flow */
+}
+
+/* Neutralize any role-based reordering */
+.message,
+.message.user,
+.message.assistant {
+  order: initial !important;  /* ignore any earlier 'order' rules */
+}
+
+/* If any grid/columns/floats interfere, neutralize them here */
+#messages,
+#messages-body {
+  column-count: initial !important;
+  float: none !important;
+}

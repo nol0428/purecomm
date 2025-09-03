@@ -6,8 +6,14 @@
     <h1 class="chat-title">Coach Chat</h1>
   </header>
   <!-- Messages -->
-  <div id="messages" data-controller="autoscroll" class="chat-messages">
-    <%= render @messages %>
+  <div id="messages"
+       data-controller="autoscroll"
+       data-turbo-preserve-scroll
+       data-turbo-permanent
+       class="chat-messages">
+    <div id="messages-body">
+      <%= render partial: "messages/message", collection: @messages, as: :message %>
+    </div>
   </div>
   <!-- Status strip -->
   <div class="chat-status">

@@ -1,16 +1,12 @@
 <div data-controller="disable-inputs" class="checkin-show text-center">
   <div class="whole-page">
   </div>
-  <h2><%= checkin.user.username %> felt:</h2>
+  <h2>User felt:</h2>
   <%= inline_svg_tag "icons/#{checkin.mood.downcase}-icon.svg", class: "mood-icon" %>
   <p class="mood-label"><%= checkin.mood.capitalize %></p>
-  <h2><%= checkin.user.username %>'s day was:</h2>
+  <h2>User's day was:</h2>
   <p><%= inline_svg_tag "icons/#{checkin.my_day.downcase}.svg", class: "mood-icon day-icon" %></p>
-  <% if checkin.discuss? %>
-    <h2>Open to talking about it?</h2>
-    <% else %>
-    <h2>Not open to talking about it</h2>
-  <% end %>
+  <h2>Open to talking about it?</h2>
   <p><%= inline_svg_tag "icons/#{checkin.discuss? ? "yes" : "no"}.svg", class: "mood-icon" %></p>
     <% if checkin.comment.present? %>
       <div class="form-group text required grievance_situation text-start">
@@ -20,6 +16,7 @@
               <%= simple_format(checkin.comment) %>
             </div>
           </div>
-        <% end %>
-        <%= link_to "Back", partnership_path(@partnership), class: 'btn btn-coach w-100'  %>
-      </div>
+        </div>
+      <% end %>
+      <%= link_to "Back", partnership_path(@partnership), class: 'btn btn-coach w-100'  %>
+    </div>

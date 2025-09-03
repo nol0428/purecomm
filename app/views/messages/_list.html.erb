@@ -1,4 +1,7 @@
-<div id="messages" data-controller="autoscroll" data-turbo-preserve-scroll>
+<div id="messages"
+     data-controller="autoscroll"
+     data-turbo-preserve-scroll
+     data-turbo-permanent>
   <div id="messages-body">
     <%= render partial: "messages/message", collection: messages, as: :message %>
   </div>
