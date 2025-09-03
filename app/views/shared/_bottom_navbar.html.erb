@@ -11,12 +11,12 @@
               src: badge_checkins_path(partnership_id: current_user.current_partnership.id) %>
       <% end %>
     <% end %>
-    <% unless checkin = current_user.checkin_today(@partnership) %>
+    <% unless checkin = current_user.checkin_today(current_user.current_partnership) %>
       <%= link_to new_partnership_checkin_path(current_user.current_partnership), class: "nav-icon" do %>
         <%= inline_svg_tag "icons/checkin-navbar.svg" %>
       <% end %>
     <% else %>
-      <%= link_to checkin_path(current_user.checkin_today(@partnership)), class: "nav-icon" do %>
+      <%= link_to checkin_path(current_user.checkin_today(current_user.current_partnership)), class: "nav-icon" do %>
         <%= inline_svg_tag "icons/checkin-navbar.svg" %>
       <% end %>
     <% end %>
