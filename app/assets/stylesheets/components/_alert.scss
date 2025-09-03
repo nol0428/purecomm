@@ -5,10 +5,40 @@
   z-index: 1000;
 }
 
-.card.border-danger { border-left: 5px solid #dc3545; }
+.health-banner {
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin: 16px;
+  text-align: center;
+  display: grid;
+  gap: 10px;
+}
 
-.card.border-warning { border-left: 5px solid #ffc107; }
+.health-banner.border-danger {
+  border-left: 5px solid #dc3545;
+  border-right: 1px solid #dc3545;
+  border-top: 1px solid #dc3545;
+  border-bottom: 1px solid #dc3545
+}
 
-.card.border-info { border-left: 5px solid #0dcaf0; }
+.health-banner.border-warning {
+  border-left: 5px solid #ffc107;
+  border-right: 1px solid #ffc107;
+  border-top: 1px solid #ffc107;
+  border-bottom: 1px solid #ffc107
+}
 
-.card.border-ok { border-left: 5px solid #198754; }
+.health-banner.border-danger {
+  border-left: 5px solid #0dcaf0;
+  border-right: 1px solid #0dcaf0;
+  border-top: 1px solid #0dcaf0;
+  border-bottom: 1px solid #0dcaf0
+}
+
+.health-banner.border-danger {
+  border-left: 5px solid #198754;
+  border-right: 1px solid #198754;
+  border-top: 1px solid #198754;
+  border-bottom: 1px solid #198754
+}
