@@ -1,21 +1,18 @@
 <div class="whole-page">
-  <div class="banner">
-    <div class="banner__row">
-      <div class="banner__content">
-        <h2>Grievances</h2>
-        <p style="margin-bottom:.5rem;">Be honest here – your partner wants to listen.</p>
-        <%= link_to new_partnership_grievance_path(@user.current_partnership), class: "btn banner__cta" do %>
-          New Grievance
-        <% end %>
-      </div>
-      <%# <%= image_tag "#{current_user.username}.png", class: "banner__avatar", alt: @user.username %>
-    </div>
+  <div class="grievances-header card">
+    <h2>Grievances</h2>
+    <p>Be honest here – your partner wants to listen.</p>
+    <%= link_to new_partnership_grievance_path(@user.current_partnership),
+        class: "btn btn-grievance" do %>
+      New Grievance
+    <% end %>
   </div>
-  <div class="section-header">
+  <div class="section-header" style="margin-top: 1.5rem;">
     <h2>Communication Growth Notes</h2>
   </div>
   <%= turbo_stream_from [:grievances_list, @user.current_partnership.id] %>
-  <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;padding-left:16px;">
+  <div class="checkin-toolbar"
+       style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;padding-left:16px;">
     <select id="grievance-sort" class="form-select" style="max-width: 220px;">
       <option value="newest" selected>Newest</option>
       <option value="oldest">Oldest</option>
@@ -36,15 +33,20 @@
           const select = document.getElementById('grievance-sort');
           const list   = document.getElementById('grievance_list');
           if (!select || !list) return;
+
           function sortGrievances() {
             const value = select.value;
             const items = Array.from(list.children);
             items.forEach(el => el.style.display = '');
             let visible = items;
+
             if (value === 'unread_only') {
               visible = items.filter(el => el.dataset.read === 'false');
-              items.forEach(el => { if (el.dataset.read !== 'false') el.style.display = 'none'; });
+              items.forEach(el => {
+                if (el.dataset.read !== 'false') el.style.display = 'none';
+              });
             }
+
             const byTimeDesc = (a, b) => (+b.dataset.createdAt) - (+a.dataset.createdAt);
             const byTimeAsc  = (a, b) => (+a.dataset.createdAt) - (+b.dataset.createdAt);
             const unreadFirst = (a, b) => {
@@ -57,17 +59,21 @@
               const rb = (b.dataset.read === 'true') ? 0 : 1;
               return ra - rb || byTimeDesc(a, b);
             };
+
             let sorter = byTimeDesc;
             if (value === 'oldest') sorter = byTimeAsc;
             if (value === 'unread') sorter = unreadFirst;
             if (value === 'read')   sorter = readFirst;
             if (value === 'unread_only') sorter = byTimeDesc;
+
             visible.sort(sorter).forEach(el => list.appendChild(el));
           }
+
           select.addEventListener('change', sortGrievances);
           window.sortGrievances = sortGrievances;
           sortGrievances();
         })();
+
         document.addEventListener("turbo:after-stream-render", () => {
           if (window.sortGrievances) window.sortGrievances();
         });

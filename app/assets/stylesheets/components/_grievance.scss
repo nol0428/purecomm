@@ -228,3 +228,28 @@
   filter: none !important;
   opacity: 1 !important;
 }
+.grievances-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+  h2 {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+    color: #333;
+  }
+
+  .btn-grievance {
+    margin: 0 auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
