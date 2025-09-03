@@ -38,17 +38,19 @@
       <% end %>
     <% end %>
   </div>
-  
   <%= render "health_banner", status: @partnership.health_status_for(@user) %>
-  
   <div class="two-buttons d-flex justify-content-between">
     <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
     <%= link_to "Grievance Drop", new_partnership_grievance_path(@partnership), class:"btn btn-grievance w-full", style: "margin-left:8px" %>
   </div>
   <div class="bulma header" style="margin-top:16px">
-    <h2><%= @user.current_partner.username %>'s Mood Check-in</h2>
+    <h2>Mood Check-in Log</h2>
   </div>
   <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;padding-left:16px;">
+    <select id="checkin-who" class="form-select" style="max-width: 180px;">
+      <option value="partner" selected><%= @user.current_partner.username %></option>
+      <option value="me">Me</option>
+    </select>
     <select id="checkin-sort" class="form-select" style="max-width: 200px;">
       <option value="newest" selected>Newest</option>
       <option value="oldest">Oldest</option>
@@ -56,41 +58,49 @@
       <option value="read">Read</option>
     </select>
   </div>
-  <% if current_user&.current_partnership.present? %>
-    <%= turbo_stream_from [:checkins_list, @user.current_partnership.id, current_user.id] %>
-  <% end %>
+  <% partner_scope = @user.current_partner.checkins %>
+  <% read_ids = CheckinRead.where(user_id: current_user.id, checkin_id: partner_scope.select(:id)).pluck(:checkin_id) %>
   <div class="mood-list" id="partner-checkins">
-    <% partner_scope = @user.current_partner.checkins %>
-    <% read_ids = CheckinRead.where(user_id: current_user.id, checkin_id: partner_scope.select(:id)).pluck(:checkin_id) %>
     <% partner_scope.order(created_at: :desc).each do |checkin| %>
-      <%= render "checkins/card", checkin: checkin, read: read_ids.include?(checkin.id) %>
+      <%= render "checkins/card",
+          checkin: checkin,
+          read:    read_ids.include?(checkin.id) %>
+    <% end %>
+  </div>
+  <% my_scope = @user.checkins %>
+  <div class="mood-list" id="my-checkins" style="display:none">
+    <% my_scope.order(created_at: :desc).each do |checkin| %>
+      <%= render "checkins/card",
+          checkin: checkin,
+          read:    true %>
     <% end %>
   </div>
 </div>
 </div>
 <script>
   (function () {
-    const select = document.getElementById('checkin-sort');
-    const list   = document.getElementById('partner-checkins');
-    if (!select || !list) return;
+    const sortSelect = document.getElementById('checkin-sort');
+    const whoSelect  = document.getElementById('checkin-who');
+    const partnerBox = document.getElementById('partner-checkins');
+    const mineBox    = document.getElementById('my-checkins');
+
+    if (!sortSelect || !whoSelect || !partnerBox || !mineBox) return;
+
+    function currentListEl() {
+      return (whoSelect.value === 'me') ? mineBox : partnerBox;
+    }
 
     function sortAndFilter() {
-      const value = select.value;
+
+      const showingMine = (whoSelect.value === 'me');
+      mineBox.style.display    = showingMine ? '' : 'none';
+      partnerBox.style.display = showingMine ? 'none' : '';
+
+      const list  = currentListEl();
+      const value = sortSelect.value;
       const items = Array.from(list.children);
 
-
       items.forEach(el => el.style.display = '');
-
-
-      let visible = items;
-      if (value === 'unread_only') {
-        visible = items.filter(el => el.dataset.read === 'false');
-
-        items.forEach(el => {
-          if (el.dataset.read !== 'false') el.style.display = 'none';
-        });
-      }
-
 
       const byTimeDesc = (a, b) => (+b.dataset.createdAt) - (+a.dataset.createdAt);
       const byTimeAsc  = (a, b) => (+a.dataset.createdAt) - (+b.dataset.createdAt);
@@ -105,15 +115,20 @@
         return ra - rb || byTimeDesc(a, b);
       };
 
-  let sorter = byTimeDesc; // default newest
-  if (value === 'oldest') sorter = byTimeAsc;
-  if (value === 'unread') sorter = unreadFirst;
-  if (value === 'read')   sorter = readFirst;
+      let sorter = byTimeDesc;
+      if (value === 'oldest') sorter = byTimeAsc;
+      if (value === 'unread') sorter = unreadFirst;
+      if (value === 'read')   sorter = readFirst;
 
-  visible.sort(sorter).forEach(el => list.appendChild(el));
+      items.sort(sorter).forEach(el => list.appendChild(el));
+    }
 
-    select.addEventListener('change', sortAndFilter);
+    sortSelect.addEventListener('change', sortAndFilter);
+    whoSelect.addEventListener('change', sortAndFilter);
 
     sortAndFilter();
+    document.addEventListener("turbo:after-stream-render", () => {
+      sortAndFilter();
+    });
   })();
 </script>
