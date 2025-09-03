@@ -11,18 +11,9 @@
           class: "meta-chip__avatar",
           alt: (owner&.try(:username) || "avatar") %>
   </div>
-  <% todays_checkin = current_user.checkins.where(created_at: Time.zone.today.all_day).first %>
-  <% if todays_checkin.present? %>
-    <% if todays_checkin.nudge.nil? %>
-      <%= render 'checkins/nudge', checkin: todays_checkin, partnership: @partnership %>
-    <% else %>
-      <%= render 'checkins/show', checkin: todays_checkin, partnership: @partnership %>
-    <% end %>
+  <% if @checkin.nudge.nil? %>
+    <%= render 'checkins/nudge', checkin: @checkin, partnership: @partnership %>
   <% else %>
-    <% if @checkin.nudge.nil? %>
-      <%= render 'checkins/nudge', checkin: @checkin, partnership: @partnership %>
-    <% else %>
-      <%= render 'checkins/show', checkin: @checkin, partnership: @partnership %>
-    <% end %>
+    <%= render 'checkins/show', checkin: @checkin, partnership: @partnership %>
   <% end %>
 </div>

@@ -18,12 +18,12 @@
                 placeholder: "Anything you'd like to share?",
                 input_html: { data: {disable_inputs_target: "input" }, rows: 4 } %>
     <%# <% end %>
-    <% if checkin.comment? %>
-      <div class="form-group text required grievance_situation">
+    <% if checkin.comment.present? %>
+      <div class="form-group text required grievance_situation text-start">
         <h2><label class="form-label">Comments</label>
           <h2>
             <div class="readonly-field">
-              <%= simple_format(@checkin.comment || "—") %>
+              <%= simple_format(checkin.comment) %>
             </div>
           </div>
         <% end %>
