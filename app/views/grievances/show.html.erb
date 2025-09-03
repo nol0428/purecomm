@@ -15,37 +15,32 @@
   <div class="card form-card">
     <!-- Topic -->
     <div class="form-group string required grievance_topic">
-      <label class="form-label">Topic *</label>
-      <div class="readonly-field"><%= @grievance.topic %></div>
-    </div>
-    <!-- Feelings -->
-    <h2 class="section-title">How it made me feel...</h2>
-    <div class="category-wrapper readonly-feelings">
-      <% feelings = [["Tired","tired"], ["Sad","sad"], ["Upset","upset"], ["Anxious","anxious"]] %>
-      <% feelings.each do |label, value| %>
-        <% selected = @grievance.feeling.to_s.downcase == value %>
-        <div class="category-item only-icon <%= selected ? 'category-item--selected' : 'category-item--dim' %>">
-          <%= inline_svg_tag "icons/#{value}.svg", class: "mood-icon", aria: { hidden: true } %>
-          <span class="visually-hidden"><%= label %></span>
+      <h2><label class="form-label">Topic:</label>
+        <h2>
+          <div class="readonly-field"><%= @grievance.topic %></div>
         </div>
-      <% end %>
-    </div>
-    <!-- Situation -->
-    <div class="form-group text required grievance_situation">
-      <label class="form-label">Description of the situation... *</label>
-      <div class="readonly-field">
-        <%= simple_format(@grievance.situation.presence || "—") %>
-      </div>
-    </div>
-    <!-- Intensity (readonly slider) -->
-    <div class="mb-3 intensity-block intensity-block--readonly">
-      <label class="form-label" for="grievance_intensity_scale">Intensity Scale</label>
-      <div class="intensity-scale">
-        <div class="scale-icon scale-icon--min">
-          <%= inline_svg_tag "icons/leaf.svg", class: "icon" %>
-        </div>
-        <div class="scale-slider">
-          <input
+        <h2 class="section-title grievance-feeling-row">
+          <span>How it made me feel...</span>
+          <%= inline_svg_tag "icons/#{@grievance.feeling.to_s.downcase}.svg",
+        class: "mood-icon", aria: { hidden: true } %>
+        </h2>
+        <!-- Situation -->
+        <div class="form-group text required grievance_situation">
+          <h2><label class="form-label">Description of the situation...</label>
+            <h2>
+              <div class="readonly-field">
+                <%= simple_format(@grievance.situation.presence || "—") %>
+              </div>
+            </div>
+            <!-- Intensity (readonly slider) -->
+            <div class="mb-3 intensity-block intensity-block--readonly">
+              <label class="form-label" for="grievance_intensity_scale">Intensity Scale</label>
+              <div class="intensity-scale">
+                <div class="scale-icon scale-icon--min">
+                  <%= inline_svg_tag "icons/leaf.svg", class: "icon" %>
+                </div>
+                <div class="scale-slider">
+                  <input
             type="range"
             id="grievance_intensity_scale"
             class="intensity-slider"
@@ -53,17 +48,17 @@
             value="<%= @grievance.intensity_scale || 0 %>"
             disabled
           >
-            <div class="scale-ticks" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
+                    <div class="scale-ticks" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  </div>
+                  <div class="scale-icon scale-icon--max">
+                    <%= inline_svg_tag "icons/fire.svg", class: "icon" %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <%= link_to "Back", grievances_path, class: "btn btn-coach w-100" %>
+              </div>
             </div>
           </div>
-          <div class="scale-icon scale-icon--max">
-            <%= inline_svg_tag "icons/fire.svg", class: "icon" %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-actions">
-      <%= link_to "Back", grievances_path, class: "btn btn-coach w-100" %>
-    </div>
-  </div>
