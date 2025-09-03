@@ -28,11 +28,11 @@ class AiReplyJob < ApplicationJob
     ai_enabled = ActiveModel::Type::Boolean.new.cast(ENV.fetch("PURECOMM_AI_ENABLED", "true"))
     reply_text =
       if !ai_enabled
-        "I’m taking a short maintenance break right now, but I’m here and ready to help again soon."
+        "I'm taking a short maintenance break right now, but I'm here and ready to help again soon."
       else
         begin
           Ai::Chat.call(
-            system: "You are PureComm’s gentle relationship coach. Be brief, warm, practical. Use the context to remember names and preferences when helpful.",
+            system: "You are PureComm's gentle relationship coach. Be brief, warm, practical. Use the context to remember names and preferences when helpful.",
             user_text: prompt_with_context
           )
         rescue => e
