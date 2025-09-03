@@ -32,29 +32,34 @@ class CheckinsController < ApplicationController
       end
     else
       @partnership = @checkin.partnership
-      @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
+      @times = [
+        ['Now', Time.now],
+        ['1 Hours', Time.now + 1.hour],
+        ['2 Hours', Time.now + 2.hours],
+        ['3 Hours', Time.now + 3.hours],
+        ['6 Hours', Time.now + 6.hours],
+        ['12 Hours', Time.now + 12.hours]
+      ]
       render 'show', status: :unprocessable_entity
     end
   end
 
   def show
-    @checkin = Checkin.find(params[:id])
+    @checkin     = Checkin.find(params[:id])
     @partnership = @checkin.partnership
-    session[:viewed_checkins] ||= []
-    session[:viewed_checkins] << @checkin.id
-    session[:viewed_checkins].uniq!
-    @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
-    mark_checkin_viewed!(@checkin) if @checkin.user_id != current_user.id
-    CheckinRead.find_or_create_by!(user: current_user, checkin: @checkin) do |cr|
-      cr.read_at = Time.current
+    if @checkin.user_id != current_user.id
+      CheckinRead.find_or_create_by!(user: current_user, checkin: @checkin) do |cr|
+        cr.read_at = Time.current
+      end
     end
   end
 
   def badge
-    partnership = current_user.current_partnership
-    viewed_ids  = viewed_checkin_ids(partnership)
-    scope = partnership.checkins.where.not(user_id: current_user.id)
-    @count = scope.where.not(id: viewed_ids).count
+    partnership   = current_user.current_partnership
+    partner_scope = partnership.checkins.where.not(user_id: current_user.id)
+    read_ids      = CheckinRead.where(user_id: current_user.id, checkin_id: partner_scope.select(:id))
+                               .pluck(:checkin_id)
+    @count        = partner_scope.where.not(id: read_ids).count
     render :badge
   end
 
