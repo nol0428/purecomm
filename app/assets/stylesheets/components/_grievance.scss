@@ -216,15 +216,21 @@
   opacity: 0.9;
 }
 .grievance-feeling-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin: 16px 0;
 }
 
+.grievance-feeling-row span {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
 .grievance-feeling-row .mood-icon {
-  width: 100x;
-  height: 100px;
+  display: block;
+  margin: 0 auto;
+  width: 64px;
+  height: 64px;
   filter: none !important;
   opacity: 1 !important;
 }
@@ -249,4 +255,37 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+  color: #333;
+  text-align: left;
+}
+
+.field-value {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+  padding: 8px 0;
+}
+
+.feeling-icon {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.5rem 0 1rem;
+  // padding-left: 48px;
+}
+
+.feeling-icon .mood-icon {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin-top: 1rem;
+}
+
+.grievance_intensity .intensity-scale {
+  margin-top: 0.5rem;
 }
