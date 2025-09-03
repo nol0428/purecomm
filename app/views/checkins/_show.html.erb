@@ -8,8 +8,8 @@
   <p><%= inline_svg_tag "icons/#{checkin.my_day.downcase}.svg", class: "mood-icon day-icon" %></p>
   <% if checkin.discuss? %>
     <h2>Open to talking about it?</h2>
-    <%# <% else %>
-    <%# <h2>Not open to talking about it</h2> %>
+    <% else %>
+    <h2>Not open to talking about it</h2>
   <% end %>
   <p><%= inline_svg_tag "icons/#{checkin.discuss? ? "yes" : "no"}.svg", class: "mood-icon" %></p>
   <%# <%= simple_form_for [partnership, checkin], html: { id: 'new_checkin' } do |f| %>
