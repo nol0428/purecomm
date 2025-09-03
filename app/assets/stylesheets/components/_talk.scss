@@ -82,11 +82,11 @@
   z-index: 100;
 }
 
-@supports (bottom: env(safe-area-inset-bottom)) {
-  .talk-input-bar {
-    padding-bottom: calc(10px + env(safe-area-inset-bottom));
-  }
-}
+// @supports (bottom: env(safe-area-inset-bottom)) {
+//   .talk-input-bar {
+//     padding-bottom: calc(10px + env(safe-area-inset-bottom));
+//   }
+// }
 
 .talk-btn-send {
   display: inline-flex;

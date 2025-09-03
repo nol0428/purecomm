@@ -1,11 +1,10 @@
-<% read = local_assigns[:read] || false %>
 <div id="<%= dom_id(checkin) %>"
      class="check-in-card d-flex align-items-center gap-3 <%= 'faded' if read %>"
      data-created-at="<%= checkin.created_at.to_i %>"
      data-read="<%= read %>">
   <%= image_tag "#{checkin.user.username}.png", class: "checkin-avatar", alt: checkin.user.username %>
   <div>
-    <%= link_to "#{checkin.user.username} checked in as #{checkin.mood}", checkin_path(checkin) %>
+    <%= link_to checkin_summary(checkin), checkin_path(checkin) %>
     <div class="checkin-time"><%= checkin.created_at.strftime("%Y-%m-%d %H:%M") %></div>
   </div>
 </div>
