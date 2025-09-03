@@ -2,6 +2,7 @@ class PartnershipsController < ApplicationController
   def show
     @user = current_user
     @partnership = @user.current_partnership
+    @health = @partnership.health_status_for(@user)
     partner_checkins = @partnership.checkins.where(user_id: @user.current_partner.id)
 
     @unread_count = partner_checkins.where.not(id: @user.checkin_reads.select(:checkin_id)).count

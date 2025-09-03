@@ -4,3 +4,11 @@
   right: 16px;
   z-index: 1000;
 }
+
+.card.border-danger { border-left: 5px solid #dc3545; }
+
+.card.border-warning { border-left: 5px solid #ffc107; }
+
+.card.border-info { border-left: 5px solid #0dcaf0; }
+
+.card.border-ok { border-left: 5px solid #198754; }
