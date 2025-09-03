@@ -363,3 +363,7 @@
   column-count: initial !important;
   float: none !important;
 }
+
+/* --- Guard: only show chat bubbles inside the message list --- */
+.chat-wrap .message { display: none; }           /* hide any stray bubbles */
+#messages-body .message { display: block; }      /* show only inside the list */

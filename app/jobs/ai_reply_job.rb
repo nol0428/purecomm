@@ -19,10 +19,10 @@ class AiReplyJob < ApplicationJob
     # Ensure a single static system message exists for this chat (local + Heroku)
     system_message = chat.messages.find_by(role: "system")
     unless system_message
-      system_message = chat.messages.create!(
+      chat.messages.create!(
         chat: chat,
         role: "system",
-        author_kind: :assistant, # remove if you don't use this enum
+        author_kind: :assistant,
         content: DEFAULT_PERSONA_PROMPT
       )
     end
@@ -34,15 +34,15 @@ class AiReplyJob < ApplicationJob
                .order(:created_at)
                .last(6)
 
-    context_lines = recent.map { |m|
+    context_lines = recent.map do |m|
       "#{m.assistant? ? 'Assistant' : 'User'}: #{m.content.to_s.strip}"
-    }
+    end
 
     # Partner traits
     user    = user_msg.user
     partner = user&.current_partner
 
-    # Personality: prefer summary (top + runner-up) if you added it; else primary label
+    # Personality and love language
     personality =
       if partner&.respond_to?(:personality_summary)
         partner.personality_summary.presence
@@ -50,10 +50,9 @@ class AiReplyJob < ApplicationJob
         partner&.primary_personality.presence
       end || "unspecified"
 
-    # Love language (optional/secondary)
     love_lang = partner&.love_language.presence || "unspecified"
 
-    # Dynamic, minimal add-on each call
+    # Dynamic add-on
     dynamic_addon = <<~PROMPT
       Partner’s personality (PRIMARY): #{personality}
       Partner’s love language (SECONDARY, only use if it fits): #{love_lang}
@@ -67,48 +66,31 @@ class AiReplyJob < ApplicationJob
       End with a one-sentence copyable script. Plain conversational text only (no bullets).
     PROMPT
 
-    # Final system prompt = stored persona + small dynamic add-on
-    system_prompt = "#{system_message.content}\n\n#{dynamic_addon}"
-
-    # User’s current message
+    system_prompt = "#{DEFAULT_PERSONA_PROMPT}\n\n#{dynamic_addon}"
     prompt_with_context = user_msg.content.to_s.strip
 
-    ai_enabled = ActiveModel::Type::Boolean.new.cast(ENV.fetch("PURECOMM_AI_ENABLED", "true"))
+    # Generate AI reply
     reply_text =
-      if !ai_enabled
+      if !ActiveModel::Type::Boolean.new.cast(ENV.fetch("PURECOMM_AI_ENABLED", "true"))
         "I'm taking a short maintenance break right now, but I'm here and ready to help again soon."
       else
         begin
-          # Helpful debug while testing locally
-          Rails.logger.debug {
-            "AI Coach: partner_id=#{partner&.id}, personality=#{personality.inspect}, love_lang=#{love_lang.inspect}"
-          }
+          Rails.logger.debug { "AI Coach: partner_id=#{partner&.id}, personality=#{personality.inspect}, love_lang=#{love_lang.inspect}" }
           Rails.logger.debug { "AI Coach system prompt (condensed):\n#{system_prompt}" }
 
-          Ai::Chat.call(
-            system:    system_prompt,
-            user_text: prompt_with_context
-          ).to_s
+          Ai::Chat.call(system: system_prompt, user_text: prompt_with_context).to_s
         rescue => e
           Rails.logger.error("AiReplyJob error: #{e.class} - #{e.message}")
           "Sorry — I had trouble responding just now. Please try again."
         end
       end
 
-    # Save the assistant reply
-    assistant = partnership.messages.create!(
+    # Save the assistant reply (model handles broadcasting)
+    partnership.messages.create!(
       chat: chat,
       content: reply_text,
       author_kind: :assistant,
       role: "assistant"
-    )
-
-    # Append to chat
-    Turbo::StreamsChannel.broadcast_append_to(
-      [partnership, :messages],
-      target:  "messages",
-      partial: "messages/message",
-      locals:  { message: assistant }
     )
   end
 end

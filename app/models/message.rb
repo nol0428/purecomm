@@ -44,22 +44,17 @@ class Message < ApplicationRecord
     end
   end
 
+  # app/models/message.rb
   def broadcast_assistant_reply
     return unless assistant? && partnership.present?
 
-    puts "📡 BROADCAST FIRING for message #{id}"
+    Rails.logger.info "📡 BROADCAST (assistant) append -> messages-body id=#{id}"
 
-    messages_for_chat = partnership.messages
-                                  .where(chat_id: chat_id)
-                                  .visible_to_users
-                                  .order(:created_at, :id)
-                                  .to_a
-
-    broadcast_replace_later_to(
-      [partnership, :messages],
-      target: "messages-body",         # inner container only
-      partial: "messages/list",
-      locals: { messages: messages_for_chat }
+    broadcast_append_later_to(
+      [partnership, :messages],      # stream name
+      target:  "messages-body",      # append inside the inner list
+      partial: "messages/message",   # render ONE bubble
+      locals:  { message: self }
     )
   end
 end
