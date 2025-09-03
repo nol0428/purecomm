@@ -2,7 +2,11 @@
 <div class="whole-page">
 </div>
 <%= simple_form_for [partnership, checkin], html: { id: 'new_checkin' } do |f| %>
-  <h2>How are you feeling?</h2>
+  <% if checkin.id.present? %>
+    <h2>User felt:</h2>
+  <% else %>
+    <h2>How are you feeling?</h2>
+  <% end %>
   <%= f.input :mood,
             as: :radio_buttons,
             collection_wrapper_tag: 'div',
@@ -10,7 +14,11 @@
             item_wrapper_class: 'category-item',
             input_html: { data: {disable_inputs_target: "input"}, class: 'category-selector'},
             collection: Checkin::MOODS %>
-  <h2>My day was...</h2>
+  <% if checkin.id.present? %>
+    <h2>User's day was:</h2>
+  <% else %>
+    <h2>My day was...</h2>
+  <% end %>
   <%= f.input :my_day,
                 as: :radio_buttons, label: false,
                 collection: [['Good','Good'], ['Bad','Bad']],
@@ -19,7 +27,15 @@
                 collection_wrapper_class: 'category-wrapper',
                 item_wrapper_class: 'category-item',
                 input_html: { data: {disable_inputs_target: "input"},  class: 'choice-input visually-hidden' } %>
-  <h2>Do you want to talk about it?</h2>
+  <% if checkin.id.present? %>
+    <% if checkin.discuss? %>
+      <h2>Open to talking about it</h2>
+    <% else %>
+      <h2>Not open to talking about it</h2>
+    <% end %>
+  <% else %>
+    <h2>Do you want to talk about it?</h2>
+  <% end %>
   <% if checkin.id %>
     <%= f.input :discuss,
             as: :radio_buttons,

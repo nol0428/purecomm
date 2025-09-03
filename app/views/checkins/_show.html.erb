@@ -1,3 +1,31 @@
-<div data-controller="disable-inputs">
-  <%= render "checkins/form", partnership: @partnership, checkin: @checkin %>
-</div>
+<div data-controller="disable-inputs" class="checkin-show text-center">
+  <div class="whole-page">
+  </div>
+  <h2>User felt:</h2>
+  <%= inline_svg_tag "icons/#{checkin.mood.downcase}-icon.svg", class: "mood-icon" %>
+  <p class="mood-label"><%= checkin.mood.capitalize %></p>
+  <h2>User's day was:</h2>
+  <p><%= inline_svg_tag "icons/#{checkin.my_day.downcase}.svg", class: "mood-icon day-icon" %></p>
+  <% if checkin.discuss? %>
+    <h2>Open to talking about it</h2>
+  <% else %>
+    <h2>Not open to talking about it</h2>
+  <% end %>
+  <p><%= inline_svg_tag "icons/#{checkin.discuss? ? "yes" : "no"}.svg", class: "mood-icon" %></p>
+  <%# <%= simple_form_for [partnership, checkin], html: { id: 'new_checkin' } do |f| %>
+    <%# <%= f.input :comment,
+                label: false,
+                placeholder: "Anything you'd like to share?",
+                input_html: { data: {disable_inputs_target: "input" }, rows: 4 } %>
+    <%# <% end %>
+    <% if checkin.comment? %>
+      <div class="form-group text required grievance_situation">
+        <h2><label class="form-label">Comments</label>
+          <h2>
+            <div class="readonly-field">
+              <%= simple_format(@checkin.comment || "—") %>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to "Back", partnership_path(@partnership), class: 'btn btn-coach w-100'  %>
+      </div>

@@ -121,14 +121,15 @@
 .category-wrapper.readonly-feelings { pointer-events: none; }
 
 .category-item {
-  border: 2px solid #e6e6e6;
+  // border: 2px solid #e6e6e6;
   border-radius: 16px;
   padding: 18px;
   min-width: 120px;
   text-align: center;
   transition: background .2s ease, border-color .2s ease, color .2s ease, opacity .2s ease;
   display: grid; place-items: center;
-  height: 108px; background: #fff;
+  height: 108px;
+  // background: #fff;
 }
 
 

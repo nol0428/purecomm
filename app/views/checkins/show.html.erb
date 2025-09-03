@@ -16,9 +16,6 @@
     <% if todays_checkin.nudge.nil? %>
       <%= render 'checkins/nudge', checkin: todays_checkin, partnership: @partnership %>
     <% else %>
-      <p class="already-checked-in-msg">
-        You've already checked in today! Here's your entry:
-      </p>
       <%= render 'checkins/show', checkin: todays_checkin, partnership: @partnership %>
     <% end %>
   <% else %>
