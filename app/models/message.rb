@@ -10,6 +10,9 @@ class Message < ApplicationRecord
   validates :content, presence: true
   validates :role, inclusion: { in: %w[user assistant system] } # column has default, not null
 
+  # ✅ Only show non-system messages in the chat feed
+  scope :visible_to_users, -> { where.not(role: "system") }
+
   # Require a user only for human-authored messages
   validate :user_presence_for_user_messages
 

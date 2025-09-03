@@ -1,11 +1,11 @@
-<!-- app/views/messages/_message.html.erb -->
-<div id="<%= dom_id(message) %>" class="message <%= message.role %>">
-  <% if message.user.present? %>
-    <strong><%= message.user.username || "User" %>:</strong>
-  <% elsif message.assistant? %>
-    <strong>Coach:</strong>
-  <% elsif message.role == "system" %>
-    <strong>System:</strong>
-  <% end %>
-  <%= simple_format(message.content) %>
-</div>
+<%# Hide system messages entirely %>
+<% unless message.role == "system" %>
+  <div id="<%= dom_id(message) %>" class="message <%= message.role %>">
+    <% if message.user.present? %>
+      <strong><%= message.user.username || "User" %>:</strong>
+    <% elsif message.assistant? %>
+      <strong>Coach:</strong>
+    <% end %>
+    <%= simple_format(message.content) %>
+  </div>
+<% end %>
