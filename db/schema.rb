@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_02_044543) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_03_024923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_02_044543) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["partnership_id"], name: "index_chats_on_partnership_id"
+  end
+
+  create_table "checkin_reads", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "checkin_id", null: false
+    t.datetime "read_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["checkin_id"], name: "index_checkin_reads_on_checkin_id"
+    t.index ["user_id", "checkin_id"], name: "index_checkin_reads_on_user_id_and_checkin_id", unique: true
+    t.index ["user_id"], name: "index_checkin_reads_on_user_id"
   end
 
   create_table "checkins", force: :cascade do |t|
@@ -257,6 +268,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_02_044543) do
   end
 
   add_foreign_key "chats", "partnerships"
+  add_foreign_key "checkin_reads", "checkins"
+  add_foreign_key "checkin_reads", "users"
   add_foreign_key "checkins", "partnerships"
   add_foreign_key "checkins", "users"
   add_foreign_key "grievances", "partnerships"
