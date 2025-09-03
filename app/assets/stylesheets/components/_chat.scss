@@ -333,3 +333,11 @@
   /* Fix iOS safe-area whitespace */
   padding-bottom: calc(var(--gap-2) + env(safe-area-inset-bottom));
 }
+
+/* Chat messages panel becomes the scroller */
+#messages {
+  height: 70vh;                 /* ~70% of the viewport height; tweak as you like */
+  overflow-y: auto;             /* inner scrollbar on the panel */
+  overscroll-behavior: contain; /* prevent bouncing the whole page on mobile */
+  -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
+}
