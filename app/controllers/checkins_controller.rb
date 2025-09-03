@@ -45,6 +45,9 @@ class CheckinsController < ApplicationController
     session[:viewed_checkins].uniq!
     @times = [['Now', Time.now], ['1 Hours', Time.now + 1.hour], ["2 Hours", Time.now + 2.hours], ["3 Hours", Time.now + 3.hours], ["6 Hours", Time.now + 6.hours], ["12 Hours", Time.now + 12.hours]]
     mark_checkin_viewed!(@checkin) if @checkin.user_id != current_user.id
+    CheckinRead.find_or_create_by!(user: current_user, checkin: @checkin) do |cr|
+      cr.read_at = Time.current
+    end
   end
 
   def badge

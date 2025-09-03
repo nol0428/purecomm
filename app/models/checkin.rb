@@ -1,9 +1,11 @@
 class Checkin < ApplicationRecord
   belongs_to :partnership
   belongs_to :user
+  has_many :checkin_reads, dependent: :destroy
 
   MOODS = ["Happy", "Fine", "Tired", "Sad", "Upset", "Anxious"]
   MY_DAY = ["Good", "Bad"]
+  BAD_MOODS = ["Tired", "Sad", "Upset", "Anxious"]
 
   validates :mood, presence: true, inclusion: { in: MOODS }
   validates :my_day, presence: true, inclusion: { in: MY_DAY }

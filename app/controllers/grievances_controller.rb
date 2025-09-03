@@ -1,6 +1,7 @@
 class GrievancesController < ApplicationController
   def index
     @user = current_user
+    @partnership = @user.current_partnership
     @grievances = @user.current_partnership.grievances.order(created_at: :desc)
   end
 
@@ -22,6 +23,8 @@ class GrievancesController < ApplicationController
 
   def show
     @grievance = Grievance.find(params[:id])
+    @user = current_user
+    @partnership = @user.current_partnership
     session[:viewed_grievances] ||= []
     session[:viewed_grievances] |= [@grievance.id]
     mark_grievance_viewed!(@grievance) if @grievance.user_id != current_user.id
