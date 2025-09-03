@@ -1,5 +1,5 @@
 <% if status.present? %>
-  <div class="card my-3 border-<%= status[:level] %>">
+  <div class="health-banner my-3 border-<%= status[:level] %>">
     <div class="card-body">
       <h5 class="card-title text-<%= status[:level] %>">
         <% case status[:level] %>
@@ -23,7 +23,7 @@
         were marked with tougher moods.
       </p>
 
-      <div class="d-flex">
+      <div class="d-flex justify-content-center">
         <%= link_to "Start a conversation", partnership_talks_path(@partnership), class: "btn btn-primary" %>
       </div>
     </div>
