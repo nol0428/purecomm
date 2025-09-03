@@ -182,3 +182,48 @@
   width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
+
+.grievance-show .readonly-field {
+  background: #fff;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.grievance-show .readonly-field:empty::after {
+  content: "—";
+  color: #999;
+}
+
+.grievance-show .readonly-feelings {
+  display: flex;
+  justify-content: flex-end;
+  margin: 12px 0 20px;
+}
+
+.grievance-show .readonly-feelings .mood-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.intensity-block--readonly input[type="range"] {
+  pointer-events: none;
+  opacity: 0.9;
+}
+.grievance-feeling-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.grievance-feeling-row .mood-icon {
+  width: 100x;
+  height: 100px;
+  filter: none !important;
+  opacity: 1 !important;
+}
