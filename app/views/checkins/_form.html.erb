@@ -1,3 +1,4 @@
+<% partnership ||= local_assigns[:partnership] || checkin.partnership %>
 <div class="whole-page">
 </div>
 <%= simple_form_for [partnership, checkin], html: { id: 'new_checkin' } do |f| %>

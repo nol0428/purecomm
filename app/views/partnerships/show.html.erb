@@ -38,12 +38,6 @@
       <% end %>
     <% end %>
   </div>
-
-
-
-
-
-
   <div class="container">
     <% if @unread_count.positive? || @recent_bad_days.positive? %>
       <div>
@@ -59,14 +53,6 @@
       </div>
     <% end %>
   </div>
-
-
-
-
-
-
-
-
   <div class="two-buttons d-flex justify-content-between">
     <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
     <%= link_to "Grievance Drop", new_partnership_grievance_path(@partnership), class:"btn btn-grievance w-full", style: "margin-left:8px" %>
@@ -86,9 +72,10 @@
     <%= turbo_stream_from [:checkins_list, @user.current_partnership.id, current_user.id] %>
   <% end %>
   <div class="mood-list" id="partner-checkins">
-    <% viewed = session[:viewed_checkins] || [] %>
-    <% @user.current_partner.checkins.order(created_at: :desc).each do |checkin| %>
-      <%= render "checkins/card", checkin:, read: viewed.include?(checkin.id) %>
+    <% partner_scope = @user.current_partner.checkins %>
+    <% read_ids = CheckinRead.where(user_id: current_user.id, checkin_id: partner_scope.select(:id)).pluck(:checkin_id) %>
+    <% partner_scope.order(created_at: :desc).each do |checkin| %>
+      <%= render "checkins/card", checkin: checkin, read: read_ids.include?(checkin.id) %>
     <% end %>
   </div>
 </div>
@@ -130,16 +117,12 @@
         return ra - rb || byTimeDesc(a, b);
       };
 
-      let sorter = byTimeDesc; // default newest
-      if (value === 'oldest') sorter = byTimeAsc;
-      if (value === 'unread') sorter = unreadFirst;
-      if (value === 'read')   sorter = readFirst;
+  let sorter = byTimeDesc; // default newest
+  if (value === 'oldest') sorter = byTimeAsc;
+  if (value === 'unread') sorter = unreadFirst;
+  if (value === 'read')   sorter = readFirst;
 
-      if (value === 'unread_only') sorter = byTimeDesc;
-
-
-      visible.sort(sorter).forEach(el => list.appendChild(el));
-    }
+  visible.sort(sorter).forEach(el => list.appendChild(el));
 
     select.addEventListener('change', sortAndFilter);
 
