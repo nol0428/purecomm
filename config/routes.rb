@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "pages#home"
   get "grievances/badge", to: "grievances#badge", as: :badge_grievances
@@ -17,7 +19,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :create]
     resources :talks, only: [:index, :create]
   end
+
   resources :checkins, only: [:show]
   resources :grievances, only: [:index, :show, :edit, :update, :destroy]
   resources :messages, only: [:show]
+
 end
