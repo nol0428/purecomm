@@ -216,7 +216,7 @@ def create_users!
     u.username     = "Mai"
     u.password     = "password"
     u.personality  = {"Sanguine": 0.15, "Choleric": 0.25, "Melancholic": 0.40, "Phlegmatic": 0.20}
-    u.love_language = "Physical Touch"
+    u.love_language = "Quality Time"
   end
   [paul, mai]
 end
