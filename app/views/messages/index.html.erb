@@ -5,15 +5,14 @@
   <header class="chat-header">
     <h1 class="chat-title">Coach Chat</h1>
   </header>
-  <!-- Messages -->
-  <div id="messages"
+  <!-- Messages (single scroll container) -->
+  <div id="messages-body"
+       class="chat-messages"
        data-controller="autoscroll"
-       data-turbo-preserve-scroll
-       data-turbo-permanent
-       class="chat-messages">
-    <div id="messages-body">
-      <%= render partial: "messages/message", collection: @messages, as: :message %>
-    </div>
+       data-turbo-preserve-scroll>
+    <%= render partial: "messages/message",
+               collection: @messages,
+               as: :message %>
   </div>
   <!-- Status strip -->
   <div class="chat-status">
@@ -30,16 +29,3 @@
                locals: { partnership: @partnership, message: @message } %>
   </footer>
 </section>
-<%= javascript_tag do %>
-  document.addEventListener("turbo:load", () => {
-  // Only run on pages that have the chat markup
-  const chat = document.querySelector(".chat-wrap");
-  if (!chat) return;
-  // Scroll the window so the composer is in view (not the messages scroller)
-  const composer = document.getElementById("new_message");
-  if (composer) {
-  const y = composer.getBoundingClientRect().top + window.scrollY - 12; // small offset
-  window.scrollTo({ top: y, behavior: "auto" }); // 'auto' works everywhere
-  }
-  });
-<% end %>
