@@ -45,15 +45,21 @@ class Message < ApplicationRecord
   end
 
   def broadcast_assistant_reply
-  return unless assistant? && partnership.present?
+    return unless assistant? && partnership.present?
 
-  puts "📡 BROADCAST FIRING for message #{id}"
+    puts "📡 BROADCAST FIRING for message #{id}"
 
-  broadcast_replace_later_to(
-    [partnership, :messages],        # Same stream name
-    target: "messages-body",         # 👈 only replace this inner div
-    partial: "messages/list",
-    locals: { messages: partnership.messages.order(:created_at).to_a }
-  )
+    messages_for_chat = partnership.messages
+                                  .where(chat_id: chat_id)
+                                  .visible_to_users
+                                  .order(:created_at, :id)
+                                  .to_a
+
+    broadcast_replace_later_to(
+      [partnership, :messages],
+      target: "messages-body",         # inner container only
+      partial: "messages/list",
+      locals: { messages: messages_for_chat }
+    )
   end
 end
