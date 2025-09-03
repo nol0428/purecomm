@@ -33,4 +33,25 @@ class User < ApplicationRecord
   def checkin_today(partnership)
     partnership.checkins.find_by(user: self, created_at: Date.current.all_day)
   end
+
+  def primary_personality
+    case personality
+    when Hash
+      # ensure string keys and numeric values
+      normalized = personality.transform_keys(&:to_s).transform_values { |v| v.to_f }
+      normalized.max_by { |_, v| v }&.first
+    when String
+      personality.presence
+    else
+      # Try to parse JSON stored in a string column
+      begin
+        parsed = JSON.parse(personality.to_s)
+        if parsed.is_a?(Hash)
+          parsed.transform_keys(&:to_s).transform_values { |v| v.to_f }.max_by { |_, v| v }&.first
+        end
+      rescue JSON::ParserError
+        nil
+      end
+    end
+  end
 end
