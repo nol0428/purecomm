@@ -1,46 +1,46 @@
-<!-- app/views/grievances/show.html.erb -->
 <div class="whole-page grievance-show grievance-scope">
   <!-- Sent-on chip -->
-  <% sender = @grievance.respond_to?(:user) && @grievance.user.present? ? @grievance.user : @user %>
+  <% sender = @grievance.user.presence || @user %>
   <div class="meta-chip">
     <div class="meta-chip__text">
       Sent on: <%= @grievance.created_at.strftime("%Y/%m/%d") %>
     </div>
     <%= image_tag(
-        (sender&.username ? "#{sender.username}.png" : "default_avatar.png"),
-        class: "meta-chip__avatar",
-        alt: (sender&.username || "avatar")
-      ) %>
+          (sender&.username ? "#{sender.username}.png" : "default_avatar.png"),
+          class: "meta-chip__avatar",
+          alt: (sender&.username || "avatar")
+        ) %>
   </div>
   <div class="card form-card">
     <!-- Topic -->
-    <div class="form-group string required grievance_topic">
-      <h2><label class="form-label">Topic:</label>
-        <h2>
-          <div class="readonly-field"><%= @grievance.topic %></div>
+    <div class="form-group grievance_topic">
+      <h2 class="section-title">Topic</h2>
+      <div class="field-value"><%= @grievance.topic %></div>
+    </div>
+    <!-- Feeling -->
+    <div class="form-group grievance_feeling">
+      <h2 class="section-title">How it made me feel...</h2>
+      <div class="feeling-icon">
+        <%= inline_svg_tag "icons/#{@grievance.feeling.to_s.downcase}.svg",
+              class: "mood-icon", aria: { hidden: true } %>
+      </div>
+    </div>
+    <!-- Situation -->
+    <div class="form-group grievance_situation">
+      <h2 class="section-title">Description of the situation...</h2>
+      <div class="field-value">
+        <%= simple_format(@grievance.situation.presence || "—") %>
+      </div>
+    </div>
+    <!-- Intensity -->
+    <div class="form-group grievance_intensity">
+      <h2 class="section-title">Intensity Scale</h2>
+      <div class="intensity-scale">
+        <div class="scale-icon scale-icon--min">
+          <%= inline_svg_tag "icons/leaf.svg", class: "icon" %>
         </div>
-        <h2 class="section-title grievance-feeling-row">
-          <span>How it made me feel...</span>
-          <%= inline_svg_tag "icons/#{@grievance.feeling.to_s.downcase}.svg",
-        class: "mood-icon", aria: { hidden: true } %>
-        </h2>
-        <!-- Situation -->
-        <div class="form-group text required grievance_situation">
-          <h2><label class="form-label">Description of the situation...</label>
-            <h2>
-              <div class="readonly-field">
-                <%= simple_format(@grievance.situation.presence || "—") %>
-              </div>
-            </div>
-            <!-- Intensity (readonly slider) -->
-            <div class="mb-3 intensity-block intensity-block--readonly">
-              <label class="form-label" for="grievance_intensity_scale">Intensity Scale</label>
-              <div class="intensity-scale">
-                <div class="scale-icon scale-icon--min">
-                  <%= inline_svg_tag "icons/leaf.svg", class: "icon" %>
-                </div>
-                <div class="scale-slider">
-                  <input
+        <div class="scale-slider">
+          <input
             type="range"
             id="grievance_intensity_scale"
             class="intensity-slider"
@@ -48,17 +48,17 @@
             value="<%= @grievance.intensity_scale || 0 %>"
             disabled
           >
-                    <div class="scale-ticks" aria-hidden="true">
-                      <span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                  </div>
-                  <div class="scale-icon scale-icon--max">
-                    <%= inline_svg_tag "icons/fire.svg", class: "icon" %>
-                  </div>
-                </div>
-              </div>
-              <div class="form-actions">
-                <%= link_to "Back", grievances_path, class: "btn btn-coach w-100" %>
-              </div>
+            <div class="scale-ticks" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
           </div>
+          <div class="scale-icon scale-icon--max">
+            <%= inline_svg_tag "icons/fire.svg", class: "icon" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= link_to "Back", grievances_path, class: "btn btn-coach w-100" %>
+      </div>
+    </div>
+  </div>
