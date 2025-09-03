@@ -24,9 +24,6 @@
       </p>
 
       <div class="d-flex">
-        <% if @unread_count.positive? %>
-          <%= link_to "View unread", partnership_checkins_path(@partnership, filter: :unread), class: "btn btn-outline-primary me-2" %>
-        <% end %>
         <%= link_to "Start a conversation", partnership_talks_path(@partnership), class: "btn btn-primary" %>
       </div>
     </div>
