@@ -50,17 +50,16 @@ class Message < ApplicationRecord
 
   puts "📡 BROADCAST FIRING for message #{id}"
 
-  # Server-side render the full list in stable chronological order
   ordered = partnership.messages
                        .where(chat_id: chat_id)
                        .visible_to_users
                        .order(:created_at, :id)
 
   broadcast_replace_later_to(
-    [partnership, :messages],   # same stream
-    target: "messages",         # replaces the <div id="messages">
-    partial: "messages/list",   # renders the whole list
-    locals: { messages: ordered }
+    [partnership, :messages],
+    target: "messages",
+    partial: "messages/list",
+    locals: { messages: ordered.to_a }  # 👈 serialize as Array, not Relation
   )
   end
 end
