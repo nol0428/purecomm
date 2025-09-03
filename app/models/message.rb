@@ -44,22 +44,16 @@ class Message < ApplicationRecord
     end
   end
 
-  # Only append to the stream when this is an assistant message
   def broadcast_assistant_reply
   return unless assistant? && partnership.present?
 
   puts "📡 BROADCAST FIRING for message #{id}"
 
-  ordered = partnership.messages
-                       .where(chat_id: chat_id)
-                       .visible_to_users
-                       .order(:created_at, :id)
-
   broadcast_replace_later_to(
-    [partnership, :messages],
-    target: "messages",
+    [partnership, :messages],        # Same stream name
+    target: "messages-body",         # 👈 only replace this inner div
     partial: "messages/list",
-    locals: { messages: ordered.to_a }  # 👈 serialize as Array, not Relation
+    locals: { messages: partnership.messages.order(:created_at).to_a }
   )
   end
 end
