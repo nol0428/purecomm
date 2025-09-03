@@ -4,25 +4,30 @@
         <h5 class="card-title text-<%= status[:level] %>">
           <% case status[:level] %>
           <% when :danger %>
-            <%= "⚠️ Critical Attention Needed" %>
+            <%= "Needs Attention" %>
           <% when :warning %>
-            <%= "⚠️ Needs Attention" %>
+            <%= "Needs Care" %>
           <% when :info %>
-            <%= "ℹ️ Heads Up" %>
+            <%= "Heads Up" %>
           <% else %>
-            <%= "✅ All Good" %>
+            <%= "All Good" %>
           <% end %>
         </h5>
-        <p class="card-text">
+        <p class="card-text mt-3">
+          <% if status[:unread_grievances].positive? %>
+            You have <strong><%= status[:unread_grievances] %></strong> unread grievance<%= "s" if status[:unread_grievances] > 1 %>.<br>
+          <% end %>
           <% if @unread_count.positive? %>
             You have <strong><%= status[:unread] %></strong> unread check-ins.<br>
           <% end %>
-          In the last <%= status[:days] %> days,
-          <strong><%= (status[:ratio] * 100).round %>%</strong> of check-ins
+          In the last <%= status[:days] %> days,<br>
+          <strong><%= (status[:user_ratio] * 100).round %>%</strong> of your check-ins
+          were marked with tougher moods.<br>
+          <strong><%= (status[:partner_ratio] * 100).round %>%</strong> of your partner's check-ins
           were marked with tougher moods.
         </p>
         <div class="d-flex justify-content-center">
-          <%= link_to "Start a conversation", partnership_talks_path(@partnership), class: "btn btn-primary" %>
+          <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 class Grievance < ApplicationRecord
   belongs_to :partnership
   belongs_to :user
+  has_many :grievance_reads, dependent: :destroy
 
   validates :topic, presence: true
   validates :feeling, presence: true
@@ -39,4 +40,9 @@ class Grievance < ApplicationRecord
       locals: { grievance: self, read: false }
     )
   end
+
+  def read_by?(user)
+    grievance_reads.where(user: user).where.not(read_at: nil).exists?
+  end
+
 end

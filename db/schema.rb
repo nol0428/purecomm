@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_03_024923) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_03_092807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_03_024923) do
     t.datetime "updated_at", null: false
     t.index ["partnership_id"], name: "index_checkins_on_partnership_id"
     t.index ["user_id"], name: "index_checkins_on_user_id"
+  end
+
+  create_table "grievance_reads", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "grievance_id", null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grievance_id"], name: "index_grievance_reads_on_grievance_id"
+    t.index ["read_at"], name: "index_grievance_reads_on_read_at"
+    t.index ["user_id", "grievance_id"], name: "index_grievance_reads_on_user_id_and_grievance_id", unique: true
+    t.index ["user_id"], name: "index_grievance_reads_on_user_id"
   end
 
   create_table "grievances", force: :cascade do |t|
@@ -96,6 +108,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_03_024923) do
     t.datetime "updated_at", null: false
     t.index ["user_one_id"], name: "index_partnerships_on_user_one_id"
     t.index ["user_two_id"], name: "index_partnerships_on_user_two_id"
+  end
+
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.text "channel"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -263,6 +284,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_03_024923) do
   add_foreign_key "checkin_reads", "users"
   add_foreign_key "checkins", "partnerships"
   add_foreign_key "checkins", "users"
+  add_foreign_key "grievance_reads", "grievances"
+  add_foreign_key "grievance_reads", "users"
   add_foreign_key "grievances", "partnerships"
   add_foreign_key "grievances", "users"
   add_foreign_key "messages", "partnerships"

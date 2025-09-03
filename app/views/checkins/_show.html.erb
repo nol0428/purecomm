@@ -12,12 +12,6 @@
     <h2>Not open to talking about it</h2>
   <% end %>
   <p><%= inline_svg_tag "icons/#{checkin.discuss? ? "yes" : "no"}.svg", class: "mood-icon" %></p>
-  <%# <%= simple_form_for [partnership, checkin], html: { id: 'new_checkin' } do |f| %>
-    <%# <%= f.input :comment,
-                label: false,
-                placeholder: "Anything you'd like to share?",
-                input_html: { data: {disable_inputs_target: "input" }, rows: 4 } %>
-    <%# <% end %>
     <% if checkin.comment.present? %>
       <div class="form-group text required grievance_situation text-start">
         <h2><label class="form-label">Comments:</label>
