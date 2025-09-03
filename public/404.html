@@ -1,67 +1,29 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>404 - Page not found</title>
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    :root { --bg:#0b0f19; --card:#121826; --text:#e5e7eb; --muted:#9aa0aa; --accent:#6366f1; }
+    * { box-sizing: border-box; }
+    body { margin:0; background: radial-gradient(1200px 800px at 50% -10%, #1c2240 0%, var(--bg) 60%), var(--bg); color:var(--text); font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    .wrap { min-height:100vh; display:grid; place-items:center; padding:40px 16px; }
+    .card { width:100%; max-width:720px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:32px; box-shadow:0 30px 60px rgba(0,0,0,.35); text-align:center; }
+    .badge { display:inline-block; padding:6px 10px; border:1px solid rgba(255,255,255,.12); border-radius:999px; color:var(--muted); font-weight:600; letter-spacing:.3px; margin-bottom:12px; }
+    h1 { margin:6px 0 10px; font-size:clamp(28px, 6vw, 40px); line-height:1.2; }
+    p { color:var(--muted); margin:0 0 22px; }
+    a.btn { display:inline-block; padding:12px 18px; border-radius:12px; color:white; background:var(--accent); text-decoration:none; font-weight:700; }
   </style>
 </head>
-
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <span class="badge">Error 404</span>
+      <h1>We couldn't find that page</h1>
+      <p>The link may be broken or the page may have been removed.</p>
+      <a class="btn" href="/">Back to Home</a>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>
