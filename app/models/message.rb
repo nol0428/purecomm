@@ -46,14 +46,21 @@ class Message < ApplicationRecord
 
   # Only append to the stream when this is an assistant message
   def broadcast_assistant_reply
-    return unless assistant? && partnership.present?
+  return unless assistant? && partnership.present?
 
-    puts "📡 BROADCAST FIRING for message #{id}"   # 👈 add this
-    broadcast_append_later_to(
-      [partnership, :messages],   # matches turbo_stream_from in index
-      target: "messages",         # <div id="messages"> ... </div>
-      partial: "messages/message",
-      locals: { message: self }
-    )
+  puts "📡 BROADCAST FIRING for message #{id}"
+
+  # Server-side render the full list in stable chronological order
+  ordered = partnership.messages
+                       .where(chat_id: chat_id)
+                       .visible_to_users
+                       .order(:created_at, :id)
+
+  broadcast_replace_later_to(
+    [partnership, :messages],   # same stream
+    target: "messages",         # replaces the <div id="messages">
+    partial: "messages/list",   # renders the whole list
+    locals: { messages: ordered }
+  )
   end
 end
