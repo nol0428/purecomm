@@ -1,9 +1,8 @@
 <div class="whole-page">
-  <div class="grievances-header card">
-    <h2>Grievances</h2>
-    <p>Be honest here – your partner wants to listen.</p>
+  <div class="grievances-header">
+    <h2 class="text-start mb-4 ms-3">Be honest here - your partner wants to listen.</h2>
     <%= link_to new_partnership_grievance_path(@user.current_partnership),
-        class: "btn btn-grievance" do %>
+        class: "btn btn-grievance mb-1" do %>
       New Grievance
     <% end %>
   </div>
