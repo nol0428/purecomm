@@ -11,8 +11,14 @@
               src: badge_checkins_path(partnership_id: current_user.current_partnership.id) %>
       <% end %>
     <% end %>
-    <%= link_to new_partnership_checkin_path(current_user.current_partnership), class: "nav-icon" do %>
-      <%= inline_svg_tag "icons/checkin-navbar.svg" %>
+    <% unless checkin = current_user.checkin_today(@partnership) %>
+      <%= link_to new_partnership_checkin_path(current_user.current_partnership), class: "nav-icon" do %>
+        <%= inline_svg_tag "icons/checkin-navbar.svg" %>
+      <% end %>
+    <% else %>
+      <%= link_to checkin_path(current_user.checkin_today(@partnership)), class: "nav-icon" do %>
+        <%= inline_svg_tag "icons/checkin-navbar.svg" %>
+      <% end %>
     <% end %>
     <%= link_to (current_user ? grievances_path : new_user_session_path), class: "nav-icon" do %>
       <%= inline_svg_tag "icons/grievance-navbar.svg" %>

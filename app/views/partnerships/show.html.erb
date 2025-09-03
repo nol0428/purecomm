@@ -3,7 +3,11 @@
     <div class="banner__row">
       <div class="banner__content">
         <h2>Hello, <%= @user.username %>!</h2>
-        <p>How's your mood today?</p>
+        <% if checkin = current_user.checkin_today(@partnership) %>
+          <p>Thanks for checking in today!</p>
+        <% else %>
+          <p>How's your mood today?</p>
+        <% end %>
       </div>
       <div class="dropdown">
         <button class="dropdown-toggle avatar-container" data-bs-toggle="dropdown" aria-expanded="false" type="button">
