@@ -3,7 +3,7 @@
 <%= simple_form_for [partnership, checkin], html: {id: :nudge_form} do |f| %>
   <div class="text-center mb-4">
     <h2 class="checkin-title mb-2">Thanks for checking-in!</h2>
-    <p>When do you want to notify your partner?</p>
+    <p>When do you want to notify <%= @checkin.user.current_partner.username %>?</p>
   </div>
   <fieldset class="mb-4 radio_buttons optional checkin_nudge">
     <div class="nudge-wrapper">
