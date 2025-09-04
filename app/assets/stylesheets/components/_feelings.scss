@@ -46,7 +46,7 @@
   box-shadow: 0 2px 6px rgba(0,0,0,.06);
 }
 .category-selector + label:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
-.category-selector:checked + label { background-color: #6ED3CF; } /* selected teal */
+.category-selector:checked + label { background-color: #FFD166; } /* selected teal */
 
 /* feelings masks (ids based on value_method) */
 #grievance_feeling_tired   + label { -webkit-mask-image: asset-url("icons/tired.svg");   mask-image: asset-url("icons/tired.svg"); }
