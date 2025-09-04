@@ -1,13 +1,25 @@
 <div class="whole-page">
 </div>
-<%= simple_form_for [partnership, checkin] , html: {id: :nudge_form} do |f| %>
-  <h2 class="checkin-title">Thanks for checking-in!</h2>
-  <fieldset class="mb-3 radio_buttons optional checkin_nudge">
-    <div class="nudge-wrapper"><input type="hidden" name="checkin[nudge]" value="" autocomplete="off">
+<%= simple_form_for [partnership, checkin], html: {id: :nudge_form} do |f| %>
+  <div class="text-center mb-4">
+    <h2 class="checkin-title mb-2">Thanks for checking-in!</h2>
+    <p>When do you want to notify your partner?</p>
+  </div>
+  <fieldset class="mb-4 radio_buttons optional checkin_nudge">
+    <div class="nudge-wrapper">
+      <input type="hidden" name="checkin[nudge]" value="" autocomplete="off">
       <% @times.each do |(label,time)| %>
         <div class="nudge-item">
-          <input class="form-check-input radio_buttons optional nudge-selector" data-disable-inputs-target="input" type="radio" value="<%= time %>" name="checkin[nudge]" id="<%= label.downcase.split.reverse.join('-') %>">
-          <label class="form-check-label collection_radio_buttons" for="<%= label.downcase.split.reverse.join('-') %>"><%= label %></label>
+          <input class="form-check-input radio_buttons optional nudge-selector"
+                 data-disable-inputs-target="input"
+                 type="radio"
+                 value="<%= time %>"
+                 name="checkin[nudge]"
+                 id="<%= label.downcase.split.reverse.join('-') %>">
+          <label class="form-check-label collection_radio_buttons"
+                 for="<%= label.downcase.split.reverse.join('-') %>">
+            <%= label %>
+          </label>
         </div>
       <% end %>
     </div>
