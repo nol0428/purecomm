@@ -4,9 +4,9 @@
       <div class="banner__content">
         <h2>Hello, <%= @user.username %>!</h2>
         <% if checkin = current_user.checkin_today(@partnership) %>
-          <p>Thanks for checking in today!</p>
+          <h4 class = "mt-3 text-black text-start"><strong>Thanks for checking in today!</strong></h4>
         <% else %>
-          <p>How's your mood today?</p>
+          <h4 class = "mt-3 text-black text-start">How's your mood today?</h4>
         <% end %>
       </div>
       <div class="dropdown">
@@ -39,7 +39,7 @@
     <% end %>
   </div>
   <%= render "health_banner", status: @partnership.health_status_for(@user) %>
-  <div class="bulma header" style="margin-top:16px">
+  <div class="bulma header">
     <h2>Mood Check-in Log</h2>
   </div>
   <div class="checkin-toolbar" style="display:flex;align-items:center;gap:8px;margin:8px 0 12px;padding-left:16px;">
