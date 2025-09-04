@@ -6,19 +6,12 @@
 }
 
 .health-banner {
-  color: #fff;
+  background-color: #f8f9fb;
   border-radius: 16px;
   padding: 20px 16px;
   text-align: center;
   display: grid;
   gap: 10px;
-}
-
-.health-banner.border-danger {
-  border: 1px solid #dc3545;
-}
-
-.health-banner.border-ok {
   border: 1px solid #b2ababa7;
 }
 
