@@ -20,6 +20,6 @@
   </div>
   <div>
     <%= link_to checkin_summary(checkin), checkin_path(checkin) %>
-    <div class="checkin-time"><%= checkin.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+    <div class="checkin-time"><%= checkin.created_at.in_time_zone.strftime("%Y-%m-%d %H:%M") %></div>
   </div>
 </div>
