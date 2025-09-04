@@ -7,6 +7,7 @@ class Grievance < ApplicationRecord
   validates :feeling, presence: true
   validates :situation, presence: true
   validates :intensity_scale, presence: true, numericality: { only_integer: true }, inclusion: { in: 0..5 }
+  after_initialize { self.intensity_scale ||= 0 }
 
   FEELINGS = ["Tired", "Sad", "Upset", "Anxious"]
 
