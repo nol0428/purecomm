@@ -1,6 +1,6 @@
 <!-- app/views/grievances/new.html.erb (or _form.html.erb) -->
 <div class="whole-page">
-  <div class="card form-card mt-3">
+  <div class="mt-3">
     <%= simple_form_for [@partnership, @grievance], html: { id: "new_grievance" } do |f| %>
       <%= f.input :topic, placeholder: "e.g. Plans changed last minute" %>
       <h2 class="section-title">How it made me feel...</h2>
