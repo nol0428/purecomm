@@ -1,7 +1,7 @@
 <% if status.present? %>
   <div class="health-banner mt-3 border-<%= status[:level] %>">
     <div class="card-body">
-      <p class="text-start"><strong>A Note to Keep You Connected</strong></p>
+      <p class="text-start"><strong>Notes to Keep You Connected:</strong></p>
       <p class="card-text">
         <% if status[:unread_grievances].positive? %>
           <p class="text-start">You have <strong><%= status[:unread_grievances] %></strong> unread grievance<%= "s" if status[:unread_grievances] > 1 %>.</p>
