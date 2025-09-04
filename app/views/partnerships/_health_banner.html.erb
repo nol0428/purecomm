@@ -1,19 +1,12 @@
 <% if status.present? %>
     <div class="health-banner my-3 border-<%= status[:level] %>">
       <div class="card-body">
-        <h5 class="card-title text-<%= status[:level] %>">
-          <% case status[:level] %>
-          <% when :danger %>
+      <% if status[:level] == :danger %>
+        <h5 class="card-title text-<%= status[:level] %> mb-3">
             <%= "Needs Attention" %>
-          <% when :warning %>
-            <%= "Needs Care" %>
-          <% when :info %>
-            <%= "Heads Up" %>
-          <% else %>
-            <%= "All Good" %>
-          <% end %>
         </h5>
-        <p class="card-text mt-3">
+      <% end %>
+        <p class="card-text">
           <% if status[:unread_grievances].positive? %>
             You have <strong><%= status[:unread_grievances] %></strong> unread grievance<%= "s" if status[:unread_grievances] > 1 %>.<br>
           <% end %>

@@ -1,10 +1,18 @@
 <div data-controller="disable-inputs" class="checkin-show text-center">
   <div class="whole-page">
   </div>
-  <h2>User felt:</h2>
+  <% if checkin.user == current_user %>
+    <h2>You felt:</h2>
+  <% else %>
+    <h2><%= checkin.user.username %> felt:</h2>
+  <% end %>
   <%= inline_svg_tag "icons/#{checkin.mood.downcase}-icon.svg", class: "mood-icon" %>
   <p class="mood-label"><%= checkin.mood.capitalize %></p>
-  <h2>User's day was:</h2>
+  <% if checkin.user == current_user %>
+    <h2>Your day was:</h2>
+  <% else %>
+    <h2><%= checkin.user.username %>'s day was:</h2>
+  <% end %>
   <p><%= inline_svg_tag "icons/#{checkin.my_day.downcase}.svg", class: "mood-icon day-icon" %></p>
   <h2>Open to talking about it?</h2>
   <p><%= inline_svg_tag "icons/#{checkin.discuss? ? "yes" : "no"}.svg", class: "mood-icon" %></p>

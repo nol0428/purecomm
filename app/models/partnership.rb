@@ -48,13 +48,10 @@ class Partnership < ApplicationRecord
     unread = unread_checkins_count_for(user)
     user_ratio  = recent_bad_mood_ratio(user, days: days)
     partner_ratio = recent_bad_mood_ratio(user.current_partner, days: days)
-    ratio = [user_ratio, partner_ratio].max
     unread_griev = unread_grievances_count_for(user)
 
     level =
-      if unread_griev.positive? ||unread >= 5 || ratio >= 0.6 then :danger
-      elsif unread >= 3 || ratio >= 0.4 then :warning
-      elsif unread >= 1 || ratio >= 0.2 then :info
+      if unread_griev.positive? then :danger
       else :ok
       end
 
