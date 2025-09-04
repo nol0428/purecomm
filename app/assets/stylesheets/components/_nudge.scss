@@ -58,3 +58,12 @@ body:has(#nudge_form) .bottom-navbar {
   color: white !important;
   background-color: $green;
 }
+
+.checkin-title {
+  margin: 0;
+  font-weight: 900;
+  margin-top: -20px;
+  font-style: italic;
+  font-size: clamp(30px, 4.5vw, 28px);
+  text-align: center;
+}
