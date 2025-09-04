@@ -1,11 +1,9 @@
 <% if status.present? %>
     <div class="health-banner my-3 border-<%= status[:level] %>">
       <div class="card-body">
-      <% if status[:level] == :danger %>
         <h5 class="card-title text-<%= status[:level] %> mb-3">
             <%= "Needs Attention" %>
         </h5>
-      <% end %>
         <p class="card-text">
           <% if status[:unread_grievances].positive? %>
             You have <strong><%= status[:unread_grievances] %></strong> unread grievance<%= "s" if status[:unread_grievances] > 1 %>.<br>
@@ -13,15 +11,47 @@
           <% if @unread_count.positive? %>
             You have <strong><%= status[:unread] %></strong> unread check-ins.<br>
           <% end %>
-          In the last <%= status[:days] %> days,<br>
+          <p class="card-text mt-3">
+          In the last <%= status[:days] %> days,<span class="collapse" id="moreDetails"><br>
           <strong><%= (status[:user_ratio] * 100).round %>%</strong> of your check-ins
           were marked with tougher moods.<br>
           <strong><%= (status[:partner_ratio] * 100).round %>%</strong> of your partner's check-ins
           were marked with tougher moods.
+        </span>
+        <a class="text-primary more-toggle"
+          data-bs-toggle="collapse"
+          href="#moreDetails"
+          role="button"
+          aria-expanded="false"
+          aria-controls="moreDetails">
+          ... more
+        </a>
         </p>
+        </div>
         <div class="d-flex justify-content-center">
           <%= link_to "Harmony Coach", partnership_messages_path(@partnership), class:"btn btn-coach w-full", style: "margin-right:8px" %>
         </div>
       </div>
     </div>
 <% end %>
+
+
+<script>
+  document.addEventListener("turbo:load", setupMoreToggles);
+  document.addEventListener("DOMContentLoaded", setupMoreToggles);
+
+  function setupMoreToggles() {
+    document.querySelectorAll(".more-toggle").forEach((link) => {
+      const targetSel = link.getAttribute("href");
+      const target = document.querySelector(targetSel);
+      if (!target) return;
+
+      target.addEventListener("shown.bs.collapse", () => {
+        link.textContent = "less";
+      });
+      target.addEventListener("hidden.bs.collapse", () => {
+        link.textContent = "... more";
+      });
+    });
+  }
+</script>
