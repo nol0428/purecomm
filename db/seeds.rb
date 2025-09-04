@@ -205,6 +205,10 @@ Partnership.destroy_all
 User.destroy_all
 puts "== Seeding deterministic demo data =="
 # --- Helpers ---------------------------------------------------------------
+def day_at(days_ago, hour, min = 0, sec = 0)
+  (Time.zone.now - days_ago.days).change(hour: hour, min: min, sec: sec)
+end
+
 def create_users!
   paul = User.find_or_create_by!(email: "paul@email.com") do |u|
     u.username     = "Paul"
@@ -276,31 +280,31 @@ ActiveRecord::Base.transaction do
   # Hand-written checkins (EXAMPLES — edit these)
   # Tip: use Date.today - n for relative days, or set explicit dates for your demo.
   paul_checkins = [
-    { created_at: Date.today - 6, mood: "Fine", my_day: "Good", discuss: false,
+    { created_at: day_at(6, 20), mood: "Fine", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-08-30 20:00") },
-    { created_at: Date.today - 5, mood: "Fine", my_day: "Good", discuss: false,
+    { created_at: day_at(5, 20), mood: "Fine", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-08-31 20:00") },
-    { created_at: Date.today - 4, mood: "Upset", my_day: "Bad", discuss: false,
+    { created_at: day_at(4, 20), mood: "Upset", my_day: "Bad", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-01 20:00") },
-    { created_at: Date.today - 3, mood: "Upset", my_day: "Bad", discuss: false,
+    { created_at: day_at(3, 20), mood: "Upset", my_day: "Bad", discuss: false,
       comment: "My subordinate is a moron.", nudge: Time.zone.parse("2025-09-02 20:00") },
-    { created_at: Date.today - 2, mood: "Tired", my_day: "Bad", discuss: false,
+    { created_at: day_at(2, 20), mood: "Tired", my_day: "Bad", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-03 20:00") },
-    { created_at: Date.today - 1, mood: "Tired", my_day: "Bad", discuss: false,
+    { created_at: day_at(1, 20), mood: "Tired", my_day: "Bad", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-04 20:00") }
   ]
   mai_checkins = [
-    { created_at: Date.today - 6, mood: "Happy", my_day: "Good", discuss: false,
+    { created_at: day_at(6, 19), mood: "Happy", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-08-30 19:00") },
-    { created_at: Date.today - 5, mood: "Happy", my_day: "Good", discuss: false,
+    { created_at: day_at(5, 19), mood: "Happy", my_day: "Good", discuss: false,
       comment: "Yummy lunch spot.", nudge: Time.zone.parse("2025-08-31 19:00") },
-    { created_at: Date.today - 4, mood: "Tired", my_day: "Good", discuss: false,
+    { created_at: day_at(4, 19), mood: "Tired", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-01 19:00") },
-    { created_at: Date.today - 3, mood: "Fine", my_day: "Good", discuss: false,
+    { created_at: day_at(3, 19), mood: "Fine", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-02 19:00") },
-    { created_at: Date.today - 2, mood: "Fine", my_day: "Good", discuss: false,
+    { created_at: day_at(2, 19), mood: "Fine", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-03 19:00") },
-    { created_at: Date.today - 1, mood: "Happy", my_day: "Good", discuss: true,
+    { created_at: day_at(1, 19), mood: "Happy", my_day: "Good", discuss: true,
       comment: "PJ's Sports Festival Day practice was so cute. The teachers asked us to volunteer and I'm excited for it.", nudge: Time.zone.parse("2025-09-04 19:00") }
   ]
   upsert_checkins!(user: paul, partnership: partnership, rows: paul_checkins)
@@ -308,17 +312,17 @@ ActiveRecord::Base.transaction do
   # Hand-written grievances (EXAMPLES — edit these)
   grievances = [
     { user: paul, feeling: "Upset",   topic: "Laundry",        intensity_scale: 3,
-      situation: "I feel like I keep folding laundry after long days." },
+      situation: "I feel like I keep folding laundry after long days.", created_at: day_at(6, 21) },
     { user: mai,  feeling: "Sad",     topic: "Communication",  intensity_scale: 4,
-      situation: "We haven’t really talked this week and it makes me lonely." },
+      situation: "We haven’t really talked this week and it makes me lonely.", created_at: day_at(5, 18, 30) },
     { user: paul, feeling: "Anxious", topic: "Money",          intensity_scale: 5,
-      situation: "I’m worried about unexpected expenses lately." },
+      situation: "I’m worried about unexpected expenses lately.", created_at: day_at(4, 20) },
     { user: mai,  feeling: "Tired",   topic: "Chores",         intensity_scale: 3,
-      situation: "I asked about the trash a few times and it’s still there." },
+      situation: "I asked about the trash a few times and it’s still there.", created_at: day_at(3, 19) },
     { user: paul, feeling: "Tired",     topic: "Social meter",  intensity_scale: 4,
-      situation: "I don't like when I am obligated to go when make dinner plans with your friends. I don't have the energy or patience to entertain them every weekend" },
+      situation: "I don't like when I am obligated to go when make dinner plans with your friends. I don't have the energy or patience to entertain them every weekend", created_at: day_at(2, 22) },
     { user: mai,  feeling: "Upset",   topic: "Work-life balance",      intensity_scale: 3,
-      situation: "Late work nights make dinners together rare." }
+      situation: "Late work nights make dinners together rare.", created_at: day_at(1, 20, 15) }
   ].map { |h| h.merge(partnership: partnership) }
   upsert_grievances!(rows: grievances, partnership: partnership)
 end
