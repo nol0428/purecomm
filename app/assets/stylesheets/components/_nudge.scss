@@ -16,7 +16,7 @@ body:has(#nudge_form) .bottom-navbar {
   height: 84px;
   width: 100%;
   color: transparent;
-  background-color: #FFD166; // default color
+  background-color: #b2ababa7; // default color
   -webkit-mask-size: contain;
   mask-size: contain;
   border: none;
@@ -56,7 +56,7 @@ body:has(#nudge_form) .bottom-navbar {
 
 .nudge-selector:checked + label {
   color: white !important;
-  background-color: $green;
+  background-color: #FFD166;
 }
 
 .checkin-title {
