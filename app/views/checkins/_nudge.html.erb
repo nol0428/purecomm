@@ -1,32 +1,32 @@
 <div class="whole-page">
-</div>
-<%= simple_form_for [partnership, checkin], html: {id: :nudge_form} do |f| %>
-  <div class="text-center mb-4">
-    <h2 class="checkin-title mb-2">Thanks for checking-in!</h2>
-    <p>When do you want to notify <%= @checkin.user.current_partner.username %>?</p>
-  </div>
-  <fieldset class="mb-4 radio_buttons optional checkin_nudge">
-    <div class="nudge-wrapper">
-      <input type="hidden" name="checkin[nudge]" value="" autocomplete="off">
-      <% @times.each do |(label,time)| %>
-        <div class="nudge-item">
-          <input class="form-check-input radio_buttons optional nudge-selector"
+  <%= simple_form_for [partnership, checkin], html: {id: :nudge_form} do |f| %>
+    <div class="text-center mb-4">
+      <h2 class="checkin-title mb-2">Thanks for checking-in!</h2>
+      <p class="mb-5">When do you want to notify <%= @checkin.user.current_partner.username %>?</p>
+    </div>
+    <fieldset class="mb-4 radio_buttons optional checkin_nudge">
+      <div class="nudge-wrapper">
+        <input type="hidden" name="checkin[nudge]" value="" autocomplete="off">
+        <% @times.each do |(label,time)| %>
+          <div class="nudge-item">
+            <input class="form-check-input radio_buttons optional nudge-selector"
                  data-disable-inputs-target="input"
                  type="radio"
                  value="<%= time %>"
                  name="checkin[nudge]"
                  id="<%= label.downcase.split.reverse.join('-') %>">
-          <label class="form-check-label collection_radio_buttons"
+            <label class="form-check-label collection_radio_buttons"
                  for="<%= label.downcase.split.reverse.join('-') %>">
-            <%= label %>
-          </label>
-        </div>
-      <% end %>
-    </div>
-  </fieldset>
-  <div class="d-flex flex-column justify-content-center align-items-center">
-    <%= f.submit "Nudge", class: "btn btn-primary hero-cta w-full mb-3" %>
-    <%= link_to "Back", edit_partnership_checkin_path(partnership, checkin),
+              <%= label %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </fieldset>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <%= f.submit "Nudge", class: "btn btn-primary hero-cta w-full mb-3 mt-5" %>
+      <%= link_to "Back", edit_partnership_checkin_path(partnership, checkin),
               class: "btn btn-coach w-full" %>
-  </div>
-<% end %>
+    </div>
+  <% end %>
+</div>

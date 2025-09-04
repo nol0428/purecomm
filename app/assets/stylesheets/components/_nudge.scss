@@ -9,6 +9,7 @@ body:has(#nudge_form) .bottom-navbar {
 .nudge-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  row-gap: 48px;
 }
 
 .nudge-item label {
