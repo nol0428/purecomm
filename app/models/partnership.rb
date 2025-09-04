@@ -50,10 +50,10 @@ class Partnership < ApplicationRecord
     partner_ratio = recent_bad_mood_ratio(user.current_partner, days: days)
     unread_griev = unread_grievances_count_for(user)
 
-    level =
-      if unread_griev.positive? then :danger
-      else :ok
-      end
+    level = :ok
+      # if unread_griev.positive? then :danger
+      # else :ok
+      # end
 
     { level: level, unread: unread, user_ratio: user_ratio.round(2), partner_ratio: partner_ratio.round(2),unread_grievances: unread_griev, days: days }
   end
