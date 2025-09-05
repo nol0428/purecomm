@@ -107,15 +107,15 @@ end
   # Mai’s check-ins
   mai_checkins = [
     { created_at: day_at(6, 19), mood: "Happy", my_day: "Good", discuss: false,
-      comment: nil, nudge: Time.zone.parse("2025-08-30 19:00") },
+      comment: nil, nudge: Time.zone.parse("2025-08-30 19:20") },
     { created_at: day_at(5, 19), mood: "Happy", my_day: "Good", discuss: false,
-      comment: "Yummy lunch spot.", nudge: Time.zone.parse("2025-08-31 19:00") },
+      comment: "Yummy lunch spot.", nudge: Time.zone.parse("2025-08-31 19:45") },
     { created_at: day_at(4, 19), mood: "Tired", my_day: "Good", discuss: false,
-      comment: nil, nudge: Time.zone.parse("2025-09-01 19:00") },
+      comment: nil, nudge: Time.zone.parse("2025-09-01 20:00") },
     { created_at: day_at(3, 19), mood: "Fine", my_day: "Good", discuss: false,
-      comment: nil, nudge: Time.zone.parse("2025-09-02 19:00") },
+      comment: nil, nudge: Time.zone.parse("2025-09-02 17:01") },
     { created_at: day_at(2, 19), mood: "Fine", my_day: "Good", discuss: false,
-      comment: nil, nudge: Time.zone.parse("2025-09-03 19:00") },
+      comment: nil, nudge: Time.zone.parse("2025-09-03 19:10") },
     { created_at: day_at(1, 19), mood: "Happy", my_day: "Good", discuss: true,
       comment: "I saw some of PJ's Sports Festival Day practice and it was so cute. The teachers asked us to volunteer and I'm really excited. We need to figure out our schedules so we can help out.", nudge: Time.zone.parse("2025-09-04 19:00") }
   ]
@@ -126,9 +126,9 @@ end
   grievances = [
     { user: paul, feeling: "Upset",   topic: "Laundry",        intensity_scale: 3,
       situation: "I feel like I keep folding laundry after long days.", created_at: day_at(6, 21) },
-    { user: mai,  feeling: "Sad",     topic: "Communication",  intensity_scale: 4,
-      situation: "We haven’t really talked this week and it makes me lonely.", created_at: day_at(5, 18, 30) },
-    { user: paul, feeling: "Anxious", topic: "Money",          intensity_scale: 5,
+    { user: mai,  feeling: "Sad",     topic: "Your pint glass",  intensity_scale: 4,
+      situation: "You keep leaving your pint glass on the coffee table in the living room", created_at: day_at(5, 18, 30) },
+    { user: paul, feeling: "Anxious", topic: "Finances",          intensity_scale: 5,
       situation: "I’m worried about unexpected expenses lately.", created_at: day_at(4, 20) },
     { user: mai,  feeling: "Tired",   topic: "Chores",         intensity_scale: 3,
       situation: "I asked about the trash a few times and it’s still there.", created_at: day_at(3, 19) },
