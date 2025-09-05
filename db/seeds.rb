@@ -106,17 +106,17 @@ end
 
   # Mai’s check-ins
   mai_checkins = [
-    { created_at: day_at(6, 19), mood: "Happy", my_day: "Good", discuss: false,
+    { created_at: (Time.zone.now - 6.days).change(hour: 18, min: 45), mood: "Happy", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-08-30 19:20") },
-    { created_at: day_at(5, 19), mood: "Happy", my_day: "Good", discuss: false,
+    { created_at: (Time.zone.now - 5.days).change(hour: 20, min: 15), mood: "Happy", my_day: "Good", discuss: false,
       comment: "Yummy lunch spot.", nudge: Time.zone.parse("2025-08-31 19:45") },
-    { created_at: day_at(4, 19), mood: "Tired", my_day: "Good", discuss: false,
+    { created_at: (Time.zone.now - 4.days).change(hour: 19, min: 05), mood: "Tired", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-01 20:00") },
-    { created_at: day_at(3, 19), mood: "Fine", my_day: "Good", discuss: false,
+    { created_at: (Time.zone.now - 3.days).change(hour: 17, min: 50), mood: "Fine", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-02 17:01") },
-    { created_at: day_at(2, 19), mood: "Fine", my_day: "Good", discuss: false,
+    { created_at: (Time.zone.now - 2.days).change(hour: 20, min: 40), mood: "Fine", my_day: "Good", discuss: false,
       comment: nil, nudge: Time.zone.parse("2025-09-03 19:10") },
-    { created_at: day_at(1, 19), mood: "Happy", my_day: "Good", discuss: true,
+    { created_at: (Time.zone.now - 1.day).change(hour: 18, min: 20), mood: "Happy", my_day: "Good", discuss: true,
       comment: "I saw some of PJ's Sports Festival Day practice and it was so cute. The teachers asked us to volunteer and I'm really excited. We need to figure out our schedules so we can help out.", nudge: Time.zone.parse("2025-09-04 19:00") }
   ]
 
