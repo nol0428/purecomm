@@ -79,7 +79,7 @@ Inspired by Jane Mount's [Bibliophile](https://www.amazon.com/Bibliophile-Illust
 - [Naing Oo Lwin](https://www.linkedin.com/in/nol0428/)
 - [Paul Miyamoto](https://www.linkedin.com/in/paul-miyamoto-044711b9/)
 - [Harry Salacuri](https://www.linkedin.com/in/harry-salacuri-7b13b6187/)
-- [Liu Jiang]
+- Liu Jiang
 
 ## Contributing
 
