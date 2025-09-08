@@ -72,11 +72,17 @@ rails s
 
 ## Acknowledgements
 
-Inspired by Jane Mount's [Bibliophile](https://www.amazon.com/Bibliophile-Illustrated-Miscellany-Jane-Mount/dp/1452167230) and a story my father once told me: "Why do we keep books? ... We keep books because they remind us of the new perspectives and lessons we learned".
+This app was built during our time at Le Wagon Tokyo Bootcamp.  
+We’d like to thank our instructors, TAs, and peers who encouraged us through every step of the journey.  
+
+A big thanks also goes to the open-source contributors behind the technologies we used, and to everyone who inspired us to think about how tech can support better communication in relationships.
 
 ## Team Members
 
-- [Douglas Berkley](https://www.linkedin.com/in/dougberkley/)
+- [Naing Oo Lwin](https://www.linkedin.com/in/nol0428/)
+- [Paul Miyamoto](https://www.linkedin.com/in/paul-miyamoto-044711b9/)
+- [Harry Salacuri](https://www.linkedin.com/in/harry-salacuri-7b13b6187/)
+- Liu Jiang
 
 ## Contributing
 
