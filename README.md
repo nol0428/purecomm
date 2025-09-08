@@ -72,8 +72,8 @@ rails s
 
 ## Acknowledgements
 
-This app was built during our time at Le Wagon Tokyo Bootcamp.  
-We’d like to thank our instructors, TAs, and peers who encouraged us through every step of the journey.  
+This app was built during our time at Le Wagon Tokyo Bootcamp.
+We’d like to thank our instructors, TAs, and peers who encouraged us through every step of the journey.
 
 A big thanks also goes to the open-source contributors behind the technologies we used, and to everyone who inspired us to think about how tech can support better communication in relationships.
 
@@ -90,4 +90,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the [MIT License](LICENSE).
