@@ -1,4 +1,4 @@
-# 📚 PureComm
+# 👩🏼‍❤️‍👨🏻 PureComm
 
 PureComm is a relationship wellness platform designed to help couples improve communication and emotional awareness.
 It lets users share daily mood check-ins, raise grievances, and track patterns over time with helpful visualizations and reminders.
