@@ -21,7 +21,7 @@ The app encourages open dialogue and supports healthier, more connected relation
   </p>
 </details>
 <br>
-App home: https://purecomm.app
+App home: https://www.purecomm.app
 
 ## Getting Started
 
