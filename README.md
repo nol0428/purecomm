@@ -21,7 +21,7 @@ The app encourages open dialogue and supports healthier, more connected relation
   </p>
 </details>
 <br>
-App home: https://WHATEVER.herokuapp.com
+App home: https://purecomm.app
 
 ## Getting Started
 
